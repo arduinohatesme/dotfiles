@@ -1,0 +1,28 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	name = arduinohatesme
+	email = awmcmillan128@gmail.com
+[core]
+	editor = nvim
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	tree = log --graph --pretty=oneline --abbrev-commit
+	setorigin = remote add origin
+	c = commit
+	a = add
+[init]
+	defaultBranch = main
