@@ -23,6 +23,9 @@
 	tree = log --graph --pretty=oneline --abbrev-commit
 	setorigin = remote add origin
 	c = commit
-	a = add
+	A = add
+	ps = push
+	pl = pull
+	aa = add -A
 [init]
 	defaultBranch = main
