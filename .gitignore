@@ -1,0 +1,14 @@
+/*
+/*/
+
+!/.local/
+/.local/*
+!/.config/
+/.config/*
+
+!/.config/nvim/
+!/.config/git/
+!/.config/hypr/
+!/.config/waybar/
+!/.local/share/fonts/
+!.gitignore
