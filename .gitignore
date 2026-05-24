@@ -10,5 +10,6 @@
 !/.config/git/
 !/.config/hypr/
 !/.config/waybar/
+!/.config/rofi/
 !/.local/share/fonts/
 !.gitignore

@@ -33,7 +33,7 @@ hl.monitor({
 local browser = "zen-browser"
 local terminal = "alacritty"
 local fileManager = "dolphin"
-local menu = "hyprlauncher"
+local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 
 -------------------
 ---- AUTOSTART ----
@@ -263,17 +263,14 @@ hl.config({
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(
-	mainMod .. " + X",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"),
-	{ long_press = true }
-)
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/powermenu.sh"))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hypr/nvcd.fish"))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
 
 -- Move with vi bindings
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -298,10 +295,6 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
