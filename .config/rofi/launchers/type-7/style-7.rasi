@@ -90,7 +90,7 @@ button {
     padding:                     12px;
     border-radius:               100%;
     background-color:            @background-alt;
-    text-color:                  @active;
+    text-color:                  @selected;
     cursor:                      pointer;
 }
 button selected {
