@@ -1,0 +1,12 @@
+[general]
+working_directory = "~"
+
+[window]
+opacity = 0.8
+
+[cursor]
+style.blinking = "Off"
+vi_mode_style.shape = "Underline"
+
+[font]
+size = 11
