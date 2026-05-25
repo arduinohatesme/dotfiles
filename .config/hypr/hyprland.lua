@@ -32,7 +32,7 @@ hl.monitor({
 -- Set programs that you use
 local browser = "zen-browser"
 local terminal = "alacritty"
-local fileManager = "dolphin"
+local fileManager = "alacritty --hold -e yazi"
 local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 
 -------------------
@@ -104,7 +104,7 @@ hl.config({
 		dim_strength = 0.15,
 
 		-- Change transparency of focused and unfocused windows
-		active_opacity = 0.82,
+		active_opacity = 0.8,
 		inactive_opacity = 0.8,
 
 		shadow = {
