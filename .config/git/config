@@ -27,5 +27,7 @@
 	ps = push
 	pl = pull
 	aa = add -A
+	df = diff
+	dfs = diff --staged
 [init]
 	defaultBranch = main
