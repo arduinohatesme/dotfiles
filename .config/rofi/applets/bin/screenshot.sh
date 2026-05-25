@@ -40,7 +40,7 @@ if [[ "$layout" == 'NO' ]]; then
 else
   option_1=""
   option_2=""
-  option_3=""
+  option_3="󰲶"
   option_4=""
 fi
 
@@ -71,7 +71,6 @@ fi
 # notify and view screenshot
 notify_view() {
   notify_cmd_shot='dunstify -u low --replace=699'
-  ${notify_cmd_shot} "Copied to clipboard."
   viewnior ${dir}/"$file"
   if [[ -e "$dir/$file" ]]; then
     ${notify_cmd_shot} "Screenshot Saved."
@@ -105,8 +104,8 @@ shot5() {
   notify_view
 }
 
-shotwin() {
-  grim -g "$(slurp -p)" "$dir/$file"
+shotann() {
+  grim -g "$(slurp)" -t ppm - | satty --filename - --output-filename "$dir/$file"
   notify_view
 }
 
@@ -122,7 +121,7 @@ run_cmd() {
   elif [[ "$1" == '--opt2' ]]; then
     shotarea
   elif [[ "$1" == '--opt3' ]]; then
-    shotwin
+    shotann
   elif [[ "$1" == '--opt4' ]]; then
     shot5
   fi
