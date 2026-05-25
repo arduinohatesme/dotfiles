@@ -10,7 +10,7 @@ source "$HOME"/.config/rofi/applets/shared/theme.bash
 theme="$type/$style"
 
 # Theme Elements
-prompt=" $HOME/Screenshots "
+prompt=" Saving to ~/Screenshots "
 
 if [[ "$theme" == *'type-1'* ]]; then
   list_col='1'
@@ -37,7 +37,6 @@ if [[ "$layout" == 'NO' ]]; then
   option_2=" Capture Area"
   option_3=" Capture Window"
   option_4=" Capture in 5s"
-  option_5=" Capture in 10s"
 else
   option_1=""
   option_2=""
@@ -49,7 +48,6 @@ fi
 rofi_cmd() {
   rofi -theme-str "window {width: $win_width;}" \
     -theme-str "listview {columns: $list_col; lines: $list_row;}" \
-    -theme-str 'textbox-prompt-colon {str: "";}' \
     -dmenu \
     -p "$prompt" \
     -markup-rows \
@@ -63,9 +61,8 @@ run_rofi() {
 
 # Screenshot
 time=$(date +%Y-%m-%d-%H-%M-%S)
-geometry=$(xrandr | grep 'current' | head -n1 | cut -d',' -f2 | tr -d '[:blank:],current')
 dir="$HOME/Screenshots"
-file="Screenshot_${time}_${geometry}.png"
+file="Screenshot_${time}.png"
 
 if [[ ! -d "$dir" ]]; then
   mkdir -p "$dir"
@@ -98,23 +95,23 @@ countdown() {
 
 # take shots
 shotnow() {
-  cd ${dir} && sleep 0.5 && grim | copy_shot
+  sleep 0.5 && grim "$dir/$file" | copy_shot
   notify_view
 }
 
 shot5() {
   countdown '5'
-  sleep 1 && cd ${dir} && maim -u -f png | copy_shot
+  shotnow
   notify_view
 }
 
 shotwin() {
-  cd ${dir} && maim -u -f png -i $(xdotool getactivewindow) | copy_shot
+  grim -g "$(slurp -p)" "$dir/$file"
   notify_view
 }
 
 shotarea() {
-  cd ${dir} && maim -u -f png -s -b 2 -c 0.35,0.55,0.85,0.25 -l | copy_shot
+  grim -g "$(slurp)" "$dir/$file"
   notify_view
 }
 

@@ -45,7 +45,7 @@ window {
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
-    spacing:                     4px;
+    spacing:                     14px;
     margin:                      0px;
     padding:                     30px;
     border:                      0px solid;

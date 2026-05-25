@@ -8,6 +8,9 @@
  **/
 
 /*****----- Configuration -----*****/
+@import "~/.config/rofi/applets/shared/colors.rasi"
+@import "~/.config/rofi/applets/shared/fonts.rasi"
+
 configuration {
 	modi:                       "drun,run,filebrowser,window";
     show-icons:                 false;
@@ -17,17 +20,6 @@ configuration {
     display-window:             "";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
-}
-
-/*****----- Global Properties -----*****/
-* {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #101010aa;
-    background-alt:              #252525aa;
-    foreground:                  #FFFFFFaa;
-    selected:                    #505050cc;
-    active:                      #909090aa;
-    urgent:                      #707070aa;
 }
 
 /*****----- Main Window -----*****/
@@ -98,11 +90,11 @@ button {
     padding:                     12px;
     border-radius:               100%;
     background-color:            @background-alt;
-    text-color:                  inherit;
+    text-color:                  @active;
     cursor:                      pointer;
 }
 button selected {
-    background-color:            @selected;
+    background-color:            @active;
     text-color:                  @foreground;
 }
 
@@ -131,13 +123,17 @@ element {
     spacing:                     10px;
     padding:                     14px;
     border-radius:               100%;
-    background-color:            transparent;
+    background-color:            @background-alt;
     text-color:                  @foreground;
     cursor:                      pointer;
 }
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @urgent;
+}
 element normal.normal {
-    background-color:            inherit;
-    text-color:                  inherit;
+    background-color:            transparent;
+    text-color:                  @urgent;
 }
 element normal.urgent {
     background-color:            @urgent;
@@ -148,7 +144,7 @@ element normal.active {
     text-color:                  @foreground;
 }
 element selected.normal {
-    background-color:            @selected;
+    background-color:            @active;
     text-color:                  @foreground;
 }
 element selected.urgent {

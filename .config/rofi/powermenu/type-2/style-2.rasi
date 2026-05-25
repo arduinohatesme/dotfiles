@@ -13,8 +13,8 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
+@import                          "../../applets/shared/colors.rasi"
+@import                          "../../applets/shared/fonts.rasi"
 
 /*
 USE_BUTTONS=YES
