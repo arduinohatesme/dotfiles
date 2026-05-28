@@ -1,8 +1,10 @@
+local ParseQuotes = require("extras.parsequotes")
 local M = {}
 
 function M.Dump(opts)
-  if #opts.fargs == 0 or pargs == nil then
-    vim.notify("Not enough arguments!")
+  local pargs = ParseQuotes.ParseQuotes(opts.fargs) or { {} }
+  if #pargs == 0 then
+    vim.notify("Invalid arguments!")
     return
   end
 
@@ -10,9 +12,8 @@ function M.Dump(opts)
   vim.fn.mkdir(vim.fn.fnamemodify(path, ":h"), "p")
 
   local points = {}
-  local args = opts.fargs
-  for i = 2, #opts.fargs do
-    local point = "* "
+  for i = 2, #pargs do
+    local point = "* " .. pargs[i]
     table.insert(points, point)
   end
 

@@ -12,24 +12,23 @@ function M.Issue(opts)
     return
   end
 
-  local pargs = vim.api.nvim_parse_cmd(opts.args, {})
   local cmd = { "gh", "issue", "create", "--body", '""', "--title" }
   local title = {}
   local label_start = 1
 
-  for i = 1, #pargs do
-    if pargs[i] == "l" then
+  for i = 1, #opts.fargs do
+    if opts.fargs[i] == "l" then
       label_start = i + 1
       break
     end
-    table.insert(title, pargs[i])
+    table.insert(title, opts.fargs[i])
   end
 
   table.insert(cmd, table.concat(title, " "))
 
-  for i = label_start, #pargs do
+  for i = label_start, #opts.fargs do
     table.insert(cmd, "--label")
-    table.insert(cmd, pargs[i])
+    table.insert(cmd, opts.fargs[i])
   end
 
   vim.system(cmd, function(out)
