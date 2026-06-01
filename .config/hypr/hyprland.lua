@@ -46,6 +46,7 @@ local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 --
 hl.on("hyprland.start", function()
 	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("waybar")
 end)
 
 -------------------------------
@@ -78,6 +79,18 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
+
+local waybar_visible = true
+
+local function toggle_waybar()
+	hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))
+	if not waybar_visible then
+		hl.config({ general = { gaps_out = 22 } })
+	else
+		hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
+	end
+	waybar_visible = not waybar_visible
+end
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
@@ -268,7 +281,7 @@ hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd("waybar"))
+hl.bind(mainMod .. " + SHIFT + W", toggle_waybar)
 
 -- Move with vi bindings
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))

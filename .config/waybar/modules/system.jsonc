@@ -1,8 +1,4 @@
 {
-  "distro": {
-    "tooltip": false,
-    "format": ""
-  },
   "cpu": {
     "tooltip": false,
     "interval": 10,

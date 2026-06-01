@@ -1,31 +1,25 @@
 {
   "layer": "top",
-  "height": 32,
-  "spacing": 6,
+  "height": 40,
+  "spacing": 2,
+  "exclusive": false,
   "include": [
+    "./modules/audio.jsonc",
+    "./modules/clock.jsonc",
+    "./modules/connections.jsonc",
     "./modules/groups.jsonc",
-    "./modules/distro.jsonc",
+    "./modules/idle-ihibitor.jsonc",
     "./modules/storage.jsonc",
     "./modules/system.jsonc",
-    "./modules/workspace.jsonc",
-    "./modules/idle-ihibitor.jsonc",
-    "./modules/audio.jsonc",
-    "./modules/connections.jsonc",
-    "./modules/clock.jsonc",
-    "./modules/tray-notif.jsonc"
+    "./modules/workspace.jsonc"
   ],
-  "modules-left": [
-    "group/distro-group",
-    "group/system"
-  ],
+  "modules-left": [],
+  "modules-right": [],
   "modules-center": [
-    "hyprland/workspaces",
-    "idle_inhibitor"
-  ],
-  "modules-right": [
+    "group/system",
     "group/audio",
     "group/connections",
-    "clock",
-    "group/tray-group"
+    "hyprland/workspaces",
+    "clock"
   ]
 }
