@@ -1,3 +1,3 @@
 function nvcd
-     ~/.config/hypr/nvcd.fish
+     ./nvcd.fish; 
 end
