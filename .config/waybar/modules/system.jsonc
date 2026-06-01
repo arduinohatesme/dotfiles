@@ -1,9 +1,12 @@
 {
+  "custom/system": {
+    "tooltip": false,
+    "format": "  "
+  },
   "cpu": {
     "tooltip": false,
     "interval": 10,
-    "format": "󰻠",
-    "format-alt": "󰻠 <span size='11pt'>{usage}%</span>",
+    "format": " {usage}%",
     "states": {
       "warning": 75,
       "critical": 90
@@ -11,10 +14,9 @@
   },
   "disk": {
     "tooltip": false,
-    "interval": 3600,
+    "interval": 60,
     "path": "/",
-    "format": "󱙋",
-    "format-alt": "󱙋 <span size='11pt'>{used}</span>",
+    "format": "󱙋 {used}",
     "states": {
       "warning": 80,
       "critical": 90
@@ -23,8 +25,7 @@
   "memory": {
     "tooltip": false,
     "interval": 15,
-    "format": "󰍛",
-    "format-alt": "󰍛 <span size='11pt'>{used}</span>",
+    "format": " {used}GiB",
     "states": {
       "warning": 75,
       "critical": 85

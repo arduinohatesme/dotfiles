@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "height": 40,
+  "height": 44,
   "spacing": 2,
   "exclusive": false,
   "include": [
@@ -9,7 +9,6 @@
     "./modules/connections.jsonc",
     "./modules/groups.jsonc",
     "./modules/idle-ihibitor.jsonc",
-    "./modules/storage.jsonc",
     "./modules/system.jsonc",
     "./modules/workspace.jsonc"
   ],

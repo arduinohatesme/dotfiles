@@ -308,19 +308,19 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-hl.bind(mainMod .. " + SHIFT + CTRL + H", hl.dsp.window.move({ workspace = "r+1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + L", hl.dsp.window.move({ workspace = "r-1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + K", hl.dsp.window.move({ workspace = "r-1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + J", hl.dsp.window.move({ workspace = "r+1" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + H", hl.dsp.window.move({ workspace = "r-1" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + L", hl.dsp.window.move({ workspace = "r+1" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + K", hl.dsp.window.move({ workspace = "r+1" }))
+hl.bind(mainMod .. " + SHIFT + CTRL + J", hl.dsp.window.move({ workspace = "r-1" }))
 
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ workspace = "r+1" }))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ workspace = "r-1" }))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.focus({ workspace = "r-1" }))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.focus({ workspace = "r+1" }))
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ workspace = "r-1" }))
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ workspace = "r+1" }))
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.focus({ workspace = "r+1" }))
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.focus({ workspace = "r-1" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "r+1" }))
+hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "r-1" }))
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

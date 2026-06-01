@@ -17,3 +17,14 @@
 window#waybar {
   background: transparent;
 }
+
+#group-system:hover #custom-system,
+#group-system:hover #custom-system label {
+  font-size: 0px;
+  min-width: 0px;
+  min-height: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  color: transparent;
+}
