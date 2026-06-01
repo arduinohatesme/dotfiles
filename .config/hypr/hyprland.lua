@@ -29,7 +29,7 @@ hl.monitor({
 ---- MY PROGRAMS ----
 ---------------------
 
-local waybar_visible = true
+local waybar_visible = false
 
 local function toggle_waybar()
 	hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))

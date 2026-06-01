@@ -24,13 +24,11 @@
   color: @on_primary;
 }
 
-#workspaces button.special {
-  color: @tertiary_fixed;
-}
-
 #workspaces button:hover {
   background-color: @surface_container_highest;
   color: @primary;
+  box-shadow: none;
+  text-shadow: none;
 }
 
 #workspaces button.active:hover {
