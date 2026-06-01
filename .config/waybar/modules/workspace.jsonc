@@ -5,7 +5,7 @@
     "persistent-workspaces": {
       "*": 5
     },
-    "window-rewrite-default": "󰊠",
+    "window-rewrite-default": "",
     "window-rewrite": {
       // --- Work ---
       "alacritty": "󰆍",
@@ -37,7 +37,7 @@
     },
     "format-icons": {
       "special": "󱁂",
-      "default": "󰊠",
+      "default": "",
       "urgent": "󰧵",
       "empty": ""
     },

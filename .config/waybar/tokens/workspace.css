@@ -18,7 +18,7 @@
 }
 
 #workspaces button.active {
-  padding: 0 12px;
+  padding: 0 12px 0 5px;
   margin: 0 2px;
   background-color: @primary;
   color: @on_primary;

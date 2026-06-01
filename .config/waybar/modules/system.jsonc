@@ -1,7 +1,7 @@
 {
   "custom/system": {
     "tooltip": false,
-    "format": "  "
+    "format": "   "
   },
   "cpu": {
     "tooltip": false,
