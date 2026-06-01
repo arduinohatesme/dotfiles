@@ -1,9 +1,9 @@
-vim.keymap.set("n", "<leader>mr", "<CMD>Notmuch<CR>")
-vim.keymap.set("n", "<leader>mw", "<CMD>Compose<CR>")
-
 return {
   "yousefakbar/notmuch.nvim",
+  cmd = { "Notmuch", "Config" },
   config = function()
+    vim.keymap.set("n", "<leader>mr", "<CMD>Notmuch<CR>")
+    vim.keymap.set("n", "<leader>mw", "<CMD>Compose<CR>")
     local opts = {
       maildir_sync_cmd = "gmi sync",
       open_cmd = "xdg-open",

@@ -1,1 +1,1 @@
-# Aidan's LazyVim config
+# Aidan's Neovim config

@@ -9,10 +9,20 @@ vim.api.nvim_create_user_command("Issue", function(opts)
   Issue.Issue(opts)
 end, { nargs = "+" })
 
+vim.api.nvim_create_user_command("I", function(opts)
+  Issue.Issue(opts)
+end, { nargs = "+" })
+
 vim.api.nvim_create_user_command("Dump", function(opts)
+  Dump.Dump(opts)
+end, { nargs = "+" })
+
+vim.api.nvim_create_user_command("D", function(opts)
   Dump.Dump(opts)
 end, { nargs = "+" })
 
 vim.keymap.set("n", "<leader>gg", function()
   Neogit.open()
 end)
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
