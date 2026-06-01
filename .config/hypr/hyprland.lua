@@ -241,12 +241,7 @@ hl.gesture({
 	action = "workspace",
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
-hl.device({
-	name = "epic-mouse-v1",
-	sensitivity = -0.5,
-})
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for per-device config
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -280,11 +275,13 @@ hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 
+-- SHIFT to move the window
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "left" }))
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 
+-- CTRL to resize the window
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
