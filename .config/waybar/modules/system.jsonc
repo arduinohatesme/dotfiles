@@ -5,7 +5,7 @@
   },
   "cpu": {
     "tooltip": false,
-    "interval": 10,
+    "interval": 5,
     "format": " {usage}%",
     "states": {
       "warning": 75,
@@ -24,7 +24,7 @@
   },
   "memory": {
     "tooltip": false,
-    "interval": 15,
+    "interval": 5,
     "format": " {used}GiB",
     "states": {
       "warning": 75,
