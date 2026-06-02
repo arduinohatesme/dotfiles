@@ -25,4 +25,27 @@ vim.keymap.set("n", "<leader>gg", function()
   Neogit.open()
 end)
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "<leader>td", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "<leader>ti", function()
+  local clients = vim.lsp.get_clients()
+  local get_imp_support = false
+
+  for _, c in ipairs(clients) do
+    if c.supports_method(c, "textDocument/implementation") then
+      get_imp_support = true
+      break
+    end
+  end
+
+  if get_imp_support then
+    vim.lsp.buf.implementation()
+  end
+
+  local current_word = vim.fn.expand("<cword>")
+  require("telescope.builtin").live_grep({
+    default_text = current_word,
+  })
+end, { desc = "Go to implementation" })
+vim.keymap.set("n", "<leader>ts", function()
+  require("telescope.builtin").live_grep()
+end)
