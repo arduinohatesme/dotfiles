@@ -1,4 +1,4 @@
-# Dotfiles
+# Dotfiles (for CachyOS)
 
 ## Rofi colors
 Create a file at ~/.config/rofi/applets/shared/colors.rasi with this:
