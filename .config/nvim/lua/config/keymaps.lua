@@ -25,7 +25,8 @@ vim.keymap.set("n", "<leader>gg", function()
   Neogit.open()
 end)
 
-vim.keymap.set("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Go to definition" })
+vim.keymap.set("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Search definition" })
+
 vim.keymap.set("n", "<leader>si", function()
   local clients = vim.lsp.get_clients()
   local get_imp_support = false
@@ -45,7 +46,8 @@ vim.keymap.set("n", "<leader>si", function()
   require("telescope.builtin").live_grep({
     default_text = current_word,
   })
-end, { desc = "Go to implementation" })
+end, { desc = "Searh for implementation" })
+
 vim.keymap.set("n", "<leader>ss", function()
   require("telescope.builtin").live_grep()
-end)
+end, { desc = "Search symbol" })
