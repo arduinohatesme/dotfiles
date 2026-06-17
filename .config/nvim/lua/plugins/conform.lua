@@ -7,6 +7,7 @@ return {
       typescript = { "prettier" },
       json = { "prettier" },
       python = { "prettier" },
+      html = { "prettier" },
     },
   },
 }
