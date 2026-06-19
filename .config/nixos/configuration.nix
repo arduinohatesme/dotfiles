@@ -75,6 +75,7 @@
     cargo
     rustc
     gcc
+    tailscale
   # Terminal
     kitty
     fish
@@ -83,6 +84,10 @@
     rofi
     waybar
     mpvpaper
+    hyprpaper
+    hyperpicker
+    hyprpolkitagent
+  # Zen Browser
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
