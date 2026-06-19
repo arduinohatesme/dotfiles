@@ -42,8 +42,8 @@ local function toggle_waybar()
 end
 
 -- Set programs that you use
-local browser = "zen-browser"
-local terminal = "alacritty"
+local browser = "zen"
+local terminal = "kitty"
 local fileManager = "alacritty --hold -e yazi"
 local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 

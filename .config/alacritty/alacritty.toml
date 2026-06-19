@@ -10,3 +10,6 @@ vi_mode_style.shape = "Underline"
 
 [font]
 size = 11
+
+[terminal.shell]
+program = "/run/current-system/sw/bin/fish"
