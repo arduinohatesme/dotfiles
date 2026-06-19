@@ -1,24 +1,5 @@
----@module 'snacks'
-
----@type LazyPicker
-local picker = {
-  name = "snacks",
-  commands = {
-    files = "files",
-    live_grep = "grep",
-    oldfiles = "recent",
-  },
-
-  ---@param source string
-  ---@param opts? snacks.picker.Config
-  open = function(source, opts)
-    return Snacks.picker.pick(source, opts)
-  end,
-}
-
 return {
   desc = "Fast and modern file picker",
-  recommended = true,
   {
     "folke/snacks.nvim",
     opts = {
@@ -34,7 +15,6 @@ return {
           },
         },
         actions = {
-          ---@param p snacks.Picker
           toggle_cwd = function(p)
             local root = Snacks.git.get_root() or vim.uv.cwd()
             local cwd = vim.fs.normalize((vim.uv or vim.loop).cwd() or ".")
@@ -149,6 +129,7 @@ return {
       },
     },
   },
+
   {
     "folke/todo-comments.nvim",
     optional = true,
@@ -160,58 +141,15 @@ return {
   },
 
   {
-    "nvim-mini/mini.starter",
-    optional = true,
-    opts = function(_, opts)
-      local items = {
-        {
-          name = "Projects",
-          action = [[lua Snacks.picker.projects()]],
-          section = string.rep(" ", 22) .. "Telescope",
-        },
-      }
-      vim.list_extend(opts.items, items)
-    end,
-  },
-  {
     "folke/flash.nvim",
-    optional = true,
-    specs = {
-      {
-        "folke/snacks.nvim",
-        opts = {
-          picker = {
-            win = {
-              input = {
-                keys = {
-                  ["<a-s>"] = { "flash", mode = { "n", "i" } },
-                  ["s"] = { "flash" },
-                },
-              },
-            },
-            actions = {
-              flash = function(picker)
-                require("flash").jump({
-                  pattern = "^",
-                  label = { after = { 0, 0 } },
-                  search = {
-                    mode = "search",
-                    exclude = {
-                      function(win)
-                        return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
-                      end,
-                    },
-                  },
-                  action = function(match)
-                    local idx = picker.list:row2idx(match.pos[1])
-                    picker.list:_move(idx, true, true)
-                  end,
-                })
-              end,
-            },
-          },
-        },
-      },
+    event = "VeryLazy",
+    opts = {},
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
-  },
+  }
 }

@@ -1,11 +1,20 @@
 return {
   "neovim/nvim-lspconfig",
+  event = "VeryLazy",
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
   opts = {
     diagnostics = {
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        spacing = 4,
+        source = "always",
+        prefix = "●",
+      },
+      severity_sort = true,
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = require("config.icons").diagnostics.Error,
@@ -30,14 +39,14 @@ return {
     },
   },
   config = function(_, opts)
+    vim.diagnostic.config(opts.diagnostics)
     require("mason").setup()
     require("mason-lspconfig").setup()
     for s, o in pairs(opts.servers or {}) do
-      if string.find(s, "*") then
-        vim.notify("bad lsp is " .. s)
+      if s ~= "*" then
+        vim.lsp.config(s, o or {})
+        vim.lsp.enable(s)
       end
-      vim.lsp.config(s, o or {})
-      vim.lsp.enable(s)
     end
   end,
 }

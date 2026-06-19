@@ -167,7 +167,7 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- formatting
 map({ "n", "x" }, "<leader>cf", function()
-  reqiure("conform").format({ force = true })
+  require("conform").format({ force = true })
 end, { desc = "Format" })
 
 -- diagnostic
