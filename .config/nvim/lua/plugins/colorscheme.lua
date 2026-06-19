@@ -1,9 +1,8 @@
 return {
-  -- Add the Mofiqul/vscode.nvim plugin
   {
     "Mofiqul/vscode.nvim",
-    lazy = false, -- Load this during startup
-    priority = 1000, -- Ensure it loads before other plugins
+    lazy = false,
+    priority = 1000,
     opts = {
       transparent = true,
       italic_comments = true,
@@ -13,13 +12,7 @@ return {
     },
     config = function(_, opts)
       require("vscode").setup(opts)
+      vim.cmd.colorscheme("vscode")
     end,
-  },
-
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "vscode",
-    },
   },
 }

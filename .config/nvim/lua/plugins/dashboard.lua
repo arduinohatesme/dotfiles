@@ -143,7 +143,7 @@ return {
     dashboard = {
       preset = {
         pick = function(cmd, opts)
-          return LazyVim.pick(cmd, opts)()
+          return Snacks.picker.files(cmd, opts)()
         end,
         header = [[
       ::::    ::: :::::::::: ::::::::  :::     ::: :::::::::::   :::   ::: 
@@ -159,8 +159,8 @@ return {
         keys = {
           { key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { key = "n", desc = "New File", action = ":ene | startinsert" },
+          { key = "s", desc = "Search Files", action = function() Snacks.picker.grep() end},
           { key = "r", desc = "Restore Session", section = "session" },
-          { key = "m", desc = "Mason", action = ":Mason" },
           { key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
           { key = "q", desc = "Quit", action = ":qa" },
         },

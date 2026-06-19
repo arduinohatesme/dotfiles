@@ -8,6 +8,7 @@ return {
       json = { "prettier" },
       python = { "prettier" },
       html = { "prettier" },
+      lua = { "prettier" },
     },
   },
 }

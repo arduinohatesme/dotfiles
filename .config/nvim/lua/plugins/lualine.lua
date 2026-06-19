@@ -5,10 +5,6 @@ local setup = function()
       theme = "vscode",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
-      disabled_filetypes = {
-        statusline = {},
-        winbar = {},
-      },
       ignore_focus = {},
       always_divide_middle = true,
       always_show_tabline = true,
@@ -31,6 +27,17 @@ local setup = function()
           "ModeChanged",
         },
       },
+      disabled_filetypes = {
+        statusline = {
+          "snacks_dashboard",
+          "snacks_picker",
+          "snacks_picker_input",
+          "snacks_picker_list",
+          "lazy",
+          "mason",
+          "checkhealth",
+        },
+      },
     },
     sections = {
       lualine_a = { "mode" },
@@ -42,8 +49,17 @@ local setup = function()
     },
     inactive_sections = {
       lualine_a = {},
-      lualine_b = {},
-      lualine_c = { "filename" },
+      lualine_b = { "filename" },
+      lualine_c = {
+        { "diff", source = function ()
+        local summary = vim.b.minidiff_summary
+        return summary and {
+          added = summary.add,
+          modified = summary.change,
+          removed = summary.delete,
+        }
+      end }
+    },
       lualine_x = { "location" },
       lualine_y = {},
       lualine_z = {},
