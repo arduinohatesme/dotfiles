@@ -6,6 +6,7 @@
 !/.config/
 /.config/*
 
+!/.config/sddm/
 !/.config/wallpapers/
 !/.config/nixos/
 !/.config/nvim/

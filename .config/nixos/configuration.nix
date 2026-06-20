@@ -122,11 +122,12 @@
   services.displayManager = {
     sddm = {
       enable = true;
-      wayland.enable = false;
+      wayland.enable = true;
+      setupScript = "";
     };
     defaultSession = "hyprland-uwsm";
   };
-  services.xserver.enable = true;
+  services.xserver.enable = false;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

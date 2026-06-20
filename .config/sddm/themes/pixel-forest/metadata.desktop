@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=PixelForest
+Comment=A custom pixel forest login screen
+Type=Link
+X-SDDM-Translate=true
+
+[SDDM]
+Author=arduinohatesme
+email=aidan.m@launchpadincubator.org
+QtVersion=6
+License=GPL-3.0-or-later
+Version=1.0
