@@ -5,7 +5,7 @@ local col = require("colorselector")
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 local function getHost()
-	local f = io.popen("/bin/hostname")
+	local f = io.popen("hostname")
 	local hostname = f:read("*a")
 	f:close()
 	return string.gsub(hostname, "%s+", "")
@@ -44,7 +44,7 @@ end
 -- Set programs that you use
 local browser = "zen"
 local terminal = "kitty"
-local fileManager = "alacritty --hold -e yazi"
+local fileManager = "kitty --hold -e yazi"
 local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 
 -------------------
@@ -57,7 +57,7 @@ local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function()
-	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("awww-daemon && sleep 0.2 && awww restore")
 	hl.exec_cmd("waybar")
 	hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
 end)
@@ -70,6 +70,8 @@ end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
 
 -----------------------
 ----- PERMISSIONS -----
@@ -95,6 +97,11 @@ hl.env("HYPRCURSOR_SIZE", "24")
 
 -- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
 hl.config({
+  cursor = {
+    no_hardware_cursors = true,
+    use_cpu_buffer = true,
+  },
+
 	general = {
 		gaps_in = 5,
 		gaps_out = 22,

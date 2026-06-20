@@ -2,14 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, hostName, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -17,7 +12,7 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.hostName = "knicks-os"; # Define your hostname.
+  networking.hostName = hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -33,6 +28,7 @@
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
+    nerd-fonts.iosevka
   ];
 
   # Select internationalisation properties.
@@ -67,6 +63,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+  # Basics
+    kdePackages.sddm
+    kitty
   # Development
     neovim
     github-cli
@@ -76,24 +75,36 @@
     rustc
     gcc
     tailscale
+    ffmpeg
   # Terminal
-    kitty
     fish
     fastfetch
   # Hyprland
     rofi
     waybar
+    waypaper
     mpvpaper
-    hyprpaper
-    hyperpicker
+    awww
+    hyprpicker
     hyprpolkitagent
+    bibata-cursors
   # Zen Browser
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
+  fonts.fontconfig.enable = true;
+  environment.pathsToLink = [ "/share/icons" ];
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
+  };
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
+    defaultSession = "hyprland-uwsm";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
