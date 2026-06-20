@@ -6,8 +6,11 @@
 
 {
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 3;
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -60,14 +63,29 @@
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # NVIDIA Driver settings
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+  };
+
+  programs.nix-ld.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   # Basics
     kdePackages.sddm
     kitty
+    fd
   # Development
     neovim
+    tree-sitter
     github-cli
     git
     nodejs_26
@@ -76,6 +94,8 @@
     gcc
     tailscale
     ffmpeg
+    uv
+    python3
   # Terminal
     fish
     fastfetch
@@ -102,10 +122,11 @@
   services.displayManager = {
     sddm = {
       enable = true;
-      wayland.enable = true;
+      wayland.enable = false;
     };
     defaultSession = "hyprland-uwsm";
   };
+  services.xserver.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -6,9 +6,13 @@ return {
       javascript = { "prettier" },
       typescript = { "prettier" },
       json = { "prettier" },
-      python = { "prettier" },
+      python = { "ruff" },
       html = { "prettier" },
       lua = { "prettier" },
     },
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_format = "fallback",
+    }
   },
 }
