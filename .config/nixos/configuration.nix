@@ -4,7 +4,20 @@
 
 { config, pkgs, inputs, hostName, ... }:
 
-{
+let
+  sddm-theme = pkgs.sddm-astronaut.override {
+    embeddedTheme = "astronaut";
+    themeConfig = {
+      Background = "/home/amcmillan/.config/wallpapers/White-Mountain.jpg";
+
+      HeaderTextColor = "#667777";
+      PartialBlur = "false";
+      FullBlur = "false";
+      Blur = "0";
+      FormPosition = "left";
+    };
+  };
+in {
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot = {
@@ -80,9 +93,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   # Basics
-    kdePackages.sddm
     kitty
     fd
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    sddm-theme
+    yazi
   # Development
     neovim
     tree-sitter
@@ -108,8 +123,6 @@
     hyprpicker
     hyprpolkitagent
     bibata-cursors
-  # Zen Browser
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   fonts.fontconfig.enable = true;
@@ -119,15 +132,30 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+
   services.displayManager = {
     sddm = {
       enable = true;
+      theme = "${sddm-theme}/share/sddm/themes/sddm-astronaut-theme";
       wayland.enable = true;
-      setupScript = "";
+      package = pkgs.kdePackages.sddm;
+
+      extraPackages = with pkgs; [
+        kdePackages.qtsvg
+        kdePackages.qtdeclarative
+        kdePackages.qt5compat
+        kdePackages.qtmultimedia
+        sddm-theme
+      ];
     };
     defaultSession = "hyprland-uwsm";
   };
+
   services.xserver.enable = false;
+
+  systemd.tmpfiles.rules = [
+    "d /home/amcmillan/.config/wallpapers/ 0755 amcmillan users -"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
