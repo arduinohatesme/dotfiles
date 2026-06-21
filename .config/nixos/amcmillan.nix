@@ -34,6 +34,7 @@ set -gx SUDO_EDITOR nvim
       font_size = 11.0;
       disable_ligatures = "cursor";
       confirm_os_window_close = 0;
+      background = "#111";
     };
   };
 }

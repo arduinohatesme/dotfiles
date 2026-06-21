@@ -5,18 +5,11 @@
 { config, pkgs, inputs, hostName, ... }:
 
 let
-  sddm-theme = pkgs.sddm-astronaut.override {
-    embeddedTheme = "astronaut";
-    themeConfig = {
-      Background = "/home/amcmillan/.config/wallpapers/White-Mountain.jpg";
-
-      HeaderTextColor = "#667777";
-      PartialBlur = "false";
-      FullBlur = "false";
-      Blur = "0";
-      FormPosition = "left";
-    };
-  };
+  sddm-file = import ./sddm.nix { inherit pkgs; };
+  sddm-theme = if hostName == "super-beast-lx" then
+    sddm-file.mountain
+  else
+    sddm-theme.mountain;
 in {
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
@@ -137,7 +130,9 @@ in {
     sddm = {
       enable = true;
       theme = "${sddm-theme}/share/sddm/themes/sddm-astronaut-theme";
-      wayland.enable = true;
+      wayland = {
+        enable = true;
+      };
       package = pkgs.kdePackages.sddm;
 
       extraPackages = with pkgs; [
@@ -154,7 +149,8 @@ in {
   services.xserver.enable = false;
 
   systemd.tmpfiles.rules = [
-    "d /home/amcmillan/.config/wallpapers/ 0755 amcmillan users -"
+    "d /var/lib/sddm/.config 0755 sddm sddm - -"
+    "f /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - {\"data\":[{\"lidClosed\":false,\"outputs\"[{\"enabled\":true,\"outputIndex\":0,\"position\":{\"x\":0,\"y\":0},\"priority\":0}.{\"enabled\":true,\"outputIndex\":1,\"position\":{\"x\":0,\"y\":0},\"priority\":0}]}],\"name\":\"setups\"}"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

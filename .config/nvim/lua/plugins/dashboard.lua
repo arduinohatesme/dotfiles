@@ -1,6 +1,23 @@
-local colors = require("ign.colors")
+local dash_colors = require("extras.dashcols")
 local git_status = {}
 local gh_issues = {}
+
+local function getHost()
+	local f = io.popen("hostname")
+	local hostname = f:read("*a")
+	f:close()
+	return string.gsub(hostname, "%s+", "")
+end
+
+local hostname = getHost()
+
+if hostname == "super-beast-lx" then
+  colors = dash_colors.mountain
+elseif hostname == "launchpad-9" then
+  colors = dash_colors.black_hole
+else
+  colors = dash_colors.astronaut
+end
 
 local function strip_str(input)
   local new_str, _ = string.gsub(input, "%s+", "")

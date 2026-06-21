@@ -11,8 +11,13 @@ SETUVAR _fisher_jorgebucaran_2F_nvm_2E_fish_files:\x7e/\x2econfig/fish/functions
 SETUVAR _fisher_plugins:jorgebucaran/nvm\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_cwd:8BF
+SETUVAR fish_color_cwd_root:8BF
+SETUVAR fish_color_error:E55
+SETUVAR fish_color_escape:8BF
+SETUVAR fish_color_operator:8BD
 SETUVAR fish_color_param:8BD
 SETUVAR fish_color_quote:88B
+SETUVAR fish_color_redirection:8BD
 SETUVAR fish_color_user:8BF
 SETUVAR fish_greeting:
 SETUVAR --export fish_user_paths:/home/amcmillan/\x2elocal/bin

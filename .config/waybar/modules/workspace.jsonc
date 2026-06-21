@@ -8,7 +8,7 @@
     "window-rewrite-default": "",
     "window-rewrite": {
       // --- Work ---
-      "alacritty": "󰆍",
+      "kitty": "󰆍",
       "zen": "",
       // --- Apps ---
       "org.kde.kdeconnect.app": "󰦉",

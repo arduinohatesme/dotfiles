@@ -1,4 +1,4 @@
-local col = require("colorselector")
+local device_conf = require("device")
 ------------------
 ---- MONITORS ----
 ------------------
@@ -16,6 +16,11 @@ local host = getHost()
 if host == "super-beast-lx" then
 	hl.monitor({ output = "DP-1", mode = "preferred", position = "0x0", scale = 1 })
 	hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "3840x512" })
+  hl.config(device_conf.mountain)
+elseif host == "launchpad-9" then
+  hl.config(device_conf.black_hole)
+else
+  hl.config(device_conf.astronaut)
 end
 
 hl.monitor({
@@ -29,7 +34,7 @@ hl.monitor({
 ---- MY PROGRAMS ----
 ---------------------
 
-local waybar_visible = false
+local waybar_visible = true
 
 local function toggle_waybar()
 	hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))
@@ -59,7 +64,6 @@ local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 hl.on("hyprland.start", function()
 	hl.exec_cmd("awww-daemon && sleep 0.2 && awww restore")
 	hl.exec_cmd("waybar")
-	hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
 end)
 
 -------------------------------
@@ -101,48 +105,6 @@ hl.config({
     no_hardware_cursors = true,
     use_cpu_buffer = true,
   },
-
-	general = {
-		gaps_in = 5,
-		gaps_out = 22,
-
-		border_size = 0,
-
-		col = col,
-		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-		resize_on_border = false,
-
-		-- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-		allow_tearing = false,
-
-		layout = "dwindle",
-	},
-
-	decoration = {
-		rounding = 10,
-		rounding_power = 2,
-		dim_inactive = true,
-		dim_strength = 0.15,
-
-		-- Change transparency of focused and unfocused windows
-		active_opacity = 0.8,
-		inactive_opacity = 0.8,
-
-		shadow = {
-			enabled = false,
-			range = 30,
-			render_power = 3,
-			color = 0xee1a1a1a,
-		},
-
-		blur = {
-			enabled = true,
-			size = 2,
-			passes = 3,
-			vibrancy = 0.1696,
-		},
-	},
-
 	animations = {
 		enabled = true,
 	},
@@ -282,13 +244,11 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/powermenu.sh"))
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hypr/nvcd.fish"))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hypr/nvcd.fish"))
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
 hl.bind(mainMod .. " + SHIFT + W", toggle_waybar)
 
 -- Move with vi bindings
@@ -303,11 +263,17 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "right" }))
 hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 
--- ALT (actually SUPER) to resize the window
-hl.bind(mainMod .. " + ALT + H", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + L", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + K", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + J", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
+-- Left hand resizes windows
+hl.bind(mainMod .. " + A", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + F", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + S", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + D", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
+
+-- Workspaces also with vi bindings, H and L to take window, J and K to not
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.move({ workspace = "r-1" }))
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.move({ workspace = "r+1" }))
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.focus({ workspace = "r+1" }))
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.focus({ workspace = "r-1" }))
 
 -- Switch workspaces with mainMod + [0-9] or mainMod + CTRL + HJ/KL
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -316,15 +282,6 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
-hl.bind(mainMod .. " + SHIFT + CTRL + H", hl.dsp.window.move({ workspace = "r-1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + L", hl.dsp.window.move({ workspace = "r+1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + K", hl.dsp.window.move({ workspace = "r+1" }))
-hl.bind(mainMod .. " + SHIFT + CTRL + J", hl.dsp.window.move({ workspace = "r-1" }))
-
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.focus({ workspace = "r-1" }))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.focus({ workspace = "r+1" }))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.focus({ workspace = "r+1" }))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.focus({ workspace = "r-1" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "r+1" }))
