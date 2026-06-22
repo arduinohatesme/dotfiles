@@ -12,6 +12,7 @@ SETUVAR _fisher_plugins:jorgebucaran/nvm\x2efish
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_cwd:8BF
 SETUVAR fish_color_cwd_root:8BF
+SETUVAR fish_color_end:88B
 SETUVAR fish_color_error:E55
 SETUVAR fish_color_escape:8BF
 SETUVAR fish_color_operator:8BD

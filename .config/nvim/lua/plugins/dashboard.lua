@@ -14,7 +14,7 @@ local hostname = getHost()
 if hostname == "super-beast-lx" then
   colors = dash_colors.mountain
 elseif hostname == "launchpad-9" then
-  colors = dash_colors.black_hole
+  colors = dash_colors.sakura
 else
   colors = dash_colors.astronaut
 end
@@ -199,7 +199,7 @@ return {
         vim.api.nvim_set_hl(0, "SnacksDashboardDesc", { fg = colors.txt })
         vim.api.nvim_set_hl(0, "SnacksDashboardKey", { fg = colors.key })
         vim.api.nvim_set_hl(0, "SnacksDashboardFooter", { fg = colors.txt })
-        vim.api.nvim_set_hl(0, "SnacksDashboardSpecial", { fg = colors.key })
+        vim.api.nvim_set_hl(0, "SnacksDashboardSpecial", { fg = colors.imp })
       end,
     })
   end,
