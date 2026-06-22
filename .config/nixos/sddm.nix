@@ -56,8 +56,7 @@
     embeddedTheme = "pixel_sakura";
     themeConfig = {
       Background = "${./wallpapers/pixel_sakura.gif}";
-      Font="Unifont:style=Bold";
-      FontWeight="Bold";
+      Font="Unifont";
 
       RoundCorners = "0";
       HourFormat = "HH:mm:ss";

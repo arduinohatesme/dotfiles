@@ -1,10 +1,9 @@
 return {
   astronaut = {
     general = {
-      gaps_in = 5,
-      gaps_out = 22,
-
       border_size = 0,
+      gaps_in = 5,
+      gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       col = {
         active_border = { colors = { "rgba(6e93ccee)", "rgba(78c9d8ee)" }, angle = 45 },
@@ -48,7 +47,7 @@ return {
 	black_hole = {
     general = {
       gaps_in = 5,
-      gaps_out = 22,
+      gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       border_size = 0,
 
@@ -93,10 +92,9 @@ return {
 
   mountain = {
     general = {
-      gaps_in = 5,
-      gaps_out = 22,
-
       border_size = 2,
+      gaps_in = 5,
+      gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       col = {
         active_border = { colors = { "rgba(9999aaee)", "rgba(aa99aaee)" }, angle = 45 },
@@ -137,10 +135,9 @@ return {
 
   sakura = {
     general = {
-      gaps_in = 5,
-      gaps_out = 22,
-
       border_size = 3,
+      gaps_in = 5,
+      gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       col = {
         active_border = { colors = { "rgba(ddddddee)", "rgba(ddaaddee)" }, angle = 45 },

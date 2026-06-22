@@ -42,13 +42,13 @@ end
 local waybar_visible = true
 
 local function toggle_waybar()
-	hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))
-	if not waybar_visible then
-		hl.config({ general = { gaps_out = 22 } })
-	else
-		hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
-	end
 	waybar_visible = not waybar_visible
+	hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))
+	if waybar_visible then
+		hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
+	else
+		hl.config({ general = { gaps_out = 22 } })
+	end
 end
 
 -- Set programs that you use
@@ -67,7 +67,7 @@ local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function()
-	hl.exec_cmd("awww-daemon && sleep 0.2 && awww restore")
+	hl.exec_cmd("awww-daemon && sleep 0.05 && awww restore")
 	hl.exec_cmd("waybar")
 end)
 
@@ -113,6 +113,11 @@ hl.config({
 	animations = {
 		enabled = true,
 	},
+	{
+    general = {
+      gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
+    },
+  },
 })
 
 hl.window_rule({
@@ -254,7 +259,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hyp
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
-hl.bind(mainMod .. " + SHIFT + W", toggle_waybar)
+hl.bind(mainMod .. " + SHIFT + W", function() toggle_waybar() end)
 
 -- Move with vi bindings
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
