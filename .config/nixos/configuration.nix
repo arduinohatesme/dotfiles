@@ -8,6 +8,8 @@ let
   sddm-file = import ./sddm.nix { inherit pkgs; };
   sddm-theme = if hostName == "super-beast-lx" then
     sddm-file.mountain
+  else if hostName == "launchpad-9" then
+    sddm-file.sakura
   else
     sddm-theme.mountain;
 in {
@@ -75,7 +77,7 @@ in {
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
@@ -110,10 +112,10 @@ in {
   # Hyprland
     rofi
     waybar
-    waypaper
     mpvpaper
     awww
     hyprpicker
+    hypridle
     hyprpolkitagent
     bibata-cursors
   ];
@@ -126,24 +128,30 @@ in {
     xwayland.enable = true;
   };
 
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      theme = "${sddm-theme}/share/sddm/themes/sddm-astronaut-theme";
-      wayland = {
+  services = {
+    displayManager = {
+      sddm = {
         enable = true;
-      };
-      package = pkgs.kdePackages.sddm;
+        theme = "${sddm-theme}/share/sddm/themes/sddm-astronaut-theme";
+        wayland = {
+          enable = true;
+        };
+        package = pkgs.kdePackages.sddm;
 
-      extraPackages = with pkgs; [
-        kdePackages.qtsvg
-        kdePackages.qtdeclarative
-        kdePackages.qt5compat
-        kdePackages.qtmultimedia
-        sddm-theme
-      ];
+        extraPackages = with pkgs; [
+          kdePackages.qtsvg
+          kdePackages.qtdeclarative
+          kdePackages.qt5compat
+          kdePackages.qtmultimedia
+          sddm-theme
+        ];
+      };
+      defaultSession = "hyprland-uwsm";
     };
-    defaultSession = "hyprland-uwsm";
+
+    tailscale = {
+      enable = true;
+    };
   };
 
   services.xserver.enable = false;

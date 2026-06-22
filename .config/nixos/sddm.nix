@@ -52,4 +52,14 @@
       HoverVirtualKeyboardButtonTextColor="#cecece";
     };
   };
+  sakura = pkgs.sddm-astronaut.override {
+    embeddedTheme = "pixel_sakura";
+    themeConfig = {
+      Background = "${./wallpapers/pixel_sakura.gif}";
+
+      RoundCorners = "0";
+      HourFormat = "HH:mm:ss";
+      DateFormat = "dddd d MMMM";
+    };
+  };
 }

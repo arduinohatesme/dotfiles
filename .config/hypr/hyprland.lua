@@ -18,17 +18,22 @@ if host == "super-beast-lx" then
 	hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "3840x512" })
   hl.config(device_conf.mountain)
 elseif host == "launchpad-9" then
-  hl.config(device_conf.black_hole)
+  hl.config(device_conf.sakura)
+  hl.monitor({
+    output = "",
+    mode = "3840x2160@60",
+    position = "0x0",
+    scale = 1,
+  })
 else
   hl.config(device_conf.astronaut)
+  hl.monitor({
+    output = "",
+    mode = "preferred",
+    position = "auto",
+    scale = "1",
+  })
 end
-
-hl.monitor({
-	output = "",
-	mode = "preferred",
-	position = "auto",
-	scale = "auto",
-})
 
 ---------------------
 ---- MY PROGRAMS ----

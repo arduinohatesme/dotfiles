@@ -19,18 +19,20 @@ uptime=$(awk '{printf "%02d:%02d", int($1/3600), int(($1%3600)/60)}' /proc/uptim
 host=$(hostname)
 
 # Options
-shutdown=''
-reboot=''
-logout=''
-yes=''
-no=''
+shutdown='󰐥'
+reboot=''
+logout='󰍃'
+yes=''
+no=''
 
 # Rofi CMD
 rofi_cmd() {
   rofi -dmenu \
     -p " Uptime: $uptime " \
     -mesg " Uptime: $uptime " \
-    -theme ${dir}/${theme}.rasi
+    -theme ${dir}/${theme}.rasi \
+    -theme-str 'textbox {horizontal-align: 0.5;}'
+    -theme-str 'element-text {horizontal-align: 0.5;}'
 }
 
 # Confirmation CMD
