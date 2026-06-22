@@ -140,7 +140,7 @@ return {
       gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       col = {
-        active_border = { colors = { "rgba(ddddddee)", "rgba(ddaaddee)" }, angle = 45 },
+        active_border = { colors = { "rgba(f8ac9eee)", "rgba(ddaaddee)" }, angle = 45 },
         inactive_border = "rgba(262c3caa)",
       },
       -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
