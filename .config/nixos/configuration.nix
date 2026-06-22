@@ -39,7 +39,7 @@ in {
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.caskaydia-cove
-    nerd-fonts.iosevka
+    unifont
   ];
 
   # Select internationalisation properties.
