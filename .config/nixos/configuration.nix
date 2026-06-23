@@ -90,6 +90,7 @@ in {
   # Basics
     kitty
     fd
+    ripgrep
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
     yazi
