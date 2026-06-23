@@ -6,7 +6,7 @@ return {
       javascript = { "prettier" },
       typescript = { "prettier" },
       json = { "prettier" },
-      python = { "ruff" },
+      python = { "ruff_format" },
       html = { "prettier" },
       lua = { "prettier" },
     },
