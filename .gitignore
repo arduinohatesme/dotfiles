@@ -8,7 +8,6 @@
 
 !/.config/sddm/
 !/.config/wallpapers/
-!/.config/nixos/
 !/.config/nvim/
 !/.config/fish/
 !/.config/git/
@@ -16,6 +15,9 @@
 !/.config/waybar/
 !/.config/rofi/
 !/.config/kitty/
+!/.config/hosts/
+!/.config/*.nix
+!/.config/flake.lock
 !.gitignore
 !README.md
 
