@@ -1,4 +1,4 @@
-local device_conf = require("device")
+local device_conf = require("theme")
 ------------------
 ---- MONITORS ----
 ------------------
@@ -16,9 +16,7 @@ local host = getHost()
 if host == "super-beast-lx" then
 	hl.monitor({ output = "DP-1", mode = "preferred", position = "0x0", scale = 1 })
 	hl.monitor({ output = "HDMI-A-1", mode = "preferred", position = "3840x512" })
-  hl.config(device_conf.mountain)
 elseif host == "launchpad-9" then
-  hl.config(device_conf.sakura)
   hl.monitor({
     output = "",
     mode = "3840x2160@60",
@@ -26,7 +24,6 @@ elseif host == "launchpad-9" then
     scale = 1,
   })
 else
-  hl.config(device_conf.astronaut)
   hl.monitor({
     output = "",
     mode = "preferred",
@@ -34,6 +31,8 @@ else
     scale = "1",
   })
 end
+
+hl.config(device_conf)
 
 ---------------------
 ---- MY PROGRAMS ----
