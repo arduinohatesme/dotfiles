@@ -1,13 +1,3 @@
-
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-
 /*****----- Configuration -----*****/
 configuration {
     show-icons:                 false;
@@ -111,7 +101,7 @@ element {
     border-radius:               100%;
     border-color:                @selected;
     background-color:            @background-alt;
-    text-color:                  @active;
+    text-color:                  @foreground;
     cursor:                      pointer;
 }
 element-text {
@@ -123,7 +113,7 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            @active;
-    text-color:                  @foreground;
+    background-color:            @selected;
+    text-color:                  @active;
 }
 

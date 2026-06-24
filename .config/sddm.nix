@@ -6,6 +6,7 @@
     themeConfig = {
       Background = "${./wallpapers/astronaut}";
 
+      Font = "Oswald";
       HourFormat = "HH:mm:ss";
       DateFormat = "dddd d MMMM";
     };
@@ -16,7 +17,7 @@
     themeConfig = {
       Background = "${./wallpapers/black_hole}";
 
-      Font = "Space Grotesk";
+      Font = "Orbitron";
       HourFormat = "HH:mm:ss";
       DateFormat = "dddd d MMMM";
 

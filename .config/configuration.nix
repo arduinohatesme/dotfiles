@@ -8,7 +8,7 @@ let
   sddm-file = import ./sddm.nix { inherit pkgs; };
 
   ttheme = if hostName == "super-beast-lx" then
-    "mountain"
+    "astronaut"
   else if hostName == "launchpad-9" then
     "black_hole"
   else
@@ -45,6 +45,7 @@ in {
     nerd-fonts.caskaydia-cove
     unifont
     orbitron
+    oswald
   ];
 
   # Select internationalisation properties.

@@ -43,6 +43,22 @@
     };
   };
 
+  gtk = {
+    enable = true;
+    cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+    };
+    gtk3.extraConfig = {
+      "gtk-cursor-theme-name" = "Bibata-Modern-Classic";
+    };
+    gtk4.extraConfig = {
+      Settings = ''
+      gtk-cursor-theme-name=Bibata-Modern-Classic
+      '';
+    };
+  };
+
   programs.fish = {
     enable = true;
     shellAliases = {
