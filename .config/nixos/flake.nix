@@ -29,7 +29,6 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.amcmillan = import ./amcmillan.nix;
         }
       ];
     };

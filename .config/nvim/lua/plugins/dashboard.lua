@@ -1,4 +1,4 @@
-local dash_colors = require("extras.dashcols")
+local colors = require("extras.dashcols")
 local git_status = {}
 local gh_issues = {}
 
@@ -10,14 +10,6 @@ local function getHost()
 end
 
 local hostname = getHost()
-
-if hostname == "super-beast-lx" then
-  colors = dash_colors.mountain
-elseif hostname == "launchpad-9" then
-  colors = dash_colors.sakura
-else
-  colors = dash_colors.astronaut
-end
 
 local function strip_str(input)
   local new_str, _ = string.gsub(input, "%s+", "")

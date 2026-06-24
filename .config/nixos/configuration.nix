@@ -6,12 +6,15 @@
 
 let
   sddm-file = import ./sddm.nix { inherit pkgs; };
-  sddm-theme = if hostName == "super-beast-lx" then
-    sddm-file.mountain
+
+  ttheme = if hostName == "super-beast-lx" then
+    "mountain"
   else if hostName == "launchpad-9" then
-    sddm-file.sakura
+    "sakura"
   else
-    sddm-theme.mountain;
+    "mountain";
+  sddm-theme = sddm-file.${ttheme};
+
 in {
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
@@ -60,6 +63,10 @@ in {
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
     shell = pkgs.fish;
+  };
+  home-manager = {
+    extraSpecialArgs = { theme = ttheme; };
+    users.amcmillan = ./amcmillan.nix;
   };
 
   environment.shellAliases = {

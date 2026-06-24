@@ -18,3 +18,5 @@
 !/.config/kitty/
 !.gitignore
 !README.md
+
+/.config/nvim/extras/dashcols.lua

@@ -1,7 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, config, theme, ... }:
+
+
+{
   home.username = "amcmillan";
   home.homeDirectory = "/home/amcmillan";
-  home.stateVersion = "26.05";
+  home.stateVersion = "26.11";
+  home.file = {
+    ".config/nvim/lua/extras/dashcols.lua" = {
+      text = ''
+      return require("extras.allcols").${theme}
+      '';
+    };
+  };
 
   programs.fish = {
     enable = true;
