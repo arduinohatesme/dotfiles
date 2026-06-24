@@ -92,12 +92,12 @@ return {
 
   mountain = {
     general = {
-      border_size = 2,
+      border_size = 3,
       gaps_in = 5,
       gaps_out = { top = 44, left = 22, right = 22, bottom = 22 },
 
       col = {
-        active_border = { colors = { "rgba(9999aaee)", "rgba(aa99aaee)" }, angle = 45 },
+        active_border = { colors = { "rgba(bbccddee)", "rgba(bbddbbee)" }, angle = 45 },
         inactive_border = "rgba(262c3caa)",
       },
       -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -111,10 +111,10 @@ return {
 
     decoration = {
       dim_inactive = true,
-      dim_strength = 0.15,
+      dim_strength = 0.25,
 
       -- Change transparency of focused and unfocused windows
-      active_opacity = 0.85,
+      active_opacity = 0.8,
       inactive_opacity = 0.8,
 
       shadow = {
@@ -126,8 +126,8 @@ return {
 
       blur = {
         enabled = false,
-        size = 2,
-        passes = 2,
+        size = 10,
+        passes = 3,
         vibrancy = 0.1696,
       },
     },
