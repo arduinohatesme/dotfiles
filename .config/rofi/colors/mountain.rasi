@@ -6,11 +6,10 @@
  * Colors
  **/
 * {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #262C3Ccc;
-    background-alt:              #2d4260cc;
-    foreground:                  #FFFFFFaa;
-    selected:                    #94d3e8aa;
-    active:                      #26212faa;
-    urgent:                      #cee8e7aa;
+    background:     #00000077;
+    background-alt: #27272777;
+    foreground:     #c3e3eb77;
+    selected:       #83a4a177;
+    active:         #83a4a177;
+    urgent:         #83a4a177;
 }
