@@ -1,0 +1,11 @@
+#audio,
+#connections,
+#clock,
+#system,
+#storage,
+#workspaces,
+#workspaces button {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 0;
+}
