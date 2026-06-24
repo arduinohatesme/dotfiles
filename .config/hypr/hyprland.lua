@@ -66,7 +66,7 @@ local menu = "~/.config/rofi/launcher.sh"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function()
-	hl.exec_cmd("awww-daemon && sleep 0.5 && awww img /home/amcmillan/.config/wallpapers/active")
+	hl.exec_cmd("awww-daemon & sleep 0.5 && awww img /home/amcmillan/.config/wallpapers/active")
 	hl.exec_cmd("waybar")
 end)
 
