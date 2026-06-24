@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+theme="$HOME/.config/rofi/screenshot-style.rasi"
+
+# Theme Elements
+prompt=" Saving to ~/Screenshots "
+list_col='2'
+list_row='2'
+win_width='450px'
+
+option_1=" "
+option_2="󰒉 "
+option_3="󰲶"
+option_4="󰔛"
+
+# Rofi CMD
+rofi_cmd() {
+  rofi -theme-str "window {width: $win_width;}" \
+    -theme-str "listview {columns: $list_col; lines: $list_row;}" \
+    -dmenu \
+    -p "$prompt" \
+    -markup-rows \
+    -theme ${theme}
+}
+
+# Pass variables to rofi dmenu
+run_rofi() {
+  echo -e "$option_1\n$option_2\n$option_3\n$option_4" | rofi_cmd
+}
+
+# Screenshot
+time=$(date +%Y-%m-%d-%H-%M-%S)
+dir="$HOME/Screenshots"
+file="Screenshot_${time}.png"
+
+if [[ ! -d "$dir" ]]; then
+  mkdir -p "$dir"
+fi
+
+# notify and view screenshot
+notify_view() {
+  notify_cmd_shot='dunstify -u low --replace=699'
+  viewnior ${dir}/"$file"
+  if [[ -e "$dir/$file" ]]; then
+    ${notify_cmd_shot} "Screenshot Saved."
+  else
+    ${notify_cmd_shot} "Screenshot Deleted."
+  fi
+}
+
+# Copy screenshot to clipboard
+copy_shot() {
+  tee "$file" | wl-copy
+}
+
+# countdown
+countdown() {
+  for sec in $(seq $1 -1 1); do
+    dunstify -t 1000 --replace=699 "Taking shot in : $sec"
+    sleep 1
+  done
+}
+
+# take shots
+shotnow() {
+  sleep 0.5 && grim "$dir/$file" | copy_shot
+  notify_view
+}
+
+shot5() {
+  countdown '5'
+  shotnow
+  notify_view
+}
+
+shotann() {
+  grim -g "$(slurp)" -t ppm - | satty --filename - --output-filename "$dir/$file"
+  notify_view
+}
+
+shotarea() {
+  grim -g "$(slurp)" "$dir/$file"
+  notify_view
+}
+
+# Execute Command
+run_cmd() {
+  if [[ "$1" == '--opt1' ]]; then
+    shotnow
+  elif [[ "$1" == '--opt2' ]]; then
+    shotarea
+  elif [[ "$1" == '--opt3' ]]; then
+    shotann
+  elif [[ "$1" == '--opt4' ]]; then
+    shot5
+  fi
+}
+
+# Actions
+chosen="$(run_rofi)"
+case ${chosen} in
+$option_1)
+  run_cmd --opt1
+  ;;
+$option_2)
+  run_cmd --opt2
+  ;;
+$option_3)
+  run_cmd --opt3
+  ;;
+$option_4)
+  run_cmd --opt4
+  ;;
+esac

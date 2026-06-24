@@ -55,7 +55,7 @@ end
 local browser = "zen"
 local terminal = "kitty"
 local fileManager = "kitty --hold -e yazi"
-local menu = "~/.config/rofi/launchers/type-7/launcher.sh"
+local menu = "~/.config/rofi/launcher.sh"
 
 -------------------
 ---- AUTOSTART ----
@@ -253,12 +253,12 @@ hl.config({
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/powermenu.sh"))
+hl.bind(mainMod .. " + X", hl.dsp.exec_cmd("~/.config/rofi/powermenu.sh"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hypr/nvcd.fish"))
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/applets/bin/screenshot.sh"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/screenshot.sh"))
 hl.bind(mainMod .. " + SHIFT + W", function() toggle_waybar() end)
 
 -- Move with vi bindings
