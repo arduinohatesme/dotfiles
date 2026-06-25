@@ -185,8 +185,8 @@ error-message {
 configuration {
   kb-move-char-back: "Shift+Left";
   kb-move-char-forward: "Shift+Right";
-	kb-mode-previous: "l";
-	kb-mode-next: "r";
+	kb-mode-previous: "h";
+	kb-mode-next: "l";
 	kb-row-up: "k";
 	kb-row-down: "j";
 }
