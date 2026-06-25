@@ -10,7 +10,7 @@ let
   ttheme = if hostName == "super-beast-lx" then
     "black_hole"
   else if hostName == "launchpad-9" then
-    "mountain"
+    "sakura"
   else
     "mountain";
 

@@ -24,9 +24,10 @@
   color: @on_primary;
 }
 
-#workspaces button:hover {
+#workspaces button:hover,
+#workspaces button.empty:hover {
   background-color: @surface_container_highest;
-  color: @primary;
+  color: @background;
   box-shadow: none;
   text-shadow: none;
 }

@@ -9,6 +9,10 @@
       Font = "Oswald";
       HourFormat = "HH:mm:ss";
       DateFormat = "dddd d MMMM";
+
+      HideLoginButton = "true";
+      HaveFormBackground = "false";
+      Blur = "0.0";
     };
   };
 
@@ -74,7 +78,7 @@
 
       FormPosition = "center";
       ScreenPadding = "0";
-      Blur="1.0";
+      Blur = "1.0";
       HideLoginButton = "true";
 
       HeaderTextColor = "#f5faff";
