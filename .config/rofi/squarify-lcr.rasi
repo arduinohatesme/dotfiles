@@ -10,7 +10,6 @@ entry {
 listbox {
   spacing: 0px;
   margin: 0px;
-  padding: 0px 20px 20px 20px;
 }
 
 inputbar {
@@ -39,7 +38,7 @@ button {
 
 listview {
   columns: 1;
-  lines: 3;
+  lines: 5;
   spacing: 0px;
 }
 

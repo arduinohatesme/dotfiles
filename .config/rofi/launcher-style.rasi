@@ -50,7 +50,7 @@ listbox {
 
 /*****----- Inputbar -----*****/
 inputbar {
-    enabled:                     true;
+    enabled:                     false;
     spacing:                     12px;
     padding:                     20px 20px 0px 20px;
     background-color:            transparent;
@@ -185,8 +185,10 @@ error-message {
 configuration {
   kb-move-char-back: "Shift+Left";
   kb-move-char-forward: "Shift+Right";
-	kb-mode-previous: "Left";
-	kb-mode-next: "Right";
+	kb-mode-previous: "l";
+	kb-mode-next: "r";
+	kb-row-up: "k";
+	kb-row-down: "j";
 }
 
 @import "./if-square-lcr.rasi"
