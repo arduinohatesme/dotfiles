@@ -8,7 +8,7 @@ let
   sddm-file = import ./sddm.nix { inherit pkgs; };
 
   ttheme = if hostName == "super-beast-lx" then
-    "mountain"
+    "black_hole"
   else if hostName == "launchpad-9" then
     "black_hole"
   else

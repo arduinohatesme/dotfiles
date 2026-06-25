@@ -22,6 +22,43 @@
       DateFormat = "dddd d MMMM";
 
       ScreenPadding = "0";
+      HideLoginButton = "true";
+
+      HeaderTextColor="#ffdfcf";
+      DateTextColor="#ffdfcf";
+      TimeTextColor="#ffdfcf";
+
+      FormBackgroundColor="#22172a";
+      BackgroundColor="#5c729d";
+      DimBackgroundColor="#5c729d";
+
+      LoginFieldBackgroundColor="#352442";
+      PasswordFieldBackgroundColor="#352442";
+      LoginFieldTextColor="#ffdfcf";
+      PasswordFieldTextColor="#ffdfcf";
+      UserIconColor="#ffdfcf";
+      PasswordIconColor="#ffdfcf";
+
+      PlaceholderTextColor="#cebddb";
+      WarningColor="#ffdfcf";
+
+      SystemButtonsIconsColor="#ffdfcf";
+      SessionButtonTextColor="#ffdfcf";
+      VirtualKeyboardButtonTextColor="#ffdfcf";
+
+      DropdownTextColor="#ffdfcf";
+      DropdownSelectedBackgroundColor="#402b4f";
+      DropdownBackgroundColor="#352442";
+
+      HighlightTextColor="#1e1f2f";
+      HighlightBackgroundColor="#352442";
+      HighlightBorderColor="#402b4f";
+
+      HoverUserIconColor="#fff1eb";
+      HoverPasswordIconColor="#fff1eb";
+      HoverSystemButtonsIconsColor="#fff1eb";
+      HoverSessionButtonTextColor="#fff1eb";
+      HoverVirtualKeyboardButtonTextColor="#fff1eb";
     };
   };
 
