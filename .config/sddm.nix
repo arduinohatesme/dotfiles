@@ -78,7 +78,7 @@
 
       FormPosition = "center";
       ScreenPadding = "0";
-      Blur = "1.0";
+      Blur = "0.0";
       HideLoginButton = "true";
 
       HeaderTextColor = "#f5faff";

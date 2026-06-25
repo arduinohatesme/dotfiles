@@ -58,6 +58,7 @@ inputbar {
     orientation:                 horizontal;
     children:                    [ "entry" ];
 }
+
 entry {
     enabled:                     true;
     expand:                      true;
@@ -71,12 +72,13 @@ entry {
 }
 
 /*****----- Mode Switcher -----*****/
-mode-switcher{
+mode-switcher {
     enabled:                     true;
     spacing:                     10px;
     background-color:            transparent;
     text-color:                  @foreground;
 }
+
 button {
     padding:                     12px;
     border-radius:               100%;
@@ -84,6 +86,7 @@ button {
     text-color:                  @selected;
     cursor:                      pointer;
 }
+
 button selected {
     background-color:            @selected;
     text-color:                  @active;
@@ -95,13 +98,13 @@ listview {
     columns:                     1;
     lines:                       5;
     cycle:                       true;
-    dynamic:                     true;
+    dynamic:                     false;
     scrollbar:                   false;
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
+
     spacing:                     10px;
     background-color:            transparent;
     text-color:                  @foreground;
@@ -178,3 +181,5 @@ error-message {
     background-color:            @background;
     text-color:                  @foreground;
 }
+
+@import "./if-square-lcr.rasi"

@@ -1,0 +1,49 @@
+window {
+  border-radius: 0px;
+  width: 600px;
+}
+
+entry {
+  border-radius: 0px;
+}
+
+listbox {
+  spacing: 0px;
+  margin: 0px;
+  padding: 0px 20px 20px 20px;
+}
+
+inputbar {
+  spacing: 0px;
+  margin: 0px;
+}
+
+message {
+  border-radius: 0px;
+}
+
+textbox {
+  border-radius: 0px;
+  height: 0px;
+  width: 600px;
+}
+
+mode-switcher {
+  spacing: 0px;
+}
+
+button {
+  border-radius: 0px;
+  margin: 0px;
+}
+
+listview {
+  columns: 1;
+  lines: 3;
+  spacing: 0px;
+}
+
+element {
+  border-radius: 0px;
+  margin: 0px;
+}

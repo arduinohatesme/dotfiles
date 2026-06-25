@@ -41,6 +41,22 @@
       return require("device").${theme}
       '';
     };
+
+    ".config/rofi/if-square.rasi" = {
+      text = if theme == "sakura" || theme == "mountain" then
+        ''
+        @import "./squarify.rasi"
+        ''
+      else '''';
+    };
+
+    ".config/rofi/if-square-lcr.rasi" = {
+      text = if theme == "sakura" || theme == "mountain" then
+        ''
+        @import "./squarify-lcr.rasi"
+        ''
+      else '''';
+    };
   };
 
   gtk = {

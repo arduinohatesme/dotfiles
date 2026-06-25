@@ -117,3 +117,4 @@ element selected.normal {
     text-color:                  @active;
 }
 
+@import "./if-square.rasi"

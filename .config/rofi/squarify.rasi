@@ -1,0 +1,37 @@
+window {
+  border-radius: 0px;
+  width: 170px;
+}
+
+prompt {
+  border-radius: 0px;
+  height: 0px;
+  width: 170px;
+  expand: false;
+  size: 0px;
+  enabled: false;
+  font: "JetBrainsMono Nerd Font 10";
+}
+
+message {
+  border-radius: 0px;
+  height: 0px;
+  width: 0px;
+}
+
+textbox {
+  border-radius: 0px;
+  height: 0px;
+  width: 170px;
+}
+
+listview {
+  spacing: 0px;
+  columns: 1;
+  lines: 3;
+}
+
+element {
+  border-radius: 0px;
+  margin: 0px;
+}
