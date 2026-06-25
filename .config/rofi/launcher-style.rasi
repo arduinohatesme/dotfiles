@@ -182,4 +182,11 @@ error-message {
     text-color:                  @foreground;
 }
 
+configuration {
+  kb-move-char-back: "Shift+Left";
+  kb-move-char-forward: "Shift+Right";
+	kb-mode-previous: "Left";
+	kb-mode-next: "Right";
+}
+
 @import "./if-square-lcr.rasi"
