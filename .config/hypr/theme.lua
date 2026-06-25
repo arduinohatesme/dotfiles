@@ -1,1 +1,1 @@
-/nix/store/n65scg0zkyma42w4v57sj5n99fl7rvpk-home-manager-files/.config/hypr/theme.lua
+/nix/store/q5xq92sdz467p63jbsnv103v6471qlja-home-manager-files/.config/hypr/theme.lua

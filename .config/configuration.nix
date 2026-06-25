@@ -8,7 +8,7 @@ let
   sddm-file = import ./sddm.nix { inherit pkgs; };
 
   ttheme = if hostName == "super-beast-lx" then
-    "astronaut"
+    "mountain"
   else if hostName == "launchpad-9" then
     "black_hole"
   else
@@ -99,6 +99,7 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
   # Basics
     kitty
     fd
@@ -106,6 +107,7 @@ in {
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
     yazi
+
   # Development
     neovim
     tree-sitter
@@ -119,9 +121,12 @@ in {
     ffmpeg
     uv
     python3
+
   # Terminal
     fish
     fastfetch
+    fishPlugins.bang-bang
+
   # Hyprland
     rofi
     waybar
