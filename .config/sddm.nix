@@ -75,44 +75,43 @@
       FormPosition = "center";
       ScreenPadding = "0";
       Blur="1.0";
+      HideLoginButton = "true";
 
-      HeaderTextColor = "#afaaaf";
-      DateTextColor="#afaaaf";
-      TimeTextColor="#afaaaf";
+      HeaderTextColor = "#f5faff";
+      DateTextColor="#f5faff";
+      TimeTextColor="#f5faff";
 
-      FormBackgroundColor="#21222C";
-      BackgroundColor="#21222C";
-      DimBackgroundColor="#21222C";
+      FormBackgroundColor="#21222c";
+      BackgroundColor="#21222c";
+      DimBackgroundColor="#21222c";
 
-      LoginFieldBackgroundColor="#222222";
-      PasswordFieldBackgroundColor="#222222";
-      LoginFieldTextColor="#ffffff";
-      PasswordFieldTextColor="#ffffff";
-      UserIconColor="#dfdddf";
-      PasswordIconColor="#dfdddf";
+      LoginFieldBackgroundColor="#21222c";
+      PasswordFieldBackgroundColor="#21222c";
+      LoginFieldTextColor="#f5faff";
+      PasswordFieldTextColor="#f5faff";
+      UserIconColor="#f5faff";
+      PasswordIconColor="#f5faff";
 
-      PlaceholderTextColor="#bbbbbb";
+      PlaceholderTextColor="#c7cdd1";
       WarningColor="#403438";
 
-      LoginButtonTextColor="#ffffff";
-      LoginButtonBackgroundColor="#403438";
-      SystemButtonsIconsColor="#dfdddf";
-      SessionButtonTextColor="#dfdddf";
-      VirtualKeyboardButtonTextColor="#dfdddf";
+      SystemButtonsIconsColor="#f5faff";
+      SessionButtonTextColor="#f5faff";
+      VirtualKeyboardButtonTextColor="#f5faff";
 
-      DropdownTextColor="#dfdddf";
-      DropdownSelectedBackgroundColor="#403438";
-      DropdownBackgroundColor="#2C2221";
+      DropdownTextColor="#f5faff";
+      DropdownSelectedBackgroundColor="#373737";
+      DropdownBackgroundColor="#272727";
 
-      HighlightTextColor="#bbbbbb";
-      HighlightBackgroundColor="#403438";
-      HighlightBorderColor="#403438";
+      HighlightTextColor="#f5faff";
+      HighlightBackgroundColor="#89959f";
+      HighlightBorderColor="#89959f";
 
-      HoverUserIconColor="#cecece";
-      HoverPasswordIconColor="#cecece";
-      HoverSystemButtonsIconsColor="#cecece";
-      HoverSessionButtonTextColor="#cecece";
-      HoverVirtualKeyboardButtonTextColor="#cecece";
+      HoverUserIconColor="#ffffff";
+      HoverPasswordIconColor="#ffffff";
+      HoverSystemButtonsIconsColor="#ffffff";
+      HoverSessionButtonTextColor="#ffffff";
+      HoverVirtualKeyboardButtonTextColor="#ffffff";
     };
   };
 
