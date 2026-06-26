@@ -259,6 +259,9 @@ hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/screenshot.sh"))
 hl.bind(mainMod .. " + SHIFT + W", function() toggle_waybar() end)
+hl.bind(mainMod .. " + SHIFT + F", function()
+  hl.dispatch(hl.dsp.window.set_prop({ window = "active", prop = "opaque", value = "toggle" }))
+end)
 
 -- Move with vi bindings
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
@@ -273,10 +276,10 @@ hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "up" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "down" }))
 
 -- Left hand resizes windows
-hl.bind(mainMod .. " + A", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + F", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + S", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + D", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + S", hl.dsp.window.resize({ x = -100, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + G", hl.dsp.window.resize({ x = 100, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + D", hl.dsp.window.resize({ x = 0, y = -100, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + F", hl.dsp.window.resize({ x = 0, y = 100, relative = true }), { repeating = true })
 
 -- Workspaces also with vi bindings, H and L to take window, J and K to not
 hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.move({ workspace = "r-1" }))
@@ -360,6 +363,13 @@ hl.window_rule({
 	},
 
 	no_focus = true,
+})
+
+hl.window_rule({
+  match = {
+    tag = "opaque"
+  },
+  opacity = "1 override"
 })
 
 -- Layer rules also return a handle.

@@ -107,6 +107,9 @@ in {
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
     yazi
+    viewnior
+    notmuch
+    lieer
 
   # Development
     neovim
@@ -136,6 +139,9 @@ in {
     hypridle
     hyprpolkitagent
     bibata-cursors
+    grim
+    slurp
+    satty
   ];
 
   fonts.fontconfig.enable = true;
