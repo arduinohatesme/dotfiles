@@ -97,7 +97,7 @@
     set -gx MANPAGER "nvim +Man!"
     '';
   };
-  
+ 
   programs.kitty = {
     enable = true;
     settings = {

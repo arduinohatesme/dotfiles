@@ -16,6 +16,7 @@
 !/.config/rofi/
 !/.config/kitty/
 !/.config/hosts/
+!/.config/fastfetch/
 !/.config/*.nix
 !/.config/flake.lock
 !.gitignore
