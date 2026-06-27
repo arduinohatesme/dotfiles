@@ -116,14 +116,8 @@ in {
     tree-sitter
     github-cli
     git
-    nodejs_26
-    cargo
-    rustc
-    gcc
     tailscale
-    ffmpeg
-    uv
-    python3
+    nodejs_26
 
   # Terminal
     fish
