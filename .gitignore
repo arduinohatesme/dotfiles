@@ -19,6 +19,7 @@
 !/.config/fastfetch/
 !/.config/*.nix
 !/.config/flake.lock
+!/.config/*.age
 !.gitignore
 !README.md
 
