@@ -162,6 +162,7 @@ in {
   '';
 
   services = {
+    printing.enable = true;
     displayManager = {
       sddm = {
         enable = true;
