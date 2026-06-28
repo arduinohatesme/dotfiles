@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    agenix.url = "github:ryantm/agenix"; 
 
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
@@ -12,8 +13,7 @@
     };
   };
 
-
-  outputs = { self, nixpkgs, zen-browser, ... }@inputs:
+  outputs = { self, nixpkgs, zen-browser, agenix, ... }@inputs:
   let
     system = "x86_64-linux";
     hostnames =  [ "knicks-os" "skull" "beast-jr" "super-beast-lx" "launchpad-9" ];
@@ -25,6 +25,7 @@
         ./configuration.nix
         (./hosts + "/${hostName}/hardware-configuration.nix")
         inputs.home-manager.nixosModules.home-manager
+        agenix.nixosModules.default
 
         {
           home-manager.useGlobalPkgs = true;

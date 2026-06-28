@@ -110,6 +110,7 @@ in {
     viewnior
     notmuch
     lieer
+    zip
 
   # Development
     neovim
@@ -152,6 +153,14 @@ in {
     WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
   };
 
+  environment.extraInit = ''
+  if [ -f "/run/agenix/github-token" ]; then
+    echo "Setting GITHUB_TOKEN"
+    export GITHUB_TOKEN=$(cat /run/agenix/github-token | awk -F'=' '{print $NF}')
+    export GH_TOKEN=$GITHUB_TOKEN
+  fi
+  '';
+
   services = {
     displayManager = {
       sddm = {
@@ -185,6 +194,14 @@ in {
     };
 
     xserver.enable = true;
+    openssh.enable = true;
+  };
+
+  age.secrets.github-token = {
+    file = ./github-token.age;
+    owner = "root";
+    group = "users";
+    mode = "0440";
   };
 
   systemd.services.sddm.environment = {
