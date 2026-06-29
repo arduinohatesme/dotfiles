@@ -97,9 +97,7 @@
     set -gx MANPAGER "nvim +Man!"
 
     if test -f "/run/agenix/github-token"
-      echo "Setting GITHUB_TOKEN"
-      set -gx GITHUB_TOKEN $(cat /run/agenix/github-token | awk -F'=' '{print $NF}')
-      set -gx GH_TOKEN $GITHUB_TOKEN
+      echo $(cat /run/agenix/github-token | awk -F'=' '{print $NF}') | gh auth login --with-token &>/dev/null
     end
     '';
   };
