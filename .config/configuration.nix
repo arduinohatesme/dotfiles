@@ -11,6 +11,8 @@ let
     "black_hole"
   else if hostName == "launchpad-9" then
     "sakura"
+  else if hostName == "beast-jr" then
+    "mountain"
   else
     "mountain";
 
