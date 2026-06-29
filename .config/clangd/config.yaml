@@ -1,0 +1,5 @@
+CompileFlags:
+  Remove:
+    - -mlongcalls
+  Add:
+    - --query-driver=/home/amcmillan/.arduino15/packages/esp32/**/bin/*gcc*
