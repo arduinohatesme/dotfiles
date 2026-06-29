@@ -95,6 +95,11 @@ in {
   };
 
   programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    glibc
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -111,6 +116,7 @@ in {
     notmuch
     lieer
     zip
+    unzip
 
   # Development
     neovim
