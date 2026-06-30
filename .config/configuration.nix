@@ -61,6 +61,7 @@ in {
 
   programs = {
     fish.enable = true;
+    kdeconnect.enable = true;
 
     nix-ld = {
       enable = true;
