@@ -95,10 +95,6 @@
     set -gx VISUAL nvim
     set -gx SUDO_EDITOR nvim
     set -gx MANPAGER "nvim +Man!"
-
-    if test -f "/run/agenix/github-token"
-      echo $(cat /run/agenix/github-token | awk -F'=' '{print $NF}') | gh auth login --with-token &>/dev/null
-    end
     '';
   };
  

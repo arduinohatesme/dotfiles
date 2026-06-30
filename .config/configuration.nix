@@ -59,7 +59,24 @@ in {
     variant = "";
   };
 
-  programs.fish.enable = true;
+  programs = {
+    fish.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        zlib
+        glibc
+      ];
+    };
+
+    hyprland = {
+      enable = true;
+      withUWSM = true;
+      xwayland.enable = true;
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."amcmillan" = {
@@ -95,13 +112,6 @@ in {
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
-
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc
-    zlib
-    glibc
-  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -145,15 +155,13 @@ in {
     grim
     slurp
     satty
+
+  # Others (security, ...)
+    age
   ];
 
   fonts.fontconfig.enable = true;
   environment.pathsToLink = [ "/share/icons" ];
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true;
-    xwayland.enable = true;
-  };
 
   environment.sessionVariables = {
     XCURSOR_THEME = "Bibata-Modern-Classic";
@@ -161,16 +169,7 @@ in {
     WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
   };
 
-  environment.extraInit = ''
-  if [ -f "/run/agenix/github-token" ]; then
-    echo "Setting GITHUB_TOKEN"
-    export GITHUB_TOKEN=$(cat /run/agenix/github-token | awk -F'=' '{print $NF}')
-    export GH_TOKEN=$GITHUB_TOKEN
-  fi
-  '';
-
   services = {
-    printing.enable = true;
     displayManager = {
       sddm = {
         enable = true;
@@ -198,19 +197,10 @@ in {
       defaultSession = "hyprland-uwsm";
     };
 
-    tailscale = {
-      enable = true;
-    };
-
+    tailscale.enable = true;
     xserver.enable = true;
     openssh.enable = true;
-  };
-
-  age.secrets.github-token = {
-    file = ./github-token.age;
-    owner = "root";
-    group = "users";
-    mode = "0440";
+    printing.enable = true;
   };
 
   systemd.services.sddm.environment = {
