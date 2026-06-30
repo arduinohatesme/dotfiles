@@ -20,6 +20,7 @@
 !/.config/*.nix
 !/.config/flake.lock
 !/.config/*.age
+!/.config/scripts/
 !/.config/clangd
 !.gitignore
 !README.md

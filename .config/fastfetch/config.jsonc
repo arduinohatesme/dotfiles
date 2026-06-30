@@ -38,6 +38,9 @@
     "disableLinewrap": true,
     "hideCursor": false,
     "separator": ": ",
+    "key": {
+      "type": "both"
+    },
     "color": {
       "keys": "",
       "title": "",
@@ -140,34 +143,43 @@
     },
     {
       "type": "os",
+      "key": "{icon}  OS",
       "keyIcon": ""
     },
     {
       "type": "host",
+      "key": "{icon}  Host",
       "keyIcon": "󰌢"
     },
     {
       "type": "kernel",
+      "key": "{icon}  Kernel",
       "keyIcon": ""
     },
     {
       "type": "uptime",
+      "key": "{icon}  Uptime",
       "keyIcon": ""
     },
     {
       "type": "packages",
-      "keyIcon": "󰏖",
-      "disabled": [
-        "winget"
-      ],
-      "combined": false
+      "key": "{icon}  Packages",
+      "keyIcon": "󰏓"
+    },
+    {
+      "type": "command",
+      "key": "{icon}  Upgradable",
+      "keyIcon": "󰏕",
+      "text": "bash /home/amcmillan/.config/scripts/get-pkgs.sh"
     },
     {
       "type": "shell",
+      "key": "{icon}  Shell",
       "keyIcon": ""
     },
     {
       "type": "display",
+      "key": "{icon}  Display",
       "keyIcon": "󰍹",
       "compactType": "none",
       "preciseRefreshRate": false,
@@ -179,6 +191,7 @@
     },
     {
       "type": "wm",
+      "key": "{icon}  WM",
       "keyIcon": "",
       "detectPlugin": true
     },
@@ -200,18 +213,22 @@
     },
     {
       "type": "cursor",
+      "key": "{icon}  Cursor",
       "keyIcon": "󰆿"
     },
     {
       "type": "terminal",
+      "key": "{icon}  Terminal",
       "keyIcon": ""
     },
     {
       "type": "terminalfont",
+      "key": "{icon}  Terminal Font",
       "keyIcon": ""
     },
     {
       "type": "cpu",
+      "key": "{icon}  CPU",
       "keyIcon": "",
       "temp": false,
       "showPeCoreCount": false,
@@ -219,6 +236,7 @@
     },
     {
       "type": "gpu",
+      "key": "{icon}  GPU",
       "keyIcon": "󰾲",
       "driverSpecific": false,
       "detectionMethod": "pci",
@@ -232,6 +250,7 @@
     },
     {
       "type": "memory",
+      "key": "{icon}  RAM",
       "keyIcon": "",
       "percent": {
         "green": 50,
@@ -240,17 +259,8 @@
       }
     },
     {
-      "type": "swap",
-      "percent": {
-        "green": 50,
-        "yellow": 80,
-        "type": 0
-      },
-      "keyIcon": "󰓡",
-      "separate": false
-    },
-    {
       "type": "disk",
+      "key": "{icon}  Disk",
       "keyIcon": "",
       "showRegular": true,
       "showExternal": true,
@@ -270,6 +280,7 @@
     },
     {
       "type": "localip",
+      "key": "{icon}  Local IP",
       "keyIcon": "󰩟",
       "showIpv4": true,
       "showIpv6": false,
@@ -297,10 +308,6 @@
     {
       "type": "poweradapter",
       "keyIcon": "󰚥"
-    },
-    {
-      "type": "locale",
-      "keyIcon": ""
     }
   ]
 }

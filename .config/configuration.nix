@@ -200,8 +200,11 @@ in {
 
     tailscale.enable = true;
     xserver.enable = true;
-    openssh.enable = true;
     printing.enable = true;
+    openssh = {
+      enable = true;
+      ports = [];
+    };
   };
 
   systemd.services.sddm.environment = {
@@ -229,8 +232,11 @@ in {
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall = {
+    allowedTCPPorts = [];
+    allowedUDPPorts = [ 41641 ];
+    trustedInterfaces = [ "tailscale0" ];
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

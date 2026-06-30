@@ -5,6 +5,6 @@ function mfdc --argument encrypted
     return 1
   end
   set -l out (string replace -r '\.age$' '' "$encrypted")
-  age -d -i "$key_path" -o "$out" "$encrypted"
+  age -d -i "$key_path" "$encrypted" | age -d -o "$out"
   shred -u "$key_path"
 end
