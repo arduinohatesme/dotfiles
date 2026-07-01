@@ -1,4 +1,4 @@
-function ghlogin
+function wgh
   set -l key_path "$HOME/Downloads/key.key"
 
   if test ! -f "$key_path"
@@ -7,7 +7,7 @@ function ghlogin
   end
 
   set -l out (string replace -r '\.age$' '' "$encrypted")
-  set -gx GH_TOKEN (age -d -i "$key_path" "$HOME/.config/github-token.age" | age -d)
+  set -lx GH_TOKEN (age -d -i "$key_path" "$HOME/.config/github-token.age" | age -d)
 
   if test -z "$GH_TOKEN"
     echo "error: decrypt: Error decrypting"
@@ -15,4 +15,6 @@ function ghlogin
   end
 
   shred -u "$key_path"
+
+  $argv
 end
