@@ -19,6 +19,7 @@ function wgh
   set -lx GH_TOKEN (age -d -i "$key_path" "$HOME/.config/github-token.age" | age -d)
 
   shred -u "$key_path"
+  echo "Key shredded."
 
   if test -z "$GH_TOKEN"
     echo "error: decrypt: Error decrypting"
