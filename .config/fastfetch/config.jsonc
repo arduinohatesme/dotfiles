@@ -167,12 +167,6 @@
       "keyIcon": "󰏓"
     },
     {
-      "type": "command",
-      "key": "{icon}  Upgradable",
-      "keyIcon": "󰏕",
-      "text": "bash /home/amcmillan/.config/scripts/get-pkgs.sh"
-    },
-    {
       "type": "shell",
       "key": "{icon}  Shell",
       "keyIcon": ""
