@@ -1,5 +1,6 @@
 CompileFlags:
   Remove:
     - -mlongcalls
-  Add:
-    - --query-driver=/home/amcmillan/.arduino15/packages/esp32/**/bin/*gcc*
+    - -mdisable-hardware-atomics
+    - -fstrict-volatile-bitfields
+    - -fno-tree-switch-conversion
