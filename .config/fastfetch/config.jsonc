@@ -291,6 +291,7 @@
     },
     {
       "type": "battery",
+      "key": "{icon}  battery",
       "keyIcon": "",
       "temp": false,
       "percent": {
