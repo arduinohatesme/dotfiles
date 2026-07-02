@@ -57,6 +57,10 @@
         ''
       else '''';
     };
+
+    ".config/fish/fish_variablea" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/fish/${theme}_fish_variables";
+    };
   };
 
   gtk = {

@@ -138,6 +138,7 @@ in {
     git
     tailscale
     nodejs_26
+    fzf
 
   # Terminal
     fish

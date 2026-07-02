@@ -1,3 +1,4 @@
 function nvcd
-     ./nvcd.fish; 
+     cd (fzf . --prompt "Enter directory: ")
+     nvim
 end
