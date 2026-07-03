@@ -1,35 +1,35 @@
 fish_color_autosuggestion brblack
 fish_color_cancel -r --theme=default
 fish_color_command --reset --theme=default
-fish_color_comment 89A
-fish_color_cwd BCD
-fish_color_cwd_root BCD
-fish_color_end 89A
-fish_color_error FBB
-fish_color_escape BCD
-fish_color_hg_added green
-fish_color_hg_clean green
-fish_color_hg_copied magenta
-fish_color_hg_deleted red
-fish_color_hg_dirty red
-fish_color_hg_modified yellow
-fish_color_hg_renamed magenta
-fish_color_hg_unmerged red
-fish_color_hg_untracked yellow
+fish_color_comment 88B 
+fish_color_cwd 8BF 
+fish_color_cwd_root 8BF 
+fish_color_end 88B 
+fish_color_error E55 
+fish_color_escape 8BF 
+fish_color_hg_added green 
+fish_color_hg_clean green 
+fish_color_hg_copied magenta 
+fish_color_hg_deleted red 
+fish_color_hg_dirty red 
+fish_color_hg_modified yellow 
+fish_color_hg_renamed magenta 
+fish_color_hg_unmerged red 
+fish_color_hg_untracked yellow 
 fish_color_history_current --bold --theme=default
 fish_color_host --reset --theme=default
 fish_color_host_remote yellow --theme=default
 fish_color_normal BCD
-fish_color_operator CCD
-fish_color_param BCD
-fish_color_quote 89A
-fish_color_redirection CCD
-fish_color_user BCD
+fish_color_operator 8BD 
+fish_color_param 8BD 
+fish_color_quote 88B 
+fish_color_redirection 8BD 
+fish_color_user 8BF 
 fish_color_search_match white --background=brblack --bold --theme=default
 fish_color_selection white --background=brblack --bold --theme=default
 fish_color_status red --theme=default
-fish_color_success BCD
-fish_color_prompt BCD
+fish_color_success 8BF
+fish_color_prompt 8BF
 fish_color_valid_path --underline --theme=default
 fish_pager_color_description yellow --italics --theme=default
 fish_pager_color_prefix --bold --underline --theme=default

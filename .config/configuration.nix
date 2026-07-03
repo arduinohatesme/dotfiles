@@ -13,6 +13,8 @@ let
     "sakura"
   else if hostName == "beast-jr" then
     "mountain"
+  else if hostName == "knicks-os" then
+    "black_hole"
   else
     "mountain";
 
@@ -21,8 +23,10 @@ let
 in {
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot = {
+  boot.loader.grub = {
     enable = true;
+    device = "nodev";
+    efiSupport = true;
     configurationLimit = 3;
   };
 
@@ -103,16 +107,28 @@ in {
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  # NVIDIA Driver settings
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+  # Driver settings
+  hardware = if hostName != "knicks-os" then {
+    graphics.enable = true;
+
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      open = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
+    };
+  } else {
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver
+      ];
+    };
   };
+
+  services.xserver.videoDrivers = if hostName != "knicks-os" then [ "nvidia" ] else [];
+  boot.initrd.kernelModules = if hostName == "knicks-os" then [ "i915" ] else [];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
