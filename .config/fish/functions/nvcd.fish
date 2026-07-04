@@ -1,4 +1,4 @@
 function nvcd
-     cd (fzf . --prompt "Enter directory: ")
+     cd (find ~ -type d | fzf --prompt "Enter directory: ")
      nvim
 end
