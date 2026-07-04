@@ -24,6 +24,16 @@ vim.keymap.set("n", "<leader>gg", function()
   Neogit.open()
 end)
 
+vim.keymap.set("n", "<leader>mb", "O<Esc>o", { desc = "Surround with blank lines" })
+
+vim.keymap.set("n", "i", function()
+  if vim.fn.getline("."):match("^%s*$") then
+    return '"_cc'
+  else
+    return 'i'
+  end
+end)
+
 local map = vim.keymap.set
 
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code action" })
