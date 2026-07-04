@@ -160,6 +160,8 @@ in {
     fish
     fastfetch
     fishPlugins.bang-bang
+    pay-respects
+    eza
 
   # Hyprland
     rofi

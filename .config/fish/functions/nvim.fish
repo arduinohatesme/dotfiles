@@ -1,6 +1,11 @@
-function nv --description "Neovim startup, but better"
+function nvim --description "Neovim startup, but better"
+  if test "q" = $argv[1]
+    command nvim $argv[2..-1]
+    return 0
+  end
+
   if test "m" = $argv[1] -o "mail" = $argv[1]
-    nvim -c :Notmuch
+    command nvim -c :Notmuch
   end
 
   if test "cd" = $argv[1] -o "fz" = $argv[1]
@@ -15,13 +20,13 @@ function nv --description "Neovim startup, but better"
       return 1
     end
 
-    cd $dir; and nvim $argv[2..-1]
+    cd $dir; and command nvim $argv[2..-1]
     return 0
   end
 
   if test -d $argv[1]
     cd $argv[1]
-    and nvim $argv[2..-1]
+    and command nvim $argv[2..-1]
     return 0
   end
 
@@ -30,9 +35,9 @@ function nv --description "Neovim startup, but better"
     set -l proot (proot $argv[1])
 
     cd $proot
-    and nvim $fpath $argv[2..-1]
+    and command nvim $fpath $argv[2..-1]
     return 0
   end
 
-  nvim $argv[1..-1]
+  command nvim $argv[1..-1]
 end

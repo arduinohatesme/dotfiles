@@ -80,7 +80,17 @@
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
       gac = "git add -A && git commit";
+      ls = "eza -a --color=always --group-directories-first --icons=always";
+      la = "eza -al --color=always --group-directories-first --icons=always";
+      ll = "eza -l --color=always --group-directories-first --icons=always";
+      lr = "eza -aT --color=always --group-directories-first --icons=always";
+      tree = "eza -aT --color=always --group-directories-first --icons=always";
     };
+    shellAbbrs = {
+      g = "git";
+      y = "yazi";
+    };
+
     interactiveShellInit = ''
     fastfetch
 
@@ -90,6 +100,8 @@
       set -gx PATH "$PNPM_HOME/bin" $PATH
     end
     # pnpm end
+
+    pay-respects fish | source
 
     set -gx EDITOR nvim
     set -gx VISUAL nvim
