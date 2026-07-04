@@ -4,6 +4,8 @@ local Neogit = require("neogit")
 local Issue = require("usrcmds.issue")
 local Dump = require("usrcmds.dump")
 
+local map = vim.keymap.set
+
 vim.api.nvim_create_user_command("Issue", function(opts)
   Issue.Issue(opts)
 end, { nargs = "+" })
@@ -20,11 +22,11 @@ vim.api.nvim_create_user_command("D", function(opts)
   Dump.Dump(opts)
 end, { nargs = "+" })
 
-vim.keymap.set("n", "<leader>gg", function()
+map("n", "<leader>gg", function()
   Neogit.open()
 end)
 
-vim.keymap.set("n", "i", function()
+map("n", "i", function()
   if vim.fn.getline("."):match("^%s*$") then
     return '"_cc'
   else
@@ -32,7 +34,7 @@ vim.keymap.set("n", "i", function()
   end
 end)
 
-vim.keymap.set("n", "a", function()
+map("n", "a", function()
   if vim.fn.getline("."):match("^%s*$") then
     return '"_cc'
   else
@@ -40,10 +42,8 @@ vim.keymap.set("n", "a", function()
   end
 end)
 
-vim.keymap.set("n", "<leader>mb", "O<Esc>o", { desc = "Make Block (surround with blank lines)" })
-vim.keymap.set("n", "x", '"_x')
-
-local map = vim.keymap.set
+map("n", "<leader>mb", "O<Esc>o", { desc = "Make Block (surround with blank lines)" })
+map("n", "x", '"_x')
 
 map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code action" })
 
