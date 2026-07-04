@@ -24,8 +24,6 @@ vim.keymap.set("n", "<leader>gg", function()
   Neogit.open()
 end)
 
-vim.keymap.set("n", "<leader>mb", "O<Esc>o", { desc = "Surround with blank lines" })
-
 vim.keymap.set("n", "i", function()
   if vim.fn.getline("."):match("^%s*$") then
     return '"_cc'
@@ -33,6 +31,17 @@ vim.keymap.set("n", "i", function()
     return 'i'
   end
 end)
+
+vim.keymap.set("n", "a", function()
+  if vim.fn.getline("."):match("^%s*$") then
+    return '"_cc'
+  else
+    return 'a'
+  end
+end)
+
+vim.keymap.set("n", "<leader>mb", "O<Esc>o", { desc = "Make Block (surround with blank lines)" })
+vim.keymap.set("n", "x", '"_x')
 
 local map = vim.keymap.set
 
