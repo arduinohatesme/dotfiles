@@ -1,14 +1,14 @@
 function nvim --description "Neovim startup, but better"
-  if test "q" = $argv[1]
+  if test "q" = "$argv[1]"
     command nvim $argv[2..-1]
     return 0
   end
 
-  if test "m" = $argv[1] -o "mail" = $argv[1]
+  if test "m" = "$argv[1]" -o "mail" = "$argv[1]"
     command nvim -c :Notmuch
   end
 
-  if test "cd" = $argv[1] -o "fz" = $argv[1]
+  if test "cd" = "$argv[1]" -o "fz" = "$argv[1]"
     if test -d $argv[2]
       set -l fzroot $argv[2]
     else
@@ -24,15 +24,15 @@ function nvim --description "Neovim startup, but better"
     return 0
   end
 
-  if test -d $argv[1]
-    cd $argv[1]
+  if test -d "$argv[1]"
+    cd "$argv[1]"
     and command nvim $argv[2..-1]
     return 0
   end
 
-  if test -f $argv[1]
-    set -l fpath (path resolve $argv[1])
-    set -l proot (proot $argv[1])
+  if test -f "$argv[1]"
+    set -l fpath (path resolve "$argv[1]")
+    set -l proot (proot "$argv[1]")
 
     cd $proot
     and command nvim $fpath $argv[2..-1]
