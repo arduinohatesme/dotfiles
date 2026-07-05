@@ -122,4 +122,9 @@
       background = "#111";
     };
   };
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+  };
 }

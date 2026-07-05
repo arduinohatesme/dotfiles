@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, hostName, ... }:
+{ config, pkgs, inputs, lib, hostName, ... }:
 
 let
   sddm-file = import ./sddm.nix { inherit pkgs; };
@@ -58,10 +58,6 @@ in {
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
 
   programs = {
     fish.enable = true;
@@ -107,28 +103,33 @@ in {
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  # Driver settings
-  hardware = if hostName != "knicks-os" then {
-    graphics.enable = true;
-
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      open = true;
-      nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.latest;
-    };
-  } else {
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        intel-media-driver
-      ];
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        FastConnectable = true;
+        DiscoverableTimeout = 0;
+      };
+      Policy.AutoEnable = true;
     };
   };
+  hardware.graphics.enable = true;
 
-  services.xserver.videoDrivers = if hostName != "knicks-os" then [ "nvidia" ] else [];
-  boot.initrd.kernelModules = if hostName == "knicks-os" then [ "i915" ] else [];
+  # Driver settings
+  hardware.nvidia = lib.mkIf (hostName != "knicks-os") {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
+  };
+
+  hardware.graphics.extraPackages = lib.optionals (hostName == "knicks-os") [
+    pkgs.intel-media-driver
+  ];
+
+  boot.initrd.kernelModules = lib.optionals (hostName == "knicks-os") [ "i915" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -175,6 +176,7 @@ in {
     hyprpolkitagent
     bibata-cursors
     grim
+    grimblast
     slurp
     satty
 
@@ -189,9 +191,17 @@ in {
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = 24;
     WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   services = {
+    xserver = {
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      videoDrivers = lib.optionals (hostName != "knicks-os") [ "nvidia" ];
+    };
     displayManager = {
       sddm = {
         enable = true;
@@ -219,6 +229,7 @@ in {
       defaultSession = "hyprland-uwsm";
     };
 
+    blueman.enable = true;
     tailscale.enable = true;
     xserver.enable = true;
     printing.enable = true;
@@ -229,6 +240,16 @@ in {
         PermitRootLogin = "no";
         MaxAuthTries = 3;
       };
+    };
+  };
+
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      config.common.default = "*";
     };
   };
 
