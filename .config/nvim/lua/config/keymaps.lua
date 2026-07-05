@@ -32,7 +32,7 @@ map("n", "i", function()
   else
     return 'i'
   end
-end)
+end, { expr = true })
 
 map("n", "a", function()
   if vim.fn.getline("."):match("^%s*$") then
@@ -40,7 +40,7 @@ map("n", "a", function()
   else
     return 'a'
   end
-end)
+end, { expr = true })
 
 map("n", "<leader>mb", "O<Esc>o", { desc = "Make Block (surround with blank lines)" })
 map("n", "x", '"_x')
