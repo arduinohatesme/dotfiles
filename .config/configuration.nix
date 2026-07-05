@@ -156,6 +156,7 @@ in {
     nodejs_26
     fzf
     gnumake
+    gcc
 
   # Terminal
     fish

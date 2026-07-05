@@ -167,11 +167,13 @@ return {
         -- stylua: ignore
         ---@type snacks.dashboard.Item[]
         keys = {
-          { key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+          { key = "f", desc = "Find File", action = function() require("telescope.builtin").find_files() end },
           { key = "n", desc = "New File", action = ":ene | startinsert" },
-          { key = "s", desc = "Search Files", action = function() Snacks.picker.grep() end},
+          { key = "s", desc = "Search Files", action = function() require("telescope.builtin").live_grep() end},
           { key = "r", desc = "Restore Session", section = "session" },
-          { key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+          { key = "c", desc = "Config", action = function()
+            require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+          end },
           { key = "q", desc = "Quit", action = ":qa" },
         },
       },
