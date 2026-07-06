@@ -38,7 +38,7 @@ Text {
     return "󰤮"
   }
 
-  color: ethernet || wifi ? window.foreBright : foreMid
+  color: ethernet || wifi ? window.foreBright : window.foreMid
   font {
     family: window.fontFam
     pixelSize: window.fontSizeMed

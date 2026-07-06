@@ -28,6 +28,12 @@ Scope {
         right: true
       }
 
+      margins {
+        left: -1
+        right: -1
+        top: 0
+      }
+
       implicitHeight: 40
       color: window.back
 
@@ -50,9 +56,18 @@ Scope {
       }
 
       ConnWidget {
+        id: conns
         anchors {
           right: workspaces.left
           rightMargin: 24
+          verticalCenter: parent.verticalCenter
+        }
+      }
+
+      BluetoothWidget {
+        anchors {
+          right: conns.left
+          rightMargin: 16
           verticalCenter: parent.verticalCenter
         }
       }
