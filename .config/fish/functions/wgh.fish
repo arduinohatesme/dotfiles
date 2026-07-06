@@ -18,7 +18,7 @@ function wgh
   set -l out (string replace -r '\.age$' '' "$encrypted")
   set -lx GH_TOKEN (age -d -i "$key_path" "$HOME/.config/github-token.age" | age -d)
 
-  shred -u "$key_path"
+  shred -uz "$key_path"
   echo "Key shredded."
 
   if test -z "$GH_TOKEN"

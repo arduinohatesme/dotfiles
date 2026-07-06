@@ -18,6 +18,6 @@ function mfdc --argument encrypted
   set -l out (string replace -r '\.age$' '' "$encrypted")
   age -d -i "$key_path" "$encrypted" | age -d -o "$out"
 
-  shred -u "$key_path"
+  shred -uz "$key_path"
   echo "Key shredded."
 end
