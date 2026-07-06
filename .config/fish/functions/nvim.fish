@@ -19,13 +19,13 @@ function nvim --description "Neovim startup, but better"
       return 1
     end
 
-    cd $dir; and command nvim "$argv[2..-1]"
+    cd $dir; and command nvim $argv[2..-1]
     return 0
   end
 
   if test -d "$argv[1]"
     cd "$argv[1]"
-    and command nvim "$argv[2..-1]"
+    and command nvim $argv[2..-1]
     return 0
   end
 
@@ -34,9 +34,9 @@ function nvim --description "Neovim startup, but better"
     set -l proot (proot "$argv[1]")
 
     cd $proot
-    and command nvim $fpath "$argv[2..-1]"
+    and command nvim $fpath $argv[2..-1]
     return 0
   end
 
-  command nvim "$argv[1..-1]"
+  command nvim $argv[1..-1]
 end
