@@ -61,7 +61,6 @@ in {
 
   programs = {
     fish.enable = true;
-    kdeconnect.enable = true;
 
     nix-ld = {
       enable = true;
@@ -179,6 +178,7 @@ in {
     grimblast
     slurp
     satty
+    quickshell
 
   # Others (security, ...)
     age
@@ -253,16 +253,27 @@ in {
     };
   };
 
-  systemd.services.sddm.environment = {
-    XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = "24";
-    WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
-  };
+  systemd = {
+    services.sddm.environment = {
+      XCURSOR_THEME = "Bibata-Modern-Classic";
+      XCURSOR_SIZE = "24";
+      WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
+    };
 
-  systemd.tmpfiles.rules = [
-    "d /var/lib/sddm/.config 0755 sddm sddm - -"
-    "f /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - {\"data\":[{\"lidClosed\":false,\"outputs\"[{\"enabled\":true,\"outputIndex\":0,\"position\":{\"x\":0,\"y\":0},\"priority\":0}.{\"enabled\":true,\"outputIndex\":1,\"position\":{\"x\":0,\"y\":0},\"priority\":0}]}],\"name\":\"setups\"}"
-  ];
+    tmpfiles.rules = [
+      "d /var/lib/sddm/.config 0755 sddm sddm - -"
+      "f /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - {\"data\":[{\"lidClosed\":false,\"outputs\"[{\"enabled\":true,\"outputIndex\":0,\"position\":{\"x\":0,\"y\":0},\"priority\":0}.{\"enabled\":true,\"outputIndex\":1,\"position\":{\"x\":0,\"y\":0},\"priority\":0}]}],\"name\":\"setups\"}"
+    ];
+
+    user.services.obex = {
+      serviceConfig = {
+        ExecStart = [
+          ""
+          "${pkgs.bluez}/libexec/bluetooth/obexd -n -r %h/Downloads/Bluetooth"
+        ];
+      };
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

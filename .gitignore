@@ -21,7 +21,8 @@
 !/.config/flake.lock
 !/.config/*.age
 !/.config/scripts/
-!/.config/clangd
+!/.config/quickshell/
+!/.config/clangd/
 !.gitignore
 !README.md
 
