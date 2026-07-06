@@ -2,6 +2,7 @@ function ghlogin
   set -l key_path "$HOME/Downloads/gh.key.txt"
 
   echo "Waiting for key..."
+  localsend_app 2>&1 >/dev/null
   for i in (seq 1 15)
     if test -f "$key_path"
       echo "Key recieved."
