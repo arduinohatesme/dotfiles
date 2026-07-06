@@ -1,5 +1,5 @@
 function ghlogin
-  set -l key_path "$HOME/Downloads/key.key"
+  set -l key_path "$HOME/Downloads/gh.key.txt"
 
   echo "Waiting for key..."
   for i in (seq 1 15)

@@ -182,6 +182,7 @@ in {
 
   # Others (security, ...)
     age
+    localsend
   ];
 
   fonts.fontconfig.enable = true;
@@ -285,8 +286,8 @@ in {
 
   # Open ports in the firewall.
   networking.firewall = {
-    allowedTCPPorts = [];
-    allowedUDPPorts = [ 41641 ];
+    allowedTCPPorts = [ 53317 ];
+    allowedUDPPorts = [ 41641 53317 ];
     trustedInterfaces = [ "tailscale0" ];
   };
   # Or disable the firewall altogether.
