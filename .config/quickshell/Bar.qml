@@ -1,4 +1,6 @@
 import QtQuick
+import QtQuick.Shapes
+import QtQuick.Layouts
 import Quickshell
 
 Scope {
@@ -24,51 +26,75 @@ Scope {
 
       anchors {
         top: true
-        left: true
-        right: true
       }
 
       margins {
-        left: -1
-        right: -1
+        left: 0
+        right: 0
         top: 0
       }
 
+      implicitWidth: middleLayout.implicitWidth + 44 + height
       implicitHeight: 40
-      color: window.back
+      color: "transparent"
 
-      WorkspaceWidget {
+      mask: Region {
+        item: middleBg
+      }
+
+      MiddleBackground {
+        id: middleBg
+      }
+
+      RowLayout {
+        id: middleLayout
+        height: parent.height
         anchors.centerIn: parent
-        id: workspaces
-      }
+        spacing: 24
 
-      ClockWidget {
-        anchors {
-          left: workspaces.right
-          leftMargin: 24
-          verticalCenter: parent.verticalCenter
+        Item {
+          height: parent.height
+          width: childrenRect.width
+          BluetoothWidget {
+            anchors {
+              verticalCenter: parent.verticalCenter
+            }
+          }
         }
-        font {
-          pixelSize: window.fontSizeMed
-          family: window.fontFam
-        }
-        color: window.foreBright
-      }
 
-      ConnWidget {
-        id: conns
-        anchors {
-          right: workspaces.left
-          rightMargin: 24
-          verticalCenter: parent.verticalCenter
+        Item {
+          height: parent.height
+          width: childrenRect.width
+          ConnWidget {
+            id: conns
+            anchors {
+              verticalCenter: parent.verticalCenter
+            }
+          }
         }
-      }
 
-      BluetoothWidget {
-        anchors {
-          right: conns.left
-          rightMargin: 16
-          verticalCenter: parent.verticalCenter
+        Item {
+          height: parent.height
+          width: childrenRect.width
+          WorkspaceWidget {
+            id: workspaces
+            anchors.verticalCenter: parent.verticalCenter
+          }
+        }
+
+        Item {
+          height: parent.height
+          width: childrenRect.width
+          ClockWidget {
+            anchors {
+              verticalCenter: parent.verticalCenter
+            }
+            font {
+              pixelSize: window.fontSizeMed
+              family: window.fontFam
+            }
+            color: window.foreBright
+          }
         }
       }
     }

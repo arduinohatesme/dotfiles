@@ -149,8 +149,11 @@ end
 
 return {
   "folke/snacks.nvim",
+  lazy = false,
+  priority = 1000,
   opts = {
     dashboard = {
+      enabled = true,
       preset = {
         pick = function(cmd, opts)
           return Snacks.picker.files(cmd, opts)()
@@ -184,6 +187,7 @@ return {
       },
     },
   },
+
   init = function()
     get_issues()
     get_status()

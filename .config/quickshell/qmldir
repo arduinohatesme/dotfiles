@@ -1,5 +1,6 @@
 singleton Time 1.0 Time.qml
 Bar 1.0 Bar.qml
+MiddleBackground 1.0 MiddleBackground.qml
 ClockWidget 1.0 ClockWidget.qml
 WorkspaceWidget 1.0 WorkspaceWidget.qml
 ConnWidget 1.0 ConnWidget.qml
