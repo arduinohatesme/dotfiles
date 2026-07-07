@@ -40,6 +40,7 @@ return {
       { "<leader>ow", "<cmd>OverseerToggle!<cr>",    desc = "Task list" },
       { "<leader>oo", "<cmd>OverseerRun<cr>",        desc = "Run task" },
       { "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
+      { "<leader>oc", "<cmd>OverseerShell<cr>",          desc = "Run command" },
     },
   },
   {
