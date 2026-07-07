@@ -57,6 +57,10 @@
         ''
       else '''';
     };
+
+    ".config/quickshell/Theme.qml" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/Theme_${theme}.qml";
+    }
   };
 
   gtk = {
@@ -121,7 +125,7 @@
     set -gx VISUAL nvim
     set -gx SUDO_EDITOR nvim
     set -gx MANPAGER "nvim +Man!"
-    
+
     fish_vi_key_bindings
     '';
   };

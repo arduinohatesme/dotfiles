@@ -38,12 +38,12 @@ hl.config(device_conf)
 ---- MY PROGRAMS ----
 ---------------------
 
-local waybar_visible = true
+local qs_visible = true
 
-local function toggle_waybar()
-  waybar_visible = not waybar_visible
+local function toggle_qs()
+  qs_visible = not qs_visible
   hl.dispatch(hl.dsp.exec_cmd([[pkill -SIGUSR1 waybar]]))
-  if waybar_visible then
+  if qs_visible then
     hl.config({ general = { gaps_out = { top = 44, left = 22, right = 22, bottom = 22 } } })
   else
     hl.config({ general = { gaps_out = 22 } })
@@ -67,7 +67,7 @@ local menu = "~/.config/rofi/launcher.sh"
 --
 hl.on("hyprland.start", function()
   hl.exec_cmd("awww-daemon & sleep 0.5 && awww img /home/amcmillan/.config/wallpapers/active")
-  hl.exec_cmd("waybar")
+  hl.exec_cmd("qs")
 end)
 
 -------------------------------
@@ -258,7 +258,7 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(terminal .. " --hold -e ~/.config/hyp
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + I", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("~/.config/rofi/screenshot.sh"))
-hl.bind(mainMod .. " + SHIFT + W", function() toggle_waybar() end)
+hl.bind(mainMod .. " + SHIFT + W", function() toggle_qs() end)
 hl.bind(mainMod .. " + SHIFT + F", function()
   hl.dispatch(hl.dsp.window.set_prop({ window = "active", prop = "opaque", value = "toggle" }))
 end)
