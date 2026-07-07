@@ -4,29 +4,19 @@ import QtQuick.Layouts
 import Quickshell
 
 Scope {
-  id: root
+  id: window
 
   Variants {
     model: Quickshell.screens;
 
     PanelWindow {
-      id: window
-
-      required property var modelData
-      readonly property color back: "#22172a"
-      readonly property color foreBright: "#ffdfcf"
-      readonly property color foreMid: "#a49990"
-      readonly property color foreMuted: "#4e4940"
-      readonly property string fontFam: "JetBrains Mono NF"
-      readonly property int fontSizeSm: 12
-      readonly property int fontSizeMed: 14
-      readonly property int fontSizeLg: 18
-
-      screen: modelData
-
+      id: middleWindow
+      screen: middleWindow.modelData
       anchors {
         top: true
       }
+
+      required property var modelData
 
       margins {
         left: 0
@@ -49,12 +39,70 @@ Scope {
         id: middleBg
         width: parent.width
         height: parent.height
+        anchors.centerIn: parent
       }
 
       RowLayout {
         id: middleLayout
         implicitHeight: parent.height
         anchors.centerIn: parent
+        spacing: 24
+
+        Item {
+          implicitHeight: parent.height
+          implicitWidth: childrenRect.width
+          WorkspaceWidget {
+            id: workspaces
+            anchors.verticalCenter: parent.verticalCenter
+          }
+        }
+      }
+    }
+  }
+
+  Variants {
+    model: Quickshell.screens
+
+    PanelWindow {
+      id: rightWindow
+      screen: rightWindow.modelData
+      anchors {
+        top: true
+        right: true
+      }
+
+      required property var modelData
+
+      margins {
+        left: 0
+        right: 0
+        top: 0
+      }
+
+      exclusionMode: ExclusionMode.Normal
+      aboveWindows: true
+
+      implicitWidth: rightLayout.implicitWidth + 22 + height
+      implicitHeight: 60
+      color: "transparent"
+
+      mask: Region {
+        item: rightBg
+      }
+
+      RightBackground {
+        id: rightBg
+        width: rightLayout.implicitWidth
+      }
+
+      RowLayout {
+        id: rightLayout
+        implicitHeight: 40
+        anchors {
+          top: parent.top
+          right: parent.right
+          rightMargin: 33
+        }
         spacing: 24
 
         Item {
@@ -81,27 +129,20 @@ Scope {
         Item {
           implicitHeight: parent.height
           implicitWidth: childrenRect.width
-          WorkspaceWidget {
-            id: workspaces
-            anchors.verticalCenter: parent.verticalCenter
-          }
-        }
-
-        Item {
-          implicitHeight: parent.height
-          implicitWidth: childrenRect.width
           ClockWidget {
             anchors {
               verticalCenter: parent.verticalCenter
             }
             font {
-              pixelSize: window.fontSizeMed
-              family: window.fontFam
+              pixelSize: Theme.fontSizeMed
+              family: Theme.fontFam
             }
-            color: window.foreBright
+            color: Theme.foreBright
           }
         }
       }
+
+
     }
   }
 }

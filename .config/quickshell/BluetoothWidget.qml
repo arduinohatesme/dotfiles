@@ -13,9 +13,9 @@ Text {
     return ""
   }
 
-  color: adapter !== null ? window.foreBright : window.foreMid
+  color: adapter !== null ? Theme.foreBright : Theme.foreMid
   font {
-    family: window.fontFam
-    pixelSize: window.fontSizeMed
+    family: Theme.fontFam
+    pixelSize: Theme.fontSizeMed
   }
 }

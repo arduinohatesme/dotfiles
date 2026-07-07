@@ -11,7 +11,7 @@ Shape {
   readonly property int radius: parent.height / 2
 
   ShapePath {
-    fillColor: window.back
+    fillColor: Theme.back
     strokeColor: "transparent"
     strokeWidth: 0
 
@@ -20,7 +20,7 @@ Shape {
 
     PathLine {
       x: 0
-      y: 
+      y: 0
     }
 
     PathLine {

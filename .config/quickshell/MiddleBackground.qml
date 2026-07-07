@@ -14,7 +14,7 @@ Shape {
   readonly property int radius: parent.height / 2
 
   ShapePath {
-    fillColor: window.back
+    fillColor: Theme.back
     strokeColor: "transparent"
     strokeWidth: 0
 
@@ -31,7 +31,7 @@ Shape {
     }
 
     PathArc {
-      x: middleBg.radius * 2
+      x: middleBg.height
       y: middleBg.height
       radiusX: middleBg.radius
       radiusY: middleBg.radius

@@ -40,9 +40,9 @@ Text {
 
   renderType: Text.NativeRendering
 
-  color: ethernet || wifi ? window.foreBright : window.foreMid
+  color: ethernet || wifi ? Theme.foreBright : Theme.foreMid
   font {
-    family: window.fontFam
-    pixelSize: window.fontSizeMed
+    family: Theme.fontFam
+    pixelSize: Theme.fontSizeMed
   }
 }
