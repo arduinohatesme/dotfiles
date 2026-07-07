@@ -38,6 +38,8 @@ Text {
     return "󰤮"
   }
 
+  renderType: Text.NativeRendering
+
   color: ethernet || wifi ? window.foreBright : window.foreMid
   font {
     family: window.fontFam

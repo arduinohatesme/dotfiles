@@ -6,7 +6,10 @@ import Quickshell
 Shape {
   id: middleBg
   anchors.fill: parent
-  layer.enabled: true
+  layer {
+    enabled: true
+    samples: 8
+  }
 
   readonly property int radius: parent.height / 2
 

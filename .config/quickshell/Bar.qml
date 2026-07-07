@@ -34,6 +34,9 @@ Scope {
         top: 0
       }
 
+      exclusionMode: ExclusionMode.Normal
+      aboveWindows: true
+
       implicitWidth: middleLayout.implicitWidth + 44 + height
       implicitHeight: 40
       color: "transparent"
@@ -44,17 +47,19 @@ Scope {
 
       MiddleBackground {
         id: middleBg
+        width: parent.width
+        height: parent.height
       }
 
       RowLayout {
         id: middleLayout
-        height: parent.height
+        implicitHeight: parent.height
         anchors.centerIn: parent
         spacing: 24
 
         Item {
-          height: parent.height
-          width: childrenRect.width
+          implicitHeight: parent.height
+          implicitWidth: childrenRect.width
           BluetoothWidget {
             anchors {
               verticalCenter: parent.verticalCenter
@@ -63,8 +68,8 @@ Scope {
         }
 
         Item {
-          height: parent.height
-          width: childrenRect.width
+          implicitHeight: parent.height
+          implicitWidth: childrenRect.width
           ConnWidget {
             id: conns
             anchors {
@@ -74,8 +79,8 @@ Scope {
         }
 
         Item {
-          height: parent.height
-          width: childrenRect.width
+          implicitHeight: parent.height
+          implicitWidth: childrenRect.width
           WorkspaceWidget {
             id: workspaces
             anchors.verticalCenter: parent.verticalCenter
@@ -83,8 +88,8 @@ Scope {
         }
 
         Item {
-          height: parent.height
-          width: childrenRect.width
+          implicitHeight: parent.height
+          implicitWidth: childrenRect.width
           ClockWidget {
             anchors {
               verticalCenter: parent.verticalCenter
