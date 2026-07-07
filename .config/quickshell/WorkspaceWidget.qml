@@ -30,11 +30,10 @@ Row {
 
         let active = wsWindows.find(top => top.activated === true);
 
-        if (!active & wsWindows.length > 0) {
+        if (!active && wsWindows.length > 0) {
           active = wsWindows[0];
         }
 
-        console.log(active.title)
         if (isActive) return index + 1;
         if (wsWindows.length === 0) return "󰆢";
         if (active.title.startsWith("nvim ")) return "";
