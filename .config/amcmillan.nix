@@ -121,6 +121,8 @@
     set -gx VISUAL nvim
     set -gx SUDO_EDITOR nvim
     set -gx MANPAGER "nvim +Man!"
+    
+    fish_vi_key_bindings
     '';
   };
  
