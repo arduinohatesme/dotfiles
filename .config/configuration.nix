@@ -164,6 +164,7 @@ in {
     fishPlugins.bang-bang
     pay-respects
     eza
+    zoxide
 
   # Hyprland
     rofi

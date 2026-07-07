@@ -78,17 +78,31 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
-      gac = "git add -A && git commit";
       ls = "eza -a --color=always --group-directories-first --icons=always";
       la = "eza -al --color=always --group-directories-first --icons=always";
       ll = "eza -l --color=always --group-directories-first --icons=always";
       lr = "eza -aT --color=always --group-directories-first --icons=always";
       tree = "eza -aT --color=always --group-directories-first --icons=always";
+      rebuild = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
+      rbs = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
+      rbb = "sudo nixos-rebuild boot --flake ~/.config#(hostname)";
+      rbsrb = "sudo nixos-rebuild switch --flake ~/.config#(hostname) && reboot";
+      rbbrb = "sudo nixos-rebuild boot --flake ~/.config#(hostname) && reboot";
     };
     shellAbbrs = {
       g = "git";
-      y = "yazi";
+      ga = "git add";
+      gaa = "git add -A";
+      gm = "git commit -m";
+      gam = "git add -A && git commit -m";
+      c = "cfg";
+      ca = "cfg add";
+      caa = "cfg add -A";
+      cm = "cfg commit -m";
+      cam = "cfg add -A && cfg commit -m";
+      e = "yazi";
+      n = "nvim";
+      cl = "clear";
     };
 
     interactiveShellInit = ''
@@ -101,7 +115,7 @@
     end
     # pnpm end
 
-    pay-respects fish | source
+    zoxide init fish --cmd d | source
 
     set -gx EDITOR nvim
     set -gx VISUAL nvim
