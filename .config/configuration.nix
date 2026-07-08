@@ -22,12 +22,16 @@ let
 
 in {
   # Bootloader.
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi = {
+    efiSysMountPoint = lib.mkIf (hostName == "super-beast-lx") "/boot/efi";
+    canTouchEfiVariables = true;
+  };
   boot.loader.grub = {
     enable = true;
     device = "nodev";
     efiSupport = true;
     configurationLimit = 3;
+    useOSProber = lib.mkIf (hostName == "super-beast-lx") true;
   };
 
   # Use latest kernel.

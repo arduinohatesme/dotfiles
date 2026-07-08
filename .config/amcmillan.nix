@@ -60,7 +60,7 @@
 
     ".config/quickshell/Theme.qml" = {
       source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/Theme_${theme}.qml";
-    }
+    };
   };
 
   gtk = {
