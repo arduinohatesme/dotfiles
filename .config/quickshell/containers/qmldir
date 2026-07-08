@@ -1,0 +1,4 @@
+module containers
+MiddleBackground 1.0 MiddleBackground.qml
+RightBackground 1.0 RightBackground.qml
+LeftBackground 1.0 LeftBackground.qml

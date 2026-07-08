@@ -1,9 +1,4 @@
-singleton Time 1.0 services/Time.qml
-singleton Theme 1.0 services/Theme.qml
 Bar 1.0 Bar.qml
-MiddleBackground 1.0 containers/MiddleBackground.qml
-RightBackground 1.0 containersRightBackground.qml
-LeftBackground 1.0 containers/LeftBackground.qml
 MiddleBar 1.0 MiddleBar.qml
 LeftBar 1.0 LeftBar.qml
 RightBar 1.0 RightBar.qml

@@ -58,8 +58,8 @@
       else '''';
     };
 
-    ".config/quickshell/Theme.qml" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/Theme_${theme}.qml";
+    ".config/quickshell/services/Theme.qml" = {
+      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/themes/Theme_${theme}.qml";
     };
   };
 
