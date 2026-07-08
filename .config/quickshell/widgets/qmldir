@@ -1,0 +1,4 @@
+ClockWidget 1.0 widgets/ClockWidget.qml
+WorkspaceWidget 1.0 widgets/WorkspaceWidget.qml
+ConnWidget 1.0 widgets/ConnWidget.qml
+BluetoothWidget 1.0 widgets/BluetoothWidget.qml
