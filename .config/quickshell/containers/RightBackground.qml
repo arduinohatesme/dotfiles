@@ -6,13 +6,14 @@ import "../services"
 
 Shape {
   id: rightBg
-  anchors {
-    fill: parent
-  }
+
   layer {
     enabled: true
     samples: 8
   }
+
+  width: rightLayout.implicitWidth + 11 + height
+  height: 60
 
   readonly property int radius: rightBg.height / 3
   readonly property int h: radius * 2

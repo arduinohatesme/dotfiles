@@ -4,7 +4,7 @@ import Quickshell.Bluetooth
 import "../services"
 
 Text {
-  id: btStat
+  id: blueRoot
 
   readonly property var adapter: Bluetooth.defaultAdapter
 
@@ -18,5 +18,16 @@ Text {
   font {
     family: Theme.fontFam
     pixelSize: Theme.fontSizeMed
+  }
+
+  signal blueClicked()
+
+  MouseArea {
+    id: blueButton
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {
+      blueRoot.blueClicked()
+    }
   }
 }

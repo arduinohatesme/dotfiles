@@ -2,10 +2,10 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Networking
-import "../services"
+import "../services/"
 
 Text {
-  id: netStat
+  id: connRoot
 
   readonly property var primary: {
     for (let i = 0; i < Networking.devices.values.length; i++) {
@@ -31,9 +31,9 @@ Text {
   text: {
     if (ethernet) return ""
     if (wifi) {
-      if (netStat.strength > 0.90) return "󰤨"
-      if (netStat.strength > 0.75) return "󰤥"
-      if (netStat.strength > 0.50) return "󰤢"
+      if (connRoot.strength > 0.90) return "󰤨"
+      if (connRoot.strength > 0.75) return "󰤥"
+      if (connRoot.strength > 0.50) return "󰤢"
       return "󰤟"
     }
     return "󰤮"
@@ -45,5 +45,16 @@ Text {
   font {
     family: Theme.fontFam
     pixelSize: Theme.fontSizeMed
+  }
+
+  signal connClicked()
+
+  MouseArea {
+    id: connButton
+    anchors.fill: parent
+    cursorShape: Qt.PointingHandCursor
+    onClicked: {
+      connRoot.connClicked()
+    }
   }
 }

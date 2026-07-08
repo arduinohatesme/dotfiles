@@ -139,17 +139,9 @@ in {
   environment.systemPackages = with pkgs; [
 
   # Basics
-    kitty
-    fd
-    ripgrep
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
     yazi
-    viewnior
-    notmuch
-    lieer
-    zip
-    unzip
 
   # Development
     neovim
@@ -163,31 +155,34 @@ in {
     gcc
 
   # Terminal
+    kitty
+    fd
+    ripgrep
     fish
     fastfetch
     fishPlugins.bang-bang
-    pay-respects
     eza
     zoxide
 
   # Hyprland
     rofi
-    waybar
     mpvpaper
     awww
     hyprpicker
-    hypridle
     hyprpolkitagent
     bibata-cursors
     grim
     grimblast
     slurp
-    satty
     quickshell
 
-  # Others (security, ...)
+  # Others (security, utility, ...)
     age
     localsend
+    zip
+    unzip
+    notmuch
+    lieer
   ];
 
   fonts.fontconfig.enable = true;

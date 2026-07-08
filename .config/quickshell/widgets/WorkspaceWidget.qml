@@ -13,14 +13,11 @@ Row {
       .map(top => top.workspace ? top.workspace.id : 0)
       .filter(id => id > 0)
 
-    onSpacesChanged: {
-      console.log(spaces)
-    }
-
     model: Math.max(
       Hyprland.focusedWorkspace?.id,
       ...spaces
     )
+
     Item {
       id: wsItem
 
@@ -44,7 +41,6 @@ Row {
         if (active.title.startsWith("Yazi: ")) return "󱧶";
         if (active.title.startsWith("fish ")) return "";
         if (active.title.endsWith(" Zen Browser")) return "󰖟";
-        console.log(active.title)
         return "";
       }
 

@@ -1,0 +1,4 @@
+module right
+
+RightBar 1.0 RightBar.qml
+RightCollapsed 1.0 RightCollapsed.qml
