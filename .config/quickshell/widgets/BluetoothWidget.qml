@@ -6,28 +6,15 @@ import "../services"
 Text {
   id: blueRoot
 
-  readonly property var adapter: Bluetooth.defaultAdapter
-
   text: {
-    if (adapter === null) return "󰂲"
-    if (adapter.devices.values.length >= 1) return "󰂱"
+    if (Bluetooth.adapter === null) return "󰂲"
+    if (Bluetooth.numConnected >= 1) return "󰂱"
     return ""
   }
 
-  color: adapter !== null ? Theme.foreBright : Theme.foreMid
+  color: Bluetooth.adapter !== null ? Theme.foreBright : Theme.foreMid
   font {
     family: Theme.fontFam
     pixelSize: Theme.fontSizeMed
-  }
-
-  signal blueClicked()
-
-  MouseArea {
-    id: blueButton
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      blueRoot.blueClicked()
-    }
   }
 }

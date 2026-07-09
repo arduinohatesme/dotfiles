@@ -1,0 +1,5 @@
+module toprighttabs
+
+BluetoothTab 1.0 Bluetooth.qml
+ConnsTab 1.0 Conns.qml
+ClockTab 1.0 Clock.qml

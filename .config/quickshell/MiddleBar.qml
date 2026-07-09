@@ -2,9 +2,9 @@ import QtQuick
 import QtQuick.Shapes
 import QtQuick.Layouts
 import Quickshell
-import "./widgets"
-import "./services"
-import "./containers"
+import "./widgets/"
+import "./services/"
+import "./containers/"
 
 Variants {
   model: Quickshell.screens;
@@ -35,7 +35,7 @@ Variants {
       item: middleBg
     }
 
-    MiddleBackground {
+    TopMiddleContainer {
       id: middleBg
       width: parent.width
       height: parent.height

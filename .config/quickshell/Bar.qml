@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Shapes
 import QtQuick.Layouts
 import Quickshell
-import "./right/"
+import "./topright/"
 
 Scope {
   id: window
@@ -10,6 +10,6 @@ Scope {
   MiddleBar {}
   Variants {
     model: Quickshell.screens
-    RightBar {}
+    TopRightBar {}
   }
 }

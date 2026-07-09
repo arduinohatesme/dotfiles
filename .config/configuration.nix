@@ -72,6 +72,9 @@ in {
         stdenv.cc.cc
         zlib
         glibc
+        glib
+        brotli
+        unixodbc
       ];
     };
 

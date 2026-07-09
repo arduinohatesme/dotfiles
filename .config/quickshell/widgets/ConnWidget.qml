@@ -7,33 +7,12 @@ import "../services/"
 Text {
   id: connRoot
 
-  readonly property var primary: {
-    for (let i = 0; i < Networking.devices.values.length; i++) {
-      let d = Networking.devices.values[i]
-      if (d.connected) {
-        return d;
-      }
-    }
-  }
-
-  property bool ethernet: primary && primary.type === DeviceType.Wired
-
-  property bool wifi: primary && primary.type === DeviceType.Wifi
-
-  property int strength: {
-    if (ethernet) return 1;
-    if (wifi && primary.network) {
-      return primary.network.signalStrength;
-    }
-    return 0;
-  }
-
   text: {
-    if (ethernet) return ""
-    if (wifi) {
-      if (connRoot.strength > 0.90) return "󰤨"
-      if (connRoot.strength > 0.75) return "󰤥"
-      if (connRoot.strength > 0.50) return "󰤢"
+    if (Conns.ethernet) return ""
+    if (Conns.wifi) {
+      if (Conns.strength > 0.90) return "󰤨"
+      if (Conns.strength > 0.75) return "󰤥"
+      if (Conns.strength > 0.50) return "󰤢"
       return "󰤟"
     }
     return "󰤮"
@@ -41,20 +20,9 @@ Text {
 
   renderType: Text.NativeRendering
 
-  color: ethernet || wifi ? Theme.foreBright : Theme.foreMid
+  color: Conns.ethernet || Conns.wifi ? Theme.foreBright : Theme.foreMid
   font {
     family: Theme.fontFam
     pixelSize: Theme.fontSizeMed
-  }
-
-  signal connClicked()
-
-  MouseArea {
-    id: connButton
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      connRoot.connClicked()
-    }
   }
 }

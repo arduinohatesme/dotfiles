@@ -20,14 +20,4 @@ Text {
 
   text: Time.time !== "" ? Time.time : fmts[fmt]
   renderType: Text.NativeRendering
-  signal timeClicked()
-
-  MouseArea {
-    id: timeButton
-    anchors.fill: parent
-    cursorShape: Qt.PointingHandCursor
-    onClicked: {
-      clockRoot.timeClicked()
-    }
-  }
 }

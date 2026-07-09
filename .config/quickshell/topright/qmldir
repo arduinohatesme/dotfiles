@@ -1,0 +1,6 @@
+module topright
+
+TopRightBar 1.0 Bar.qml
+TopRightCollapsed 1.0 Collapsed.qml
+TopRightExpanded 1.0 Expanded.qml
+TopRightExpandedPage 1.0 ExpandedPage.qml

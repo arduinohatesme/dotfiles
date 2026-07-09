@@ -86,13 +86,6 @@ Row {
           NumberAnimation { duration: transitionMs; easing.type: Easing.InOutQuad }
         }
       }
-
-      MouseArea {
-        anchors.fill: parent
-        onClicked: Hyprland.dispatch(
-          `hl.dsp.focus({ workspace = ${index + 1} })`)
-        cursorShape: wsItem.isActive ? Qt.ArrowCursor : Qt.PointingHandCursor
-      }
     }
   }
 }

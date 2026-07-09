@@ -20,7 +20,8 @@ Scope {
     id: rightWindow
     screen: modelData
 
-    property int activeMenu: RightSection.ActiveMenu.Collapsed
+    property bool targetExpanded: false
+    property bool isExpanded: false
 
     anchors {
       top: true
@@ -38,7 +39,7 @@ Scope {
     aboveWindows: true
 
     implicitWidth:
-      (activeMenu === RightSection.ActiveMenu.Collapsed)
+      (!rightWindow.targetExpanded)
       ? rightCd.implicitWidth + 60 : 300
     implicitHeight: rightBg.height
 
@@ -51,15 +52,26 @@ Scope {
     Item {
       anchors.fill: parent
 
-      RightBackground {
+      TopRightContainer {
         id: rightBg
         anchors.right: parent.right
         height:
-          (rightWindow.activeMenu === RightSection.ActiveMenu.Collapsed)
-          ? 60 : 800
+          (!rightWindow.targetExpanded)
+          ? 60 : 1200
         width:
-          (rightWindow.activeMenu === RightSection.ActiveMenu.Collapsed)
-          ? rightCd.implicitWidth + 60 : 500
+          (!rightWindow.targetExpanded)
+          ? rightCd.implicitWidth + 60 : 700
+
+        Timer {
+          id: runningTimer
+          interval: 15
+          repeat: true
+          running: expandAnim.running
+
+          onTriggered: {
+            rightWindow.targetExpanded = rHover.hovered
+          }
+        }
 
         Behavior on height {
           NumberAnimation {
@@ -70,17 +82,36 @@ Scope {
 
         Behavior on width {
           NumberAnimation {
+            id: expandAnim
             duration: 350
             easing.type: Easing.OutExpo
+
+            onRunningChanged: {
+              if (!running)
+                rightWindow.isExpanded = rightWindow.targetExpanded
+            }
           }
         }
 
-        RightCollapsed {
+        TopRightCollapsed {
           id: rightCd
+          onRightCollapsedClicked: {
+            rightWindow.targetExpanded = true
+          }
         }
 
-        RightExpanded {
+        TopRightExpanded {
           id: rightExp
+        }
+      }
+
+      HoverHandler {
+        id: rHover
+
+        onHoveredChanged: {
+          if (!hovered && rightWindow.isExpanded) {
+            rightWindow.targetExpanded = false
+          }
         }
       }
     }

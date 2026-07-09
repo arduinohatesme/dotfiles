@@ -1,4 +1,5 @@
 module services
 singleton Time 1.0 Time.qml
 singleton Theme 1.0 Theme.qml
-singleton RightSection 1.0 RightSection.qml
+singleton Conns 1.0 Conns.qml
+singleton Bluetooth 1.0 Bluetooth.qml
