@@ -3,3 +3,4 @@ ClockWidget 1.0 ClockWidget.qml
 WorkspaceWidget 1.0 WorkspaceWidget.qml
 ConnWidget 1.0 ConnWidget.qml
 BluetoothWidget 1.0 BluetoothWidget.qml
+TabSelector 1.0 TabSelector.qml

@@ -5,18 +5,18 @@ import Quickshell
 import "../services"
 
 Shape {
-  id: rightBg
+  id: rightContainer
 
   layer {
     enabled: true
     samples: 8
   }
 
-  width: rightLayout.implicitWidth + 11 + height
-  height: 60
+  width: parent.width
+  height: parent.height
 
-  readonly property int radius: rightBg.height / 3
-  readonly property int h: radius * 2
+  readonly property int r: 20
+  readonly property int h: height - 20
 
   ShapePath {
     fillColor: Theme.back
@@ -27,39 +27,44 @@ Shape {
     startY: 0
 
     PathArc {
-      x: rightBg.radius
-      y: rightBg.radius
-      radiusX: rightBg.radius
-      radiusY: rightBg.radius
+      x: rightContainer.r
+      y: rightContainer.r
+      radiusX: rightContainer.r
+      radiusY: rightContainer.r
       useLargeArc: false
       direction: PathArc.Clockwise
     }
 
+    PathLine {
+      x: rightContainer.r
+      y: rightContainer.h - rightContainer.r
+    }
+
     PathArc {
-      x: rightBg.h
-      y: rightBg.h
-      radiusX: rightBg.radius
-      radiusY: rightBg.radius
+      x: rightContainer.r * 2
+      y: rightContainer.h
+      radiusX: rightContainer.r
+      radiusY: rightContainer.r
       useLargeArc: false
       direction: PathArc.Counterclockwise
     }
 
     PathLine {
-      x: rightBg.width - rightBg.radius
-      y: rightBg.h
+      x: rightContainer.width - rightContainer.r
+      y: rightContainer.h
     }
 
     PathArc {
-      x: rightBg.width
-      y: rightBg.h + rightBg.radius
-      radiusX: rightBg.radius
-      radiusY: rightBg.radius
+      x: rightContainer.width
+      y: rightContainer.h + rightContainer.r
+      radiusX: rightContainer.r
+      radiusY: rightContainer.r
       useLargeArc: false
       direction: PathArc.Clockwise
     }
 
     PathLine {
-      x: rightBg.width
+      x: rightContainer.width
       y: 0
     }
 

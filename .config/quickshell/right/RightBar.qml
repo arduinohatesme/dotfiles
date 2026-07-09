@@ -37,27 +37,29 @@ Scope {
     exclusionMode: ExclusionMode.Normal
     aboveWindows: true
 
-    implicitHeight: (activeMenu === RightSection.ActiveMenu.Collapsed) ? 60 : 200
+    implicitWidth:
+      (activeMenu === RightSection.ActiveMenu.Collapsed)
+      ? rightCd.implicitWidth + 60 : 300
+    implicitHeight: rightBg.height
+
     color: "transparent"
 
     mask: Region {
       item: rightBg
     }
 
-    // Collapsed
     Item {
       anchors.fill: parent
 
       RightBackground {
         id: rightBg
         anchors.right: parent.right
-
-        Behavior on width {
-          NumberAnimation {
-            duration: 350
-            easing.type: Easing.OutExpo
-          }
-        }
+        height:
+          (rightWindow.activeMenu === RightSection.ActiveMenu.Collapsed)
+          ? 60 : 800
+        width:
+          (rightWindow.activeMenu === RightSection.ActiveMenu.Collapsed)
+          ? rightCd.implicitWidth + 60 : 500
 
         Behavior on height {
           NumberAnimation {
@@ -66,55 +68,21 @@ Scope {
           }
         }
 
-        Item {
-          anchors {
-            top: parent.top
-            bottom: parent.bottom
-            right: parent.right
-          }
-          width: parent.width - (height / 2)
-
-          clip: true
-
-          RowLayout {
-            id: rightLayout
-            height: 40
-            layoutDirection: Qt.LeftToRight
-            spacing: 24
-
-            anchors {
-              top: parent.top
-              right: parent.right
-              rightMargin: 22
-            }
-
-            BluetoothWidget {
-              Layout.alignment: Qt.AlignVCenter
-              onBlueClicked: {
-                rightWindow.activeMenu = RightSection.ActiveMenu.Bluetooth
-              }
-            }
-
-            ConnWidget {
-              Layout.alignment: Qt.AlignVCenter
-              onConnClicked: {
-                rightWindow.activeMenu = RightSection.ActiveMenu.Conn
-              }
-            }
-
-            ClockWidget {
-              Layout.alignment: Qt.AlignVCenter
-              onTimeClicked: {
-                rightWindow.activeMenu = RightSection.ActiveMenu.Clock
-              }
-            }
+        Behavior on width {
+          NumberAnimation {
+            duration: 350
+            easing.type: Easing.OutExpo
           }
         }
-      }
-    }
 
-    Item {
-      anchors.fill: parent
+        RightCollapsed {
+          id: rightCd
+        }
+
+        RightExpanded {
+          id: rightExp
+        }
+      }
     }
   }
 }
