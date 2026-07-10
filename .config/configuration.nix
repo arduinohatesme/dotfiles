@@ -66,6 +66,11 @@ in {
   programs = {
     fish.enable = true;
 
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -156,6 +161,7 @@ in {
     fzf
     gnumake
     gcc
+    python313
 
   # Terminal
     kitty
