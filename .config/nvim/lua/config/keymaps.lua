@@ -29,30 +29,53 @@ end)
 map({ "n", "x", "o" }, "m", "'", { remap = false })
 map({ "n", "x", "o" }, "'", "m", { remap = false })
 
-map("n", "i", function()
+function on_empty_line()
   if vim.fn.getline("."):match("^%s*$") then
+    return true
+  end
+  return false
+end
+
+-- i/a behave like cc on blank lines
+map("n", "i", function()
+  if on_empty_line() then
     return '"_cc'
   else
-    return 'i'
+    return "i"
   end
 end, { expr = true })
 
 map("n", "a", function()
-  if vim.fn.getline("."):match("^%s*$") then
+  if on_empty_line() then
     return '"_cc'
   else
-    return 'a'
+    return "a"
   end
 end, { expr = true })
 
-map("n", "<leader>mb", "O<Esc>o", { desc = "Make Block (surround with blank lines)" })
+-- Don't copy empty lines
+map("n", "dd", function()
+  if on_empty_line() then
+    return '"_dd'
+  else
+    return "dd"
+  end
+end)
+
+map("n", "cc", function()
+  if on_empty_line() then
+    return '"_cc'
+  else
+    return "cc"
+  end
+end)
+
+-- x doesn't copy, use dl intentionally to copy
+-- Just avoids single char copying accidentally
 map("n", "x", '"_x')
 
-map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code action" })
-
-map("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Search definition" })
-
-map("n", "<leader>si", function()
+-- Search for implementation with fallback
+function get_impl()
   local clients = vim.lsp.get_clients()
   local get_imp_support = false
 
@@ -71,11 +94,31 @@ map("n", "<leader>si", function()
   require("telescope.builtin").live_grep({
     default_text = current_word,
   })
-end, { desc = "Searh for implementation" })
+end
 
+-- Search (<leader>s) bindings
+map("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Search for definition" })
+map("n", "<leader>si", get_impl, { desc = "Search for implementations" })
 map("n", "<leader>ss", function()
   require("telescope.builtin").live_grep()
-end, { desc = "Search symbol" })
+end, { desc = "Search for symbol" })
+
+-- Code (<localleader>c) bindings
+map("n", "<localleader>cb", function()
+  if on_empty_line() then
+    return "O<Esc>o<Esc>cc"
+  else
+    return "o<Esc>O<Esc>o<Esc>cc"
+  end
+end, { expr = true, desc = "Code Block" })
+
+map("n", "<localleader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "<localleader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+map("n", "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "<localleader>ci", get_impl, { desc = "Find Implementations" })
+map({ "n", "x" }, "<leader>cf", function()
+  require("conform").format({ force = true })
+end, { desc = "Code Format" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -190,9 +233,6 @@ map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- formatting
-map({ "n", "x" }, "<leader>cf", function()
-  require("conform").format({ force = true })
-end, { desc = "Format" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
@@ -204,7 +244,6 @@ local diagnostic_goto = function(next, severity)
     })
   end
 end
-map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
 map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })

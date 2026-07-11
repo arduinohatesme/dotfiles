@@ -1,7 +1,7 @@
 return {
   {
     "rcarriga/nvim-notify",
-    config = function ()
+    config = function()
       require("notify").setup({
         render = "default",
         timeout = 2000,
@@ -21,7 +21,7 @@ return {
       for _, gp in ipairs(notify_gps) do
         vim.api.nvim_set_hl(0, gp, { bg = "none", ctermbg = "none" })
       end
-    end
+    end,
   },
 
   {
@@ -75,5 +75,5 @@ return {
       end
       require("noice").setup(opts)
     end,
-  }
+  },
 }

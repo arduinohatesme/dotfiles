@@ -1,7 +1,10 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- This file is automatically loaded by plugins.core
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = "/"
+
+-- Disable / for find
+vim.keymap.set({ "n", "v" }, "/", "<Nop>", { silent = true })
 
 -- Auto format
 vim.g.autoformat = true
