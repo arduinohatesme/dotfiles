@@ -1,14 +1,6 @@
 return {
   {
-    "catppuccin",
-    optional = true,
-    opts = {
-      integrations = { overseer = true },
-    },
-  },
-  {
     "stevearc/overseer.nvim",
-    lazy = false, -- plugin is self-lazy-loading
     cmd = {
       "OverseerOpen",
       "OverseerClose",
@@ -43,6 +35,7 @@ return {
       { "<leader>oc", "<cmd>OverseerShell<cr>",          desc = "Run command" },
     },
   },
+
   {
     "folke/which-key.nvim",
     optional = true,
@@ -52,6 +45,7 @@ return {
       },
     },
   },
+
   {
     "folke/edgy.nvim",
     optional = true,
@@ -66,6 +60,7 @@ return {
       })
     end,
   },
+
   {
     "nvim-neotest/neotest",
     optional = true,
@@ -75,6 +70,7 @@ return {
       opts.consumers.overseer = require("neotest.consumers.overseer")
     end,
   },
+
   {
     "mfussenegger/nvim-dap",
     optional = true,

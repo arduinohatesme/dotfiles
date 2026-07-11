@@ -1,15 +1,6 @@
-local colors = require("extras.dashcols")
+local colors
 local git_status = {}
 local gh_issues = {}
-
-local function getHost()
-	local f = io.popen("hostname")
-	local hostname = f:read("*a")
-	f:close()
-	return string.gsub(hostname, "%s+", "")
-end
-
-local hostname = getHost()
 
 local function strip_str(input)
   local new_str, _ = string.gsub(input, "%s+", "")
@@ -25,8 +16,7 @@ local function get_status()
   local num_ahead = 0
   local num_behind = 0
 
-  local completed = 0
-  local total = 4
+  local todo = 0
 
   local function finish()
     git_status_out = git_status_out or ""
@@ -78,33 +68,33 @@ local function get_status()
   end
 
   vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, function(res)
-    completed = completed + 1
+    todo = todo - 1
     branch_out = strip_str(res.stdout) or ""
-    if completed >= total then
+    if todo == 0 then
       finish()
       return
     end
   end)
   vim.system({ "git", "status", "--porcelain" }, function(res)
-    completed = completed + 1
+    todo = todo - 1
     git_status_out = res.stdout or ""
-    if completed >= total then
+    if todo == 0 then
       finish()
       return
     end
   end)
   vim.system({ "git", "rev-list", "--count", "HEAD..@{u}" }, function(res)
-    completed = completed + 1
+    todo = todo - 1
     num_behind = tonumber(strip_str(res.stdout)) or 0
-    if completed >= total then
+    if todo == 0 then
       finish()
       return
     end
   end)
   vim.system({ "git", "rev-list", "--count", "@{u}..HEAD" }, function(res)
-    completed = completed + 1
+    todo = todo - 1
     num_ahead = tonumber(strip_str(res.stdout)) or 0
-    if completed >= total then
+    if todo == 0 then
       finish()
       return
     end
@@ -154,7 +144,19 @@ return {
   "folke/snacks.nvim",
   lazy = false,
   priority = 1000,
+  keys = {
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer()
+      end,
+      desc = "Explorer (root dir)",
+    },
+  },
   opts = {
+    picker = { enabled = false },
+    words = { enabled = false },
+    indent = { enabled = false },
     dashboard = {
       enabled = true,
       preset = {
@@ -192,6 +194,7 @@ return {
   },
 
   init = function()
+    colors = require("extras.dashcols")
     get_issues()
     get_status()
     vim.api.nvim_create_autocmd("ColorScheme", {

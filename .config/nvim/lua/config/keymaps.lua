@@ -1,6 +1,5 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Add any additional keymaps here
-local Neogit = require("neogit")
 local Issue = require("usrcmds.issue")
 local Dump = require("usrcmds.dump")
 
@@ -30,7 +29,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 
     if vim.v.shell_error == 0 then
       map("n", "<leader>g", function()
-        Neogit.open()
+        require("neogit").open()
       end, { desc = "Open Neogit" })
     end
   end,

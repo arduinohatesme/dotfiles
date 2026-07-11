@@ -1,7 +1,3 @@
--- Fast and feature-rich surround actions. For text that includes
--- surrounding characters like brackets or quotes, this allows you
--- to select the text inside, change or modify the surrounding characters,
--- and more.
 return {
   -- disable gitsigns.nvim
   {
@@ -60,6 +56,7 @@ return {
   {
     "nvim-mini/mini.ai",
     version = false,
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("mini.ai").setup({
         -- Table with textobject id as fields, textobject specification as values.
