@@ -13,15 +13,6 @@ return {
   {
     "nvim-mini/mini.diff",
     event = "VeryLazy",
-    keys = {
-      {
-        "<leader>gO",
-        function()
-          require("mini.diff").toggle_overlay(0)
-        end,
-        desc = "Toggle mini.diff overlay",
-      },
-    },
     opts = {
       view = {
         style = "sign",
@@ -35,7 +26,7 @@ return {
   },
 
   {
-    "mini.diff",
+    "nvim-mini/mini.diff",
     opts = function()
       Snacks.toggle({
         name = "Mini Diff Signs",
@@ -67,31 +58,10 @@ return {
   },
 
   {
-    "echasnovski/mini.surround",
-    version = false,
-    event = "VeryLazy",
-    opts = {
-      mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
-        update_n_lines = "gsn", -- Update `n_lines`
-      },
-    },
-    config = function(_, opts)
-      require("mini.surround").setup(opts)
-    end,
-  },
-
-  {
     "nvim-mini/mini.ai",
     version = false,
-    config = function ()
-      require("mini.ai").setup(
-      {
+    config = function()
+      require("mini.ai").setup({
         -- Table with textobject id as fields, textobject specification as values.
         -- Also use this to disable builtin textobjects. See |MiniAi.config|.
         custom_textobjects = nil,
@@ -99,20 +69,20 @@ return {
         -- Module mappings. Use `''` (empty string) to disable one.
         mappings = {
           -- Main textobject prefixes
-          around = 'a',
-          inside = 'i',
+          around = "a",
+          inside = "i",
 
           -- Next/last variants
           -- NOTE: This (deliberately) overrides Neovim>=0.12 built-in incremental
           -- selection mappings. See `:h MiniAi-default-an-in` for more details.
-          around_next = 'an',
-          inside_next = 'in',
-          around_last = 'al',
-          inside_last = 'il',
+          around_next = "an",
+          inside_next = "in",
+          around_last = "al",
+          inside_last = "il",
 
           -- Move cursor to corresponding edge of `a` textobject
-          goto_left = 'g[',
-          goto_right = 'g]',
+          goto_left = "g[",
+          goto_right = "g]",
         },
 
         -- Number of lines within which textobject is searched
@@ -121,14 +91,13 @@ return {
         -- How to search for object (first inside current line, then inside
         -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
         -- 'cover_or_nearest', 'next', 'previous', 'nearest'.
-        search_method = 'cover_or_next',
+        search_method = "cover_or_next",
 
         -- Whether to disable showing non-error feedback
         -- This also affects (purely informational) helper messages shown after
         -- idle time if user input is required.
         silent = false,
-      }
-    )
+      })
     end,
-  }
+  },
 }

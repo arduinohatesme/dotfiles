@@ -26,9 +26,6 @@ map("n", "<leader>gg", function()
   Neogit.open()
 end)
 
-map({ "n", "x", "o" }, "m", "'", { remap = false })
-map({ "n", "x", "o" }, "'", "m", { remap = false })
-
 function on_empty_line()
   if vim.fn.getline("."):match("^%s*$") then
     return true
@@ -60,7 +57,7 @@ map("n", "dd", function()
   else
     return "dd"
   end
-end)
+end, { expr = true })
 
 map("n", "cc", function()
   if on_empty_line() then
@@ -68,7 +65,7 @@ map("n", "cc", function()
   else
     return "cc"
   end
-end)
+end, { expr = true })
 
 -- x doesn't copy, use dl intentionally to copy
 -- Just avoids single char copying accidentally
@@ -96,29 +93,34 @@ function get_impl()
   })
 end
 
--- Search (<leader>s) bindings
+-- Search (<leader>s)
 map("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Search for definition" })
 map("n", "<leader>si", get_impl, { desc = "Search for implementations" })
 map("n", "<leader>ss", function()
   require("telescope.builtin").live_grep()
 end, { desc = "Search for symbol" })
 
--- Code (<localleader>c) bindings
-map("n", "<localleader>cb", function()
+-- Code (local leader)
+map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "<localleader>s", vim.lsp.buf.rename, { desc = "Rename Symbol" })
+map("n", "<localleader>a", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "<localleader>i", get_impl, { desc = "Find Implementations" })
+
+map({ "n", "x" }, "<localleader>f", function()
+  require("conform").format({ force = true })
+end, { desc = "Code Format" })
+
+map("n", "<localleader>n", function()
+  require("neogen").generate()
+end, { desc = "Generate Annotations" })
+
+map("n", "<localleader>b", function()
   if on_empty_line() then
     return "O<Esc>o<Esc>cc"
   else
     return "o<Esc>O<Esc>o<Esc>cc"
   end
 end, { expr = true, desc = "Code Block" })
-
-map("n", "<localleader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "<localleader>cr", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-map("n", "<localleader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-map("n", "<localleader>ci", get_impl, { desc = "Find Implementations" })
-map({ "n", "x" }, "<leader>cf", function()
-  require("conform").format({ force = true })
-end, { desc = "Code Format" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -274,12 +276,6 @@ Snacks.toggle.profiler_highlights():map("<leader>dph")
 
 if vim.lsp.inlay_hint then
   Snacks.toggle.inlay_hints():map("<leader>uh")
-end
-
--- lazygit
-if vim.fn.executable("lazygit") == 1 then
-  map("n", "<leader>gg", function() Snacks.lazygit({ cwd = Snacks.git.get_root() }) end, { desc = "Lazygit (Root Dir)" })
-  map("n", "<leader>gG", function() Snacks.lazygit() end, { desc = "Lazygit (cwd)" })
 end
 
 map("n", "<leader>gL", function() Snacks.picker.git_log() end, { desc = "Git Log (cwd)" })

@@ -7,5 +7,5 @@ return {
     "folke/snacks.nvim",
   },
   cmd = "Neogit",
-  keys = { "<leader>gg" },
+  keys = { "<leader>gg", "<cmd>Neogit<cr>" desc = "Open Neogit" },
 }

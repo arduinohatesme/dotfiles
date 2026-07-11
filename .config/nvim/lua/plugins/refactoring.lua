@@ -5,9 +5,9 @@ return {
     "ThePrimeagen/refactoring.nvim",
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>r", "", desc = "+refactor", mode = { "n", "x" } },
+      { "<localleader>r", "", desc = "+refactor", mode = { "n", "x" } },
       {
-        "<leader>rs",
+        "<localleader>rs",
         function()
           return require("refactoring").select_refactor()
         end,
@@ -15,7 +15,7 @@ return {
         desc = "Select Refactor",
       },
       {
-        "<leader>ri",
+        "<localleader>ri",
         function()
           return require("refactoring").inline_var()
         end,
@@ -24,7 +24,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rP",
+        "<localleader>rP",
         function()
           return require("refactoring.debug").print_loc({ output_location = "below" })
         end,
@@ -32,7 +32,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rp",
+        "<localleader>rp",
         function()
           return require("refactoring.debug").print_var({ output_location = "below" }) .. "iw"
         end,
@@ -41,7 +41,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rc",
+        "<localleader>rc",
         function()
           return require("refactoring.debug").cleanup({ restore_view = true }) .. "ag"
         end,
@@ -49,7 +49,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rf",
+        "<localleader>rf",
         function()
           return require("refactoring").extract_func()
         end,
@@ -58,7 +58,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rF",
+        "<localleader>rF",
         function()
           return require("refactoring").extract_func_to_file()
         end,
@@ -67,7 +67,7 @@ return {
         expr = true,
       },
       {
-        "<leader>rx",
+        "<localleader>rx",
         function()
           return require("refactoring").extract_var()
         end,
