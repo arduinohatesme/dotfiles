@@ -6,15 +6,12 @@
 !/.config/
 /.config/*
 
-!/.config/sddm/
 !/.config/wallpapers/
 !/.config/nvim/
 !/.config/fish/
 !/.config/git/
 !/.config/hypr/
-!/.config/waybar/
 !/.config/rofi/
-!/.config/kitty/
 !/.config/hosts/
 !/.config/fastfetch/
 !/.config/*.nix
@@ -27,3 +24,4 @@
 !README.md
 
 /.config/nvim/extras/dashcols.lua
+/.config/hypr/theme.lua

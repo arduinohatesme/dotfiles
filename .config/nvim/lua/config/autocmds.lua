@@ -25,8 +25,10 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
-    vim.keymap.set({"n", "x"}, "<localleader>r", function() Snacks.debug.run() end, { desc = "Run Lua", buffer = true })
-  end
+    vim.keymap.set({ "n", "x" }, "<localleader>r", function()
+      Snacks.debug.run()
+    end, { desc = "Run Lua", buffer = true })
+  end,
 })
 
 local function augroup(name)

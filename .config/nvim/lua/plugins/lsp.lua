@@ -7,27 +7,6 @@ return {
     "williamboman/mason-lspconfig.nvim",
   },
   opts = {
-    diagnostics = {
-      underline = true,
-      update_in_insert = false,
-      severity_sort = true,
-
-      virtual_text = {
-        spacing = 4,
-        source = "always",
-        prefix = "●",
-      },
-
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = require("config.icons").diagnostics.Error,
-          [vim.diagnostic.severity.WARN] = require("config.icons").diagnostics.Warn,
-          [vim.diagnostic.severity.INFO] = require("config.icons").diagnostics.Info,
-          [vim.diagnostic.severity.HINT] = require("config.icons").diagnostics.Hint,
-        },
-      },
-    },
-
     inlay_hints = {
       enabled = true,
     },
@@ -59,7 +38,27 @@ return {
   },
 
   config = function(_, opts)
-    vim.diagnostic.config(opts.diagnostics)
+    vim.diagnostic.config({
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+
+      virtual_text = {
+        spacing = 4,
+        source = "always",
+        prefix = "●",
+      },
+
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = require("config.icons").opts.diagnostics.Error,
+          [vim.diagnostic.severity.WARN] = require("config.icons").opts.diagnostics.Warn,
+          [vim.diagnostic.severity.INFO] = require("config.icons").opts.diagnostics.Info,
+          [vim.diagnostic.severity.HINT] = require("config.icons").opts.diagnostics.Hint,
+        },
+      },
+    })
+
     vim.lsp.config("gitlab_duo", { enabled = false })
     require("mason-tool-installer").setup({
       ensure_installed = {
@@ -82,8 +81,6 @@ return {
       run_on_start = true,
     })
     require("mason").setup()
-
-    local lspconfig = require("lspconfig")
 
     if opts.servers then
       opts.servers.gitlab_duo = nil

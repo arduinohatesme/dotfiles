@@ -2,25 +2,15 @@ return {
   desc = "Snacks File Explorer",
   recommended = true,
   "folke/snacks.nvim",
-  opts = { explorer = {
-    replace_netrw = false,
-  } },
+  opts = { explorer = {}, picker = { enabled = false } },
+
   keys = {
     {
-      "<leader>fe",
+      "<leader>e",
       function()
         Snacks.explorer()
       end,
-      desc = "Explorer Snacks (root dir)",
+      desc = "Explorer (root dir)",
     },
-    {
-      "<leader>fE",
-      function()
-        Snacks.explorer({ cwd = vim.uv.cwd() })
-      end,
-      desc = "Explorer Snacks (cwd)",
-    },
-    { "<leader>e", "<leader>fe", desc = "Explorer Snacks (root dir)", remap = true },
-    { "<leader>E", "<leader>fE", desc = "Explorer Snacks (cwd)", remap = true },
   },
 }

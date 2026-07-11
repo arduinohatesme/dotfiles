@@ -1,6 +1,0 @@
-[config]
-reload_apps = false
-
-[templates.waybar]
-input_path = "~/.config/waybar/matugen-template.css"
-output_path = "~/.config/waybar/tokens/unknown-colors.css"
