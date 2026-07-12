@@ -25,3 +25,9 @@
 
 /.config/nvim/extras/dashcols.lua
 /.config/hypr/theme.lua
+/.config/rofi/colors.rasi
+/.config/rofi/if-square-lcr.rasi
+/.config/rofi/if-square.rasi
+/.config/wallpapers/active
+/.config/quickshell/services/Theme.qml
+/.config/fish/config.fish
