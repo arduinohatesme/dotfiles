@@ -59,6 +59,8 @@ return {
       })
 
       vim.lsp.config("gitlab_duo", { enabled = false })
+      vim.lsp.enable("gitlab_duo", false)
+      require("lspconfig").gitlab_duo = nil
 
       if opts.servers then
         opts.servers.gitlab_duo = nil
@@ -66,10 +68,7 @@ return {
 
       for s, o in pairs(opts.servers or {}) do
         if s ~= "*" then
-          if s == "gitlab_duo" then
-            o = o or {}
-            o.enabled = false
-          else
+          if enabled ~= false then
             vim.lsp.config(s, o or {})
             vim.lsp.enable(s)
           end
@@ -94,6 +93,7 @@ return {
         "prettier",
         "prettierd",
         "ruff",
+        "rust-analyzer",
         "stylua",
         "ts_ls",
         "yamlls",

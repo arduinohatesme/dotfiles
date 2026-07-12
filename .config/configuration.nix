@@ -162,6 +162,7 @@ in {
     gnumake
     gcc
     python313
+    uv
 
   # Terminal
     kitty
