@@ -135,6 +135,9 @@
       set -gx VISUAL nvim
       set -gx SUDO_EDITOR nvim
       set -gx MANPAGER "nvim +Man!"
+      set -gx MOZ_ENABLE_WAYLAND 1
+      set -gx NIXOS_OZONE_WL 1
+      set -gx EGL_PLATFORM wayland
 
       fish_vi_key_bindings
     '';

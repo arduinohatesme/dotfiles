@@ -1,106 +1,81 @@
 return {
-  {
-    "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
+  event = "VeryLazy",
+  dependencies = {
+    "williamboman/mason-lspconfig.nvim",
+  },
+  opts = {
+    inlay_hints = {
+      enabled = true,
     },
-    opts = {
-      inlay_hints = {
-        enabled = true,
-      },
 
-      codelens = {
+    codelens = {
+      enabled = false,
+    },
+
+    folds = {
+      enabled = true,
+    },
+
+    format = {
+      formatting_options = nil,
+      timeout_ms = nil,
+    },
+
+    servers = {
+      gitlab_duo = {
         enabled = false,
       },
-
-      folds = {
-        enabled = true,
-      },
-
-      format = {
-        formatting_options = nil,
-        timeout_ms = nil,
-      },
-
-      servers = {
-        gitlab_duo = {
-          enabled = false,
-        },
-        basedpyright = {},
-        clangd = {},
-        eslint = {},
-        ruff = {},
-        ts_ls = {},
-        yamlls = {},
-      },
+      basedpyright = {},
+      clangd = {},
+      eslint = {},
+      ruff = {},
+      rust_analyzer = {},
+      ts_ls = {},
+      yamlls = {},
     },
+  },
 
-    config = function(_, opts)
-      vim.diagnostic.config({
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
+  config = function(_, opts)
+    vim.diagnostic.config({
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
 
-        virtual_text = {
-          spacing = 4,
-          source = "always",
-          prefix = "●",
+      virtual_text = {
+        spacing = 4,
+        source = "always",
+        prefix = "●",
+      },
+
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = require("config.icons").opts.diagnostics.Error,
+          [vim.diagnostic.severity.WARN] = require("config.icons").opts.diagnostics.Warn,
+          [vim.diagnostic.severity.INFO] = require("config.icons").opts.diagnostics.Info,
+          [vim.diagnostic.severity.HINT] = require("config.icons").opts.diagnostics.Hint,
         },
+      },
+    })
 
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = require("config.icons").opts.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = require("config.icons").opts.diagnostics.Warn,
-            [vim.diagnostic.severity.INFO] = require("config.icons").opts.diagnostics.Info,
-            [vim.diagnostic.severity.HINT] = require("config.icons").opts.diagnostics.Hint,
-          },
-        },
-      })
+    vim.lsp.config("gitlab_duo", { enabled = false })
+    vim.lsp.enable("gitlab_duo", false)
+    require("lspconfig").gitlab_duo = nil
 
-      vim.lsp.config("gitlab_duo", { enabled = false })
-      vim.lsp.enable("gitlab_duo", false)
-      require("lspconfig").gitlab_duo = nil
+    if opts.servers then
+      opts.servers.gitlab_duo = nil
+    end
 
-      if opts.servers then
-        opts.servers.gitlab_duo = nil
-      end
-
-      for s, o in pairs(opts.servers or {}) do
-        if s ~= "*" then
-          if enabled ~= false then
-            vim.lsp.config(s, o or {})
-            vim.lsp.enable(s)
+    for s, o in pairs(opts.servers or {}) do
+      if s ~= "*" then
+        opts = o or {}
+        if opts.enabled ~= false then
+          if not vim.tbl_isempty(opts) then
+            vim.lsp.config(s, opts)
           end
+          vim.lsp.enable(s)
         end
       end
-    end,
-  },
-
-  { "williamboman/mason.nvim", cmd = "Mason", opts = {} },
-  {
-    "WhoIsSethDaniel/mason-tool-installer",
-    cmd = { "MasonToolsClean" },
-    opts = {
-      ensure_installed = {
-        "actionlint",
-        "basedpyright",
-        "clangd",
-        "clang-format",
-        "eslint",
-        "eslint_d",
-        "nixfmt",
-        "prettier",
-        "prettierd",
-        "ruff",
-        "rust-analyzer",
-        "stylua",
-        "ts_ls",
-        "yamlls",
-      },
-
-      auto_update = true,
-      run_on_start = false,
-    },
-  },
+    end
+  end,
 }

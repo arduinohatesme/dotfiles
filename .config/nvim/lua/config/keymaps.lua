@@ -122,9 +122,7 @@ map({ "n", "x" }, "<localleader>f", function()
   require("conform").format({ force = true })
 end, { desc = "Code Format" })
 
-map("n", "<localleader>n", function()
-  require("neogen").generate()
-end, { desc = "Generate Annotations" })
+map("n", "<localleader>g", "<CMD>DogeGenerate<CR>", { desc = "Generate Annotations" })
 
 -- Make empty space for a new block
 map("n", "<localleader>b", function()

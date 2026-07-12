@@ -10,6 +10,7 @@ return {
       css = { "prettierd", "prettier", stop_after_first = true },
       scss = { "prettierd", "prettier", stop_after_first = true },
 
+      rust = { "rustfmt" },
       python = { "ruff_fix", "ruff_format", stop_after_first = false },
       lua = { "stylua" },
       nix = { "nixfmt" },
@@ -20,6 +21,6 @@ return {
     format_on_save = {
       timeout_ms = 500,
       lsp_format = "fallback",
-    }
+    },
   },
 }

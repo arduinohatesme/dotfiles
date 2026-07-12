@@ -1,1 +1,1 @@
-/nix/store/1i2vrccigdy2p12wnchxkybm11l1s3dk-home-manager-files/.config/nvim/lua/extras/dashcols.lua
+/nix/store/4mgas13zcrca06b5wg4dznz08c2z46y6-home-manager-files/.config/nvim/lua/extras/dashcols.lua

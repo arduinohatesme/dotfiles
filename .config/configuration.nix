@@ -2,25 +2,35 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, lib, hostName, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  hostName,
+  fenix,
+  ...
+}:
 
 let
   sddm-file = import ./sddm.nix { inherit pkgs; };
 
-  ttheme = if hostName == "super-beast-lx" then
-    "black_hole"
-  else if hostName == "launchpad-9" then
-    "sakura"
-  else if hostName == "beast-jr" then
-    "mountain"
-  else if hostName == "knicks-os" then
-    "black_hole"
-  else
-    "mountain";
+  ttheme =
+    if hostName == "super-beast-lx" then
+      "black_hole"
+    else if hostName == "launchpad-9" then
+      "sakura"
+    else if hostName == "beast-jr" then
+      "mountain"
+    else if hostName == "knicks-os" then
+      "black_hole"
+    else
+      "mountain";
 
   sddm-theme = sddm-file.${ttheme};
 
-in {
+in
+{
   # Bootloader.
   boot.loader.efi = {
     efiSysMountPoint = lib.mkIf (hostName == "super-beast-lx") "/boot/efi";
@@ -94,24 +104,31 @@ in {
   users.users."amcmillan" = {
     isNormalUser = true;
     description = "amcmillan";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
     shell = pkgs.fish;
   };
   home-manager = {
-    extraSpecialArgs = { theme = ttheme; };
+    extraSpecialArgs = {
+      theme = ttheme;
+    };
     users.amcmillan = ./amcmillan.nix;
   };
 
   environment.shellAliases = {
     zen-browser = "zen";
-    gac = "git add -A && git commit";
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   hardware.bluetooth = {
@@ -142,16 +159,18 @@ in {
 
   boot.initrd.kernelModules = lib.optionals (hostName == "knicks-os") [ "i915" ];
 
+  nixpkgs.overlays = [ fenix.overlays.default ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-  # Basics
+    # Basics
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
     yazi
 
-  # Development
+    # Development
     neovim
     tree-sitter
     github-cli
@@ -161,10 +180,43 @@ in {
     fzf
     gnumake
     gcc
+
+    # TS Parsers
+    tree-sitter-grammars.tree-sitter-python
+    tree-sitter-grammars.tree-sitter-lua
+    tree-sitter-grammars.tree-sitter-rust
+    tree-sitter-grammars.tree-sitter-javascript
+    tree-sitter-grammars.tree-sitter-typescript
+    tree-sitter-grammars.tree-sitter-c
+
+    # Neovim LSPs
+    basedpyright
+    ruff
+    typescript-language-server
+    vscode-langservers-extracted
+    prettier
+    yaml-language-server
+    clang-tools
+    nixfmt
+    stylua
+    actionlint
+    rust-analyzer
+
+    # Rust Tools
+    pkg-config
+    (pkgs.fenix.combine [
+      pkgs.fenix.stable.cargo
+      pkgs.fenix.stable.rustc
+      pkgs.fenix.stable.clippy
+      pkgs.fenix.stable.rust-src
+      pkgs.fenix.latest.rustfmt
+    ])
+
+    # Python Tools
     python313
     uv
 
-  # Terminal
+    # Terminal
     kitty
     fd
     ripgrep
@@ -174,7 +226,7 @@ in {
     eza
     zoxide
 
-  # Hyprland
+    # Hyprland
     rofi
     mpvpaper
     awww
@@ -186,7 +238,7 @@ in {
     slurp
     quickshell
 
-  # Others (security, utility, ...)
+    # Others (security, utility, ...)
     age
     localsend
     zip
@@ -246,7 +298,7 @@ in {
     printing.enable = true;
     openssh = {
       enable = true;
-      ports = [];
+      ports = [ ];
       settings = {
         PermitRootLogin = "no";
         MaxAuthTries = 3;
@@ -259,8 +311,12 @@ in {
       enable = true;
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-hyprland
       ];
-      config.common.default = "*";
+      config.common.default = [
+        "hyprland"
+        "gtk"
+      ];
     };
   };
 
@@ -297,7 +353,10 @@ in {
   # Open ports in the firewall.
   networking.firewall = {
     allowedTCPPorts = [ 53317 ];
-    allowedUDPPorts = [ 41641 53317 ];
+    allowedUDPPorts = [
+      41641
+      53317
+    ];
     trustedInterfaces = [ "tailscale0" ];
   };
   # Or disable the firewall altogether.
