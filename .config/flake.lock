@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "conflake": {
+      "inputs": {
+        "nixpkgs": [
+          "nix-treesitter",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739025932,
+        "narHash": "sha256-8BbSpXfJfy3R7XYX43dQeYZJ7K+IDCfGZb1KgRHN0Pg=",
+        "owner": "ratson",
+        "repo": "conflake",
+        "rev": "69b5b014b79ecd457aa698e383602b07d52683c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ratson",
+        "repo": "conflake",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -41,7 +62,42 @@
         "type": "github"
       }
     },
+    "nix-treesitter": {
+      "inputs": {
+        "conflake": "conflake",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1739028560,
+        "narHash": "sha256-7joUNhdZfSkuGL65Lbsmuf/NviUjuGtAhbfdPYuFGjk=",
+        "owner": "ratson",
+        "repo": "nix-treesitter",
+        "rev": "d9d35e37a5b2aee2f3f4d14c66e2bf0604dae4ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ratson",
+        "repo": "nix-treesitter",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1738958807,
+        "narHash": "sha256-h0WKgHTLkjwjRNTkqByQquS7N/15SqIFMQ356Ww8uCA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "e8d0b02af0958823c955aaab3c82b03f54411d91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1783224372,
         "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
@@ -61,7 +117,8 @@
       "inputs": {
         "fenix": "fenix",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
+        "nix-treesitter": "nix-treesitter",
+        "nixpkgs": "nixpkgs_2",
         "zen-browser": "zen-browser"
       }
     },

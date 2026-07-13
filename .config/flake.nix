@@ -6,14 +6,18 @@
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-treesitter.url = "github:ratson/nix-treesitter";
   };
 
   outputs =
@@ -46,6 +50,7 @@
 
             {
               home-manager.useGlobalPkgs = true;
+              home-manager.extraSpecialArgs = { inherit inputs; };
               home-manager.useUserPackages = true;
             }
           ];

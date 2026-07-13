@@ -127,9 +127,9 @@ map("n", "<localleader>g", "<CMD>DogeGenerate<CR>", { desc = "Generate Annotatio
 -- Make empty space for a new block
 map("n", "<localleader>b", function()
   if on_empty_line() then
-    return "O<Esc>o<Esc>cc"
+    return 'O<Esc>o<Esc>"_cc'
   else
-    return "o<Esc>O<Esc>o<Esc>cc"
+    return 'o<Esc>O<Esc>o<Esc>"_cc'
   end
 end, { expr = true, desc = "Code Block" })
 
@@ -155,6 +155,10 @@ map("n", "<C-S-k>", "<cmd>resize +2<cr>", { desc = "Increase Window Height" })
 map("n", "<C-S-j>", "<cmd>resize -2<cr>", { desc = "Decrease Window Height" })
 map("n", "<C-S-l>", "<cmd>vertical resize -2<cr>", { desc = "Decrease Window Width" })
 map("n", "<C-S-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Width" })
+
+-- Saner <C-d> and <C-u>
+map({ "n", "x" }, "<C-d>", "<C-d>zz")
+map({ "n", "x" }, "<C-u>", "<C-u>zz")
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })

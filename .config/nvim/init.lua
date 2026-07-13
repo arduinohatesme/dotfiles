@@ -1,3 +1,4 @@
+vim.opt.runtimepath:prepend("~/.config/nvim")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 require("config.options")

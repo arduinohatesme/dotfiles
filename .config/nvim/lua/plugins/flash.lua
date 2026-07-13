@@ -29,7 +29,7 @@ return {
         search = { wrap = false },
         highlight = { backdrop = true },
         jump = {
-          register = true,
+          register = false,
           autojump = true,
         },
       },

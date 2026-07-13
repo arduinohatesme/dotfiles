@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   theme,
   ...
 }:
@@ -9,69 +10,65 @@
   home.username = "amcmillan";
   home.homeDirectory = "/home/amcmillan";
   home.stateVersion = "26.11";
-  home.file = {
-    ".config/nvim/lua/extras/dashcols.lua" = {
-      text = ''
-        return require("extras.allcols").${theme}
-      '';
-    };
+  home.file =
+    let
+      ts = inputs.nix-treesitter.packages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      ".config/nvim/lua/extras/dashcols.lua" = {
+        text = ''
+          return require("extras.allcols").${theme}
+        '';
+      };
 
-    ".config/waybar/tokens/if-square.css" = {
-      text =
-        if theme == "sakura" || theme == "mountain" then
-          ''
-            @import "squarify.css";
-          ''
-        else
-          "";
-    };
+      ".config/nvim/parser/nix.so".source = "${ts.tree-sitter-nix}/parser";
+      ".config/nvim/parser/lua.so".source = "${ts.tree-sitter-lua}/parser";
+      ".config/nvim/parser/python.so".source = "${ts.tree-sitter-python}/parser";
+      ".config/nvim/parser/c.so".source = "${ts.tree-sitter-c}/parser";
+      ".config/nvim/parser/rust.so".source = "${ts.tree-sitter-rust}/parser";
+      ".config/nvim/parser/typescript.so".source = "${ts.tree-sitter-typescript}/parser";
+      ".config/nvim/parser/javascript.so".source = "${ts.tree-sitter-javascript}/parser";
 
-    ".config/waybar/tokens/colors.css" = {
-      text = ''
-        @import "${theme}-colors.css";
-      '';
-    };
+      ".config/rofi/colors.rasi" = {
+        text = ''
+          @import "~/.config/rofi/colors/${theme}.rasi"
+        '';
+      };
 
-    ".config/rofi/colors.rasi" = {
-      text = ''
-        @import "~/.config/rofi/colors/${theme}.rasi"
-      '';
-    };
+      ".config/wallpapers/active" = {
+        source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/wallpapers/${theme}";
+      };
 
-    ".config/wallpapers/active" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/wallpapers/${theme}";
-    };
+      ".config/hypr/theme.lua" = {
+        text = ''
+          return require("device").${theme}
+        '';
+      };
 
-    ".config/hypr/theme.lua" = {
-      text = ''
-        return require("device").${theme}
-      '';
-    };
+      ".config/rofi/if-square.rasi" = {
+        text =
+          if theme == "sakura" || theme == "mountain" then
+            ''
+              @import "./squarify.rasi"
+            ''
+          else
+            "";
+      };
 
-    ".config/rofi/if-square.rasi" = {
-      text =
-        if theme == "sakura" || theme == "mountain" then
-          ''
-            @import "./squarify.rasi"
-          ''
-        else
-          "";
-    };
+      ".config/rofi/if-square-lcr.rasi" = {
+        text =
+          if theme == "sakura" || theme == "mountain" then
+            ''
+              @import "./squarify-lcr.rasi"
+            ''
+          else
+            "";
+      };
 
-    ".config/rofi/if-square-lcr.rasi" = {
-      text =
-        if theme == "sakura" || theme == "mountain" then
-          ''
-            @import "./squarify-lcr.rasi"
-          ''
-        else
-          "";
+      ".config/quickshell/services/Theme.qml" = {
+        source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/themes/Theme_${theme}.qml";
+      };
     };
-
-    ".config/quickshell/services/Theme.qml" = {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/amcmillan/.config/quickshell/themes/Theme_${theme}.qml";
-    };
-  };
 
   gtk = {
     enable = true;
