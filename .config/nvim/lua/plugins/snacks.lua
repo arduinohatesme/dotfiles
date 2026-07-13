@@ -16,7 +16,7 @@ local function get_status()
   local num_ahead = 0
   local num_behind = 0
 
-  local todo = 0
+  local todo = 4
 
   local function finish()
     git_status_out = git_status_out or ""
@@ -62,8 +62,7 @@ local function get_status()
     end
 
     vim.schedule(function()
-      local Snacks = require("snacks")
-      Snacks.dashboard.update()
+      require("snacks").dashboard.update()
     end)
   end
 
@@ -112,8 +111,7 @@ local function get_issues()
       { "⦿" .. num_issues, hl = "special" },
     }
     vim.schedule(function()
-      local Snacks = require("snacks")
-      Snacks.dashboard.update()
+      require("snacks").dashboard.update()
     end)
   end)
 end
@@ -153,10 +151,12 @@ return {
       desc = "Explorer (root dir)",
     },
   },
+
   opts = {
     picker = { enabled = false },
     words = { enabled = false },
     indent = { enabled = false },
+
     dashboard = {
       enabled = true,
       preset = {
@@ -173,7 +173,6 @@ return {
 ###    #### ########## ########      ###     ########### ###       ###     
   ]],
         -- stylua: ignore
-        ---@type snacks.dashboard.Item[]
         keys = {
           { key = "f", desc = "Find File", action = function() require("telescope.builtin").find_files() end },
           { key = "n", desc = "New File", action = ":ene | startinsert" },
@@ -185,6 +184,7 @@ return {
           { key = "q", desc = "Quit", action = ":qa" },
         },
       },
+
       sections = {
         { section = "header" },
         { section = "keys", gap = 1, padding = 1 },
@@ -195,7 +195,7 @@ return {
 
   init = function()
     colors = require("extras.dashcols")
-    get_issues()
+    -- get_issues()
     get_status()
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "*",

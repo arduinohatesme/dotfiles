@@ -22,9 +22,7 @@
       };
 
       ".config/nvim/parser/nix.so".source = "${ts.tree-sitter-nix}/parser";
-      ".config/nvim/parser/lua.so".source = "${ts.tree-sitter-lua}/parser";
       ".config/nvim/parser/python.so".source = "${ts.tree-sitter-python}/parser";
-      ".config/nvim/parser/c.so".source = "${ts.tree-sitter-c}/parser";
       ".config/nvim/parser/rust.so".source = "${ts.tree-sitter-rust}/parser";
       ".config/nvim/parser/typescript.so".source = "${ts.tree-sitter-typescript}/parser";
       ".config/nvim/parser/javascript.so".source = "${ts.tree-sitter-javascript}/parser";
