@@ -31,3 +31,4 @@
 /.config/wallpapers/active
 /.config/quickshell/services/Theme.qml
 /.config/fish/config.fish
+/.config/nvim/lua/extras/dashcols.lua
