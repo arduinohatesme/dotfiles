@@ -118,10 +118,6 @@ in
     users.amcmillan = ./amcmillan.nix;
   };
 
-  environment.shellAliases = {
-    zen-browser = "zen";
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nix.settings = {
@@ -177,7 +173,6 @@ in
     git
     tailscale
     nodejs_26
-    fzf
     gnumake
     gcc
 
@@ -218,13 +213,17 @@ in
 
     # Terminal
     kitty
-    fd
     ripgrep
     fish
     fastfetch
     fishPlugins.bang-bang
     eza
     zoxide
+    fd
+    bat
+    fzf
+    btop
+    atuin
 
     # Hyprland
     rofi
