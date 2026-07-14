@@ -117,15 +117,15 @@ end, { desc = "Search live" })
 
 -- Code (local leader)
 map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "<localleader>c", vim.lsp.buf.rename, { desc = "Symbol Name" })
+map("n", "<localleader>c", vim.lsp.buf.rename, { desc = "Change Name" })
 map("n", "<localleader>a", vim.lsp.buf.code_action, { desc = "Code Action" })
 map("n", "<localleader>i", get_impl, { desc = "Find Implementations" })
+map("n", "<localleader>g", "<CMD>DogeGenerate<CR>", { desc = "Generate Annotations" })
+map({ "n", "x" }, "<localleader>s", "", { desc = "+surround" })
 
 map({ "n", "x" }, "<localleader>f", function()
   require("conform").format({ force = true })
 end, { desc = "Code Format" })
-
-map("n", "<localleader>g", "<CMD>DogeGenerate<CR>", { desc = "Generate Annotations" })
 
 -- Make empty space for a new block
 map("n", "<localleader>b", function()
