@@ -11,8 +11,13 @@ return {
       italic_inlayhints = true,
     },
     config = function(_, opts)
-      require("vscode").setup(opts)
+      local vsc = require("vscode")
+      vsc.setup(opts)
+      local colors = require("vscode.colors").get_colors()
       vim.cmd.colorscheme("vscode")
+      vim.api.nvim_set_hl(0, "MiniDiffSignAdd", { fg = colors.vscGitAdded, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "MiniDiffSignChange", { fg = colors.vscGitModified, bg = "NONE" })
+      vim.api.nvim_set_hl(0, "MiniDiffSignDelete", { fg = colors.vscGitDeleted, bg = "NONE" })
     end,
   },
 }

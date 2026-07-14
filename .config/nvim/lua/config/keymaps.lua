@@ -76,6 +76,9 @@ map("n", "cc", function()
   end
 end, { expr = true })
 
+-- TODO: ? for mini.surround
+map({ "n", "x" }, "?", "<nop>")
+
 -- x doesn't copy, use dl intentionally to copy
 -- Just avoids single char copying accidentally
 map("n", "x", '"_x')
@@ -114,7 +117,7 @@ end, { desc = "Search live" })
 
 -- Code (local leader)
 map("n", "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "<localleader>s", vim.lsp.buf.rename, { desc = "Symbol Name" })
+map("n", "<localleader>c", vim.lsp.buf.rename, { desc = "Symbol Name" })
 map("n", "<localleader>a", vim.lsp.buf.code_action, { desc = "Code Action" })
 map("n", "<localleader>i", get_impl, { desc = "Find Implementations" })
 

@@ -5,7 +5,30 @@ return {
     enabled = false,
   },
 
-  -- setup mini.diff
+  {
+    "nvim-mini/mini.surround",
+    event = { "BufReadPre", "BufNewFile" },
+    config = {
+      custom_surroundings = {},
+
+      highlight_duration = 2000,
+
+      mappings = {
+        add = "<localleader>sa",
+        delete = "<localleader>sd",
+        find = "<localleader>sf",
+        find_left = "<localleader>sF",
+        highlight = "<localleader>sh",
+        replace = "<localleader>sr",
+
+        suffix_last = "l",
+        suffix_next = "n",
+      },
+    },
+
+    search_method = "cover_or_next",
+  },
+
   {
     "nvim-mini/mini.diff",
     event = "VeryLazy",
@@ -22,31 +45,7 @@ return {
   },
 
   {
-    "nvim-mini/mini.diff",
-    opts = function()
-      Snacks.toggle({
-        name = "Mini Diff Signs",
-        get = function()
-          return vim.g.minidiff_disable ~= true
-        end,
-        set = function(state)
-          vim.g.minidiff_disable = not state
-          if state then
-            require("mini.diff").enable(0)
-          else
-            require("mini.diff").disable(0)
-          end
-          -- HACK: redraw to update the signs
-          vim.defer_fn(function()
-            vim.cmd([[redraw!]])
-          end, 200)
-        end,
-      }):map("<leader>uG")
-    end,
-  },
-
-  {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     event = "VeryLazy",
     opts = {
       modes = { insert = true, command = true, terminal = true },
