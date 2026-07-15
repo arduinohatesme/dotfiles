@@ -1,10 +1,4 @@
 return {
-  -- disable gitsigns.nvim
-  {
-    "lewis6991/gitsigns.nvim",
-    enabled = false,
-  },
-
   {
     "nvim-mini/mini.surround",
     event = { "BufReadPre", "BufNewFile" },
