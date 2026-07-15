@@ -105,36 +105,51 @@ function get_impl()
   })
 end
 
--- Search (<leader>s)
-map("n", "<leader>sd", vim.lsp.buf.definition, { desc = "Search for definition" })
-map("n", "<leader>si", get_impl, { desc = "Search for implementations" })
-map("n", "<leader>sf", function()
+-- Find (<leader>f)
+map("n", "<leader>fd", vim.lsp.buf.definition, { desc = "Search for definition" })
+map("n", "<leader>fi", get_impl, { desc = "Search for implementations" })
+map("n", "<leader>ff", function()
   require("telescope.builtin").find_files()
 end, { desc = "Search filenames" })
-map("n", "<leader>sl", function()
+map("n", "<leader>fl", function()
   require("telescope.builtin").live_grep()
 end, { desc = "Search live" })
+map("n", "<leader>fs", function()
+  require("telescope.builtin").lsp_workspace_symbols()
+end, { desc = "Search symbols" })
 
--- Code (local leader)
+-- Code (<localleader>)
 map({ "n", "x" }, "<localleader>d", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map({ "n", "x" }, "<localleader>c", vim.lsp.buf.rename, { desc = "Change Name" })
 map({ "n", "x" }, "<localleader>a", vim.lsp.buf.code_action, { desc = "Code Action" })
-map({ "n", "x" }, "<localleader>i", get_impl, { desc = "Find Implementations" })
-map({ "n", "x" }, "<localleader>g", "<CMD>DogeGenerate<CR>", { desc = "Generate Annotations" })
-map({ "n", "x" }, "<localleader>s", "", { desc = "+surround" })
 
-map({ "n", "x" }, "<localleader>f", function()
-  require("conform").format({ force = true })
-end, { desc = "Code Format" })
+-- Find (<localleader>f)
+map({ "n", "x" }, "<localleader>fi", get_impl, { desc = "Find Implementations" })
+map({ "n", "x" }, "<localleader>fs", function()
+  require("telescope.builtin").lsp_document_symbols()
+end, { desc = "Find symbols" })
 
--- Make empty space for a new block
-map("n", "<localleader>b", function()
+-- Make (<localleader>m)
+map("n", "<localleader>ms", function()
   if on_empty_line() then
     return 'O<Esc>o<Esc>"_cc'
   else
     return 'o<Esc>O<Esc>o<Esc>"_cc'
   end
-end, { expr = true, desc = "Code Block" })
+end, { expr = true, desc = "Make Space" })
+map({ "n", "x" }, "<localleader>ma", function()
+  require("neogen").generate()
+end, { desc = "Make Annotations" })
+map("n", "<localleader>mt", function()
+  local todo = string.gsub(vim.bo.commentstring, "%%s", "TODO: ")
+  if on_empty_line() then
+    vim.api.nvim_put({ todo }, "c", true, true)
+  else
+    vim.api.nvim_put({ todo }, "l", true, true)
+    vim.cmd("normal! k==")
+  end
+  vim.cmd("startinsert!")
+end, { desc = "Make TODO" })
 
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -162,6 +177,24 @@ map("n", "<C-S-h>", "<cmd>vertical resize +2<cr>", { desc = "Increase Window Wid
 -- Saner <C-d> and <C-u>
 map({ "n", "x" }, "<C-d>", "<C-d>zz")
 map({ "n", "x" }, "<C-u>", "<C-u>zz")
+
+-- Saner mark jumping
+map({ "n", "x" }, "`", function()
+  local char = vim.fn.getcharstr()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("`" .. char .. "zz", true, true, true),
+    "n",
+    false
+  )
+end)
+map({ "n", "x" }, "'", function()
+  local char = vim.fn.getcharstr()
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes("'" .. char .. "zz", true, true, true),
+    "n",
+    false
+  )
+end)
 
 -- buffers
 map("n", "<S-h>", "<cmd>bprevious<cr>", { desc = "Prev Buffer" })

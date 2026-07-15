@@ -9,9 +9,14 @@ return {
     spec = {
       {
         mode = { "n", "x" },
-        { "<leader>g", group = "git" },
+        { "<leader>", group = "global" },
         { "<leader>s", group = "search" },
+        { "<leader>f", group = "find" },
         { "<leader>u", group = "ui" },
+        { "<localleader>", group = "local" },
+        { "<localleader>f", group = "find" },
+        { "<localleader>m", group = "make" },
+        { "<localleader>s", group = "surround" },
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },
