@@ -57,10 +57,10 @@ Scope {
         anchors.right: parent.right
         height:
           (!rightWindow.targetExpanded)
-          ? 60 : 1200
+          ? 40 + Theme.cornerRadius : 500
         width:
           (!rightWindow.targetExpanded)
-          ? rightCd.implicitWidth + 60 : 700
+          ? rightCd.implicitWidth + Theme.cornerRadius + 40 : 600
 
         Timer {
           id: runningTimer

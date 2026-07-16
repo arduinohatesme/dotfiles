@@ -15,8 +15,8 @@ Shape {
   width: parent.width
   height: parent.height
 
-  readonly property int r: 20
-  readonly property int h: height - 20
+  readonly property int r: Theme.cornerRadius
+  readonly property int h: height - Theme.cornerRadius
 
   ShapePath {
     fillColor: Theme.back

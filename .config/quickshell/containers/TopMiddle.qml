@@ -12,7 +12,7 @@ Shape {
     samples: 8
   }
 
-  readonly property int radius: parent.height / 2
+  readonly property int radius: Theme.cornerRadius
 
   ShapePath {
     fillColor: Theme.back
@@ -31,8 +31,13 @@ Shape {
       direction: PathArc.Clockwise
     }
 
+    PathLine {
+      x: middleBg.radius
+      y: middleBg.height - middleBg.radius
+    }
+
     PathArc {
-      x: middleBg.height
+      x: (middleBg.height * 0) + (middleBg.radius * 2) + (middleBg.width * 0)
       y: middleBg.height
       radiusX: middleBg.radius
       radiusY: middleBg.radius
@@ -52,6 +57,11 @@ Shape {
       radiusY: middleBg.radius
       useLargeArc: false
       direction: PathArc.Counterclockwise
+    }
+
+    PathLine {
+      x: middleBg.width - middleBg.radius
+      y: middleBg.radius
     }
 
     PathArc {

@@ -12,7 +12,7 @@ Singleton {
   readonly property var primary: {
     for (let i = 0; i < Networking.devices.values.length; i++) {
       let d = Networking.devices.values[i]
-      if (d.connected) {
+      if (d.connected && d.networks.values.length >= 1) {
         return d;
       }
     }

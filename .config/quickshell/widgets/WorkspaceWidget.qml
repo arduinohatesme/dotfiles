@@ -40,7 +40,7 @@ Row {
         if (active.title.startsWith("nvim ")) return "";
         if (active.title.startsWith("Yazi: ")) return "󱧶";
         if (active.title.startsWith("fish ")) return "";
-        if (active.title.endsWith(" Zen Browser")) return "󰖟";
+        if (active.title.endsWith("Zen Browser")) return "󰖟";
         return "";
       }
 
@@ -84,6 +84,16 @@ Row {
         opacity: wsItem.isActive ? 0.0 : 1.0
         Behavior on opacity {
           NumberAnimation { duration: transitionMs; easing.type: Easing.InOutQuad }
+        }
+      }
+
+      MouseArea {
+        anchors.fill: parent
+        cursorShape: isActive ? Qt.ArrowCursor : Qt.PointingHandCursor
+        onClicked: {
+          if (!isActive) {
+            Hyprland.dispatch(`hl.dsp.focus({ workspace = ${index + 1} })`)
+          }
         }
       }
     }

@@ -27,7 +27,7 @@ Variants {
     exclusionMode: ExclusionMode.Normal
     aboveWindows: true
 
-    implicitWidth: middleLayout.implicitWidth + 44 + height
+    implicitWidth: middleLayout.implicitWidth + (Theme.cornerRadius * 2) + height
     implicitHeight: 40
     color: "transparent"
 

@@ -12,7 +12,7 @@ Item {
     bottom: parent.bottom
     right: parent.right
   }
-  width: parent.width - 20
+  width: parent.width - Theme.cornerRadius
   implicitWidth: rightLayoutCollapsed.implicitWidth
 
   clip: true

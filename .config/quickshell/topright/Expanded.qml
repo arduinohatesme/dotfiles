@@ -8,40 +8,49 @@ import "../services/"
 
 Item {
   id: rExpanded
-  anchors {
-    top: parent.top
-    bottom: parent.bottom
-    right: parent.right
-  }
+  anchors.fill: parent
 
   implicitWidth: parent.width - 25
 
   clip: true
-  visible: !rightWindow.targetExpanded
+  visible: rightWindow.targetExpanded
 
   property bool targetStateExpanded: false
 
   ScrollView {
-    id: trExPage
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+    id: trExpPage
     visible: (opacity !== 0)
     opacity: rightWindow.targetExpanded ? 1.0 : 0.0
+    anchors {
+      margins: 20
+      top: parent.top
+      topMargin: 12
+      bottom: parent.bottom
+      right: parent.right
+      left: parent.left
+      leftMargin: 40
+    }
 
     ColumnLayout {
-      BluetoothWidget {
+      id: trColumnLayout
+      width: trExpPage.availableWidth
+      spacing: 12
+
+      TopRightTimeHeader {
+        id: timeHeader
         Layout.fillWidth: true
-        Layout.fillHeight: true
       }
 
-      ConnWidget {
+      Rectangle {
         Layout.fillWidth: true
-        Layout.fillHeight: true
+        height: 1
+        color: Theme.cardBack
       }
 
-      ClockWidget {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
+      TopRightSettingsCard {
+        id: settingsCard
+        Layout.preferredHeight: 80
+        Layout.preferredWidth: 200
       }
     }
   }
