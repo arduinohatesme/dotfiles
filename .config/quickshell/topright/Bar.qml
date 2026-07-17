@@ -22,6 +22,8 @@ Scope {
 
     property bool targetExpanded: false
     property bool isExpanded: false
+    property int expandedWidth: 500
+    property int expandedHeight: 400
 
     anchors {
       top: true
@@ -38,10 +40,12 @@ Scope {
     exclusionMode: ExclusionMode.Normal
     aboveWindows: true
 
+    implicitHeight:
+      (!rightWindow.targetExpanded)
+      ? 40 + Theme.cornerRadius : rightWindow.expandedHeight
     implicitWidth:
       (!rightWindow.targetExpanded)
-      ? rightCd.implicitWidth + 60 : 300
-    implicitHeight: rightBg.height
+      ? rightCd.implicitWidth + Theme.cornerRadius + 40 : rightWindow.expandedWidth
 
     color: "transparent"
 
@@ -57,10 +61,10 @@ Scope {
         anchors.right: parent.right
         height:
           (!rightWindow.targetExpanded)
-          ? 40 + Theme.cornerRadius : 500
+          ? 40 + Theme.cornerRadius : rightWindow.expandedHeight
         width:
           (!rightWindow.targetExpanded)
-          ? rightCd.implicitWidth + Theme.cornerRadius + 40 : 600
+          ? rightCd.implicitWidth + Theme.cornerRadius + 40 : rightWindow.expandedWidth
 
         Timer {
           id: runningTimer
