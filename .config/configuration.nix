@@ -75,6 +75,7 @@ in
 
   programs = {
     fish.enable = true;
+    virt-manager.enable = true;
 
     direnv = {
       enable = true;
@@ -107,6 +108,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
+      "libvirtd"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;

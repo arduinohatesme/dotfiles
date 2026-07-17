@@ -3,8 +3,8 @@ import Quickshell
 import "../services/"
 
 Rectangle {
-  id: settingsCard
-  visible: true
+  id: wifiCard
+  visible: rightWindow.targetExpanded
   color: Theme.cardBack
   radius: Theme.cardCornerRadius
 }
