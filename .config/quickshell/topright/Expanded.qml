@@ -24,11 +24,11 @@ Item {
     anchors {
       margins: 20
       top: parent.top
-      topMargin: 12
+      topMargin: 10
       bottom: parent.bottom
       right: parent.right
       left: parent.left
-      leftMargin: 40
+      leftMargin: Theme.cornerRadius + 24
     }
 
     ColumnLayout {

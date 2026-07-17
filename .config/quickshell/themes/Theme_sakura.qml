@@ -18,6 +18,6 @@ QtObject {
   readonly property int fontSizeMed: 14
   readonly property int fontSizeLg: 18
   readonly property int fontSizeHead: 34
-  readonly property int cornerRadius: 20
-  readonly property int cardCornerRadius: 12
+  readonly property int cornerRadius: 0
+  readonly property int cardCornerRadius: 0
 }
