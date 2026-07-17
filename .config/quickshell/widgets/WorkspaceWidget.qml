@@ -9,9 +9,11 @@ Row {
   id: workspaceRow
   spacing: 10
   Repeater {
+    id: wsRepeater
     property var spaces: Hyprland.toplevels.values
       .map(top => top.workspace ? top.workspace.id : 0)
       .filter(id => id > 0)
+    property var activeWindows: []
 
     model: Math.max(
       Hyprland.focusedWorkspace?.id,
@@ -30,11 +32,11 @@ Row {
           top => top.workspace && top.workspace.id === index + 1
         );
 
-        let active = wsWindows.find(top => top.activated === true);
-
-        if (!active && wsWindows.length > 0) {
-          active = wsWindows[0];
+        if (Hyprland.focusedWorkspace.id === index + 1) {
+          wsRepeater.activeWindows[index + 1] = Hyprland.activeToplevel
         }
+
+        const active = wsRepeater.activeWindows[index + 1]
 
         if (wsWindows.length === 0) return "󰆢";
         if (active.title.startsWith("nvim ")) return "";
