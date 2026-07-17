@@ -8,12 +8,13 @@ import "../services"
 Row {
   id: workspaceRow
   spacing: 10
+  property var activeWindows: []
+
   Repeater {
     id: wsRepeater
     property var spaces: Hyprland.toplevels.values
       .map(top => top.workspace ? top.workspace.id : 0)
       .filter(id => id > 0)
-    property var activeWindows: []
 
     model: Math.max(
       Hyprland.focusedWorkspace?.id,
@@ -27,34 +28,35 @@ Row {
       height: Theme.fontSizeLg * 2
       property int transitionMs: 120
 
-      function getIcon() {
-        const wsWindows = Hyprland.toplevels.values.filter(
-          top => top.workspace && top.workspace.id === index + 1
-        );
-
-        if (Hyprland.focusedWorkspace.id === index + 1) {
-          wsRepeater.activeWindows[index + 1] = Hyprland.activeToplevel
-        }
-
-        const active = wsRepeater.activeWindows[index + 1]
-
-        if (wsWindows.length === 0) return "󰆢";
-        if (active.title.startsWith("nvim ")) return "";
-        if (active.title.startsWith("Yazi: ")) return "󱧶";
-        if (active.title.startsWith("fish ")) return "";
-        if (active.title.endsWith("Zen Browser")) return "󰖟";
-        return "";
-      }
-
       property var ws:
         Hyprland.workspaces.values.find(w => w.id === index + 1)
       property bool isActive:
         Hyprland.focusedWorkspace?.id === (index + 1)
 
+      function getIcon() {
+        const wsWindows = Hyprland.toplevels.values.filter(
+          top => top.workspace && top.workspace.id === index + 1
+        );
+
+        if (index + 1 === Hyprland.activeToplevel.workspace.id) {
+          workspaceRow.activeWindows[ws.id] = Hyprland.activeToplevel
+        }
+
+        const activeWin = workspaceRow.activeWindows[index + 1]
+
+        if (wsWindows.length === 0) return "󰆢";
+        if (!activeWin) return "";
+        if (activeWin.title.startsWith("nvim ")) return "";
+        if (activeWin.title.startsWith("Yazi: ")) return "󱧶";
+        if (activeWin.title.endsWith("kitty")) return "";
+        if (activeWin.title.endsWith("Zen Browser")) return "󰖟";
+        return "";
+      }
+
       Text {
         id: active
         anchors.centerIn: parent
-        text: index + 1
+        text: index + 1;
         color: Theme.foreBright
 
         font {
