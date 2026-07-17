@@ -16,6 +16,7 @@ Singleton {
         return d;
       }
     }
+    return null;
   }
 
   property bool ethernet: primary && primary.type === DeviceType.Wired

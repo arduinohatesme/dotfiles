@@ -38,7 +38,7 @@ Row {
           top => top.workspace && top.workspace.id === index + 1
         );
 
-        if (index + 1 === Hyprland.activeToplevel.workspace.id) {
+        if (Hyprland.activeToplevel && index + 1 === Hyprland.activeToplevel.workspace.id) {
           workspaceRow.activeWindows[ws.id] = Hyprland.activeToplevel
         }
 
