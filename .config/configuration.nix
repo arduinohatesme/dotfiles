@@ -283,6 +283,7 @@ in
     slurp
     quickshell
     hypridle
+    hyprshutdown
 
     # Others (security, utility, ...)
     age
