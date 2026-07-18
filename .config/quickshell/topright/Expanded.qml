@@ -57,13 +57,13 @@ Item {
           Layout.fillHeight: true
         }
 
-        TopRightWifiCard {
+        TopRightBluetoothCard {
           id: settingsCardTwo
           Layout.fillWidth: true
           Layout.fillHeight: true
         }
 
-        TopRightWifiCard {
+        TopRightCaffeineCard {
           id: caffeineCard
           Layout.preferredWidth: 80
           Layout.fillHeight: true

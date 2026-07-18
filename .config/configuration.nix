@@ -244,6 +244,7 @@ in
     unzip
     notmuch
     lieer
+    psmisc
   ];
 
   fonts.fontconfig.enable = true;

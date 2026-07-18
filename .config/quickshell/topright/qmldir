@@ -5,4 +5,6 @@ TopRightCollapsed 1.0 Collapsed.qml
 TopRightExpanded 1.0 Expanded.qml
 TopRightExpandedPage 1.0 ExpandedPage.qml
 TopRightWifiCard 1.0 WifiCard.qml
+TopRightCaffeineCard 1.0 CaffeineCard.qml
+TopRightBluetoothCard 1.0 BluetoothCard.qml
 TopRightTimeHeader 1.0 TimeHeader.qml
