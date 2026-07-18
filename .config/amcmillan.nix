@@ -84,6 +84,11 @@
     };
   };
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    systemd.enable = false;
+  };
+
   programs.fish = {
     enable = true;
     shellAliases = {

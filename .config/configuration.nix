@@ -32,20 +32,51 @@ let
 in
 {
   # Bootloader.
-  boot.loader.efi = {
-    efiSysMountPoint = lib.mkIf (hostName == "super-beast-lx") "/boot/efi";
-    canTouchEfiVariables = true;
-  };
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    configurationLimit = 3;
-    useOSProber = lib.mkIf (hostName == "super-beast-lx") true;
-  };
+  boot = {
+    loader = {
+      efi = {
+        efiSysMountPoint = lib.mkIf (hostName == "super-beast-lx") "/boot/efi";
+        canTouchEfiVariables = true;
+      };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        configurationLimit = 3;
+        useOSProber = lib.mkIf (hostName == "super-beast-lx") true;
+      };
+
+      timeout = 0;
+    };
+
+    initrd = {
+      kernelModules =
+        if hostName == "knicks-os" then
+          [ "i915" ]
+        else
+          [
+            "nvidia"
+            "nvidia_modeset"
+            "nvidia_uvm"
+            "nvidia_drm"
+          ];
+      compressor = "zstd";
+      systemd.enable = true;
+    };
+
+    supportedFilesystems = [
+      "vfat"
+      "ext4"
+    ];
+
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [
+      "console=tty1"
+      "8250.nr_uarts=0"
+      "reboot=acpi"
+    ];
+  };
 
   networking.hostName = hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -76,6 +107,7 @@ in
   programs = {
     fish.enable = true;
     virt-manager.enable = true;
+    fuse.enable = true;
 
     direnv = {
       enable = true;
@@ -154,8 +186,6 @@ in
   hardware.graphics.extraPackages = lib.optionals (hostName == "knicks-os") [
     pkgs.intel-media-driver
   ];
-
-  boot.initrd.kernelModules = lib.optionals (hostName == "knicks-os") [ "i915" ];
 
   nixpkgs.overlays = [ fenix.overlays.default ];
 
@@ -257,6 +287,11 @@ in
     NIXOS_OZONE_WL = "1";
   };
 
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
+
   services = {
     xserver = {
       xkb = {
@@ -292,6 +327,8 @@ in
       defaultSession = "hyprland-uwsm";
     };
 
+    upower.enable = true;
+    dbus.enable = true;
     blueman.enable = true;
     tailscale.enable = true;
     xserver.enable = true;
@@ -313,24 +350,36 @@ in
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-hyprland
       ];
-      config.common.default = [
-        "hyprland"
-        "gtk"
-      ];
+      config = {
+        common.default = [
+          "gtk"
+        ];
+        hyprland.default = [
+          "hyprland"
+          "gtk"
+        ];
+      };
     };
   };
 
   systemd = {
-    services.sddm.environment = {
-      XCURSOR_THEME = "Bibata-Modern-Classic";
-      XCURSOR_SIZE = "24";
-      WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
+    services = {
+      systemd-udev-settle.enable = false;
+      sddm.environment = {
+        XCURSOR_THEME = "Bibata-Modern-Classic";
+        XCURSOR_SIZE = "24";
+        WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
+      };
     };
 
     tmpfiles.rules = [
       "d /var/lib/sddm/.config 0755 sddm sddm - -"
       "f /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - {\"data\":[{\"lidClosed\":false,\"outputs\"[{\"enabled\":true,\"outputIndex\":0,\"position\":{\"x\":0,\"y\":0},\"priority\":0}.{\"enabled\":true,\"outputIndex\":1,\"position\":{\"x\":0,\"y\":0},\"priority\":0}]}],\"name\":\"setups\"}"
     ];
+
+    settings.Manager = {
+      DefaultTimeoutStopSec = "5s";
+    };
 
     user.services.obex = {
       serviceConfig = {
