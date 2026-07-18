@@ -75,6 +75,9 @@ in
       "console=tty1"
       "8250.nr_uarts=0"
       "reboot=acpi"
+      "nvidia.NVred_PreserveVideoMemoryAllocation=1"
+      "nvidia_drm.fbdev=1"
+      "pcie_aspm=off"
     ];
   };
 
@@ -177,7 +180,7 @@ in
   # Driver settings
   hardware.nvidia = lib.mkIf (hostName != "knicks-os") {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
@@ -383,6 +386,24 @@ in
         XCURSOR_THEME = "Bibata-Modern-Classic";
         XCURSOR_SIZE = "24";
         WLR_RENDERER_ALLOW_SOFTWARE_CURSORS = "1";
+      };
+
+      hyprland-suspend = {
+        description = "Suspend Hyprland Session";
+        before = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "nvidia-suspend.service"
+          "nvidia-hibernate.service"
+        ];
+        wantedBy = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+        ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.procps}/bin/killall -STOP Hyprland";
+        };
       };
     };
 
