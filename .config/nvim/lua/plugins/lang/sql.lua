@@ -110,11 +110,6 @@ return {
     },
   },
 
-  -- Linters & formatters
-  {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "sqlfluff" } },
-  },
   {
     "mfussenegger/nvim-lint",
     optional = true,

@@ -192,7 +192,6 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-
     # Basics
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     sddm-theme
@@ -224,10 +223,25 @@ in
     prettier
     yaml-language-server
     clang-tools
+    nixd
     nixfmt
     stylua
     actionlint
     rust-analyzer
+    vscode-extensions.vadimcn.vscode-lldb.adapter
+    cmake-language-server
+    cmake-lint
+    markdownlint-cli2
+    markdown-toc
+    vscode-js-debug
+    golangci-lint
+    gotools
+    gofumpt
+    gomodifytags
+    impl
+    delve
+    sqlfluff
+    hadolint
 
     # Rust Tools
     pkg-config

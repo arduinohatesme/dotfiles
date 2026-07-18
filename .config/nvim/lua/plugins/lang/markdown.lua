@@ -4,7 +4,7 @@ vim.api.nvim_create_autocmd("User", {
     vim.filetype.add({
       extension = { mdx = "markdown.mdx" },
     })
-  end
+  end,
 })
 return {
   {
@@ -34,10 +34,6 @@ return {
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
       },
     },
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "markdownlint-cli2", "markdown-toc" } },
   },
   {
     "nvimtools/none-ls.nvim",

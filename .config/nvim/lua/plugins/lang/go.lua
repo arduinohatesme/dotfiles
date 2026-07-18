@@ -76,18 +76,8 @@ return {
   },
   -- Ensure Go tools are installed
   {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "goimports", "gofumpt" } },
-  },
-  {
     "nvimtools/none-ls.nvim",
     optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "gomodifytags", "impl" } },
-      },
-    },
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = vim.list_extend(opts.sources or {}, {
@@ -102,12 +92,6 @@ return {
   {
     "mfussenegger/nvim-lint",
     optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "golangci-lint" } },
-      },
-    },
     opts = {
       linters_by_ft = {
         go = { "golangcilint" },
@@ -127,10 +111,6 @@ return {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = { ensure_installed = { "delve" } },
-      },
       {
         "leoluz/nvim-dap-go",
         opts = {},

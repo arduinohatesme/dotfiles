@@ -23,10 +23,6 @@ return {
     },
   },
   {
-    "mason.nvim",
-    opts = { ensure_installed = { "cmakelang", "cmakelint" } },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {

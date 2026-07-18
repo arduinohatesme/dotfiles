@@ -4,10 +4,6 @@ return {
     opts = { ensure_installed = { "dockerfile" } },
   },
   {
-    "mason.nvim",
-    opts = { ensure_installed = { "hadolint" } },
-  },
-  {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)

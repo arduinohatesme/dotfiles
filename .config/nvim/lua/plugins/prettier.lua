@@ -47,11 +47,6 @@ function M.has_parser(ctx)
 end
 
 return {
-  {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "prettier" } },
-  },
-
   -- conform
   {
     "stevearc/conform.nvim",

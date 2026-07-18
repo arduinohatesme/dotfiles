@@ -3,7 +3,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      -- make sure mason installs the server
       servers = {
         vtsls = {
           -- explicitly add default filetypes, so that we can extend
@@ -173,15 +172,6 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
-    dependencies = {
-      {
-        "mason-org/mason.nvim",
-        opts = function(_, opts)
-          opts.ensure_installed = opts.ensure_installed or {}
-          table.insert(opts.ensure_installed, "js-debug-adapter")
-        end,
-      },
-    },
     opts = function()
       local dap = require("dap")
 
@@ -267,15 +257,6 @@ return {
         end
       end
     end,
-  },
-
-  {
-    "jay-babu/mason-nvim-dap.nvim",
-    optional = true,
-    opts = {
-      -- chrome adapter is deprecated, use js-debug-adapter instead
-      automatic_installation = { exclude = { "chrome" } },
-    },
   },
 
   -- Filetype icons
