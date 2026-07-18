@@ -68,6 +68,7 @@ local menu = "~/.config/rofi/launcher.sh"
 hl.on("hyprland.start", function()
 	hl.exec_cmd("awww-daemon & sleep 0.5 && awww img /home/amcmillan/.config/wallpapers/active")
 	hl.exec_cmd("qs")
+	hl.exec_cmd("hypridle -q")
 end)
 
 -------------------------------

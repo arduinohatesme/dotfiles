@@ -222,10 +222,7 @@ in
     eza
     zoxide
     fd
-    bat
     fzf
-    btop
-    atuin
 
     # Hyprland
     rofi
@@ -238,6 +235,7 @@ in
     grimblast
     slurp
     quickshell
+    hypridle
 
     # Others (security, utility, ...)
     age
