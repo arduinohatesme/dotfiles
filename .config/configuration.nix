@@ -31,12 +31,11 @@ let
 
 in
 {
-  # Bootloader.
   boot = {
     loader = {
       efi = {
         efiSysMountPoint = lib.mkIf (hostName == "super-beast-lx") "/boot/efi";
-        canTouchEfiVariables = true;
+        canTouchEfiVariables = (hostName != "thirtyoneiron");
       };
 
       grub = {
@@ -45,6 +44,7 @@ in
         efiSupport = true;
         configurationLimit = 3;
         useOSProber = lib.mkIf (hostName == "super-beast-lx") true;
+        efiInstallAsRemovable = lib.mkIf (hostName == "thirtyoneiron") true;
       };
 
       timeout = 0;
@@ -52,7 +52,12 @@ in
 
     initrd = {
       kernelModules =
-        if hostName == "knicks-os" then
+        if
+          lib.elem hostName [
+            "knicks-os"
+            "thirtyoneiron"
+          ]
+        then
           [ "i915" ]
         else
           [
@@ -71,14 +76,28 @@ in
     ];
 
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = [
-      "console=tty1"
-      "8250.nr_uarts=0"
-      "reboot=acpi"
-      "nvidia.NVred_PreserveVideoMemoryAllocation=1"
-      "nvidia_drm.fbdev=1"
-      "pcie_aspm=off"
-    ];
+    kernelParams =
+      if
+        lib.elem hostName [
+          "knicks-os"
+          "thirtyoneiron"
+        ]
+      then
+        [
+          "console=tty1"
+          "8250.nr_uarts=0"
+          "reboot=acpi"
+          "pcie_aspm=off"
+        ]
+      else
+        [
+          "console=tty1"
+          "8250.nr_uarts=0"
+          "reboot=acpi"
+          "nvidia.NVred_PreserveVideoMemoryAllocation=1"
+          "nvidia_drm.fbdev=1"
+          "pcie_aspm=off"
+        ];
   };
 
   networking.hostName = hostName; # Define your hostname.
@@ -178,13 +197,19 @@ in
   hardware.graphics.enable = true;
 
   # Driver settings
-  hardware.nvidia = lib.mkIf (hostName != "knicks-os") {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
+  hardware.nvidia =
+    lib.mkIf
+      (lib.elem hostName [
+        "knicks-os"
+        "thirtyoneiron"
+      ])
+      {
+        modesetting.enable = true;
+        powerManagement.enable = true;
+        open = true;
+        nvidiaSettings = true;
+        package = config.boot.kernelPackages.nvidiaPackages.latest;
+      };
 
   hardware.graphics.extraPackages = lib.optionals (hostName == "knicks-os") [
     pkgs.intel-media-driver
@@ -316,7 +341,16 @@ in
         layout = "us";
         variant = "";
       };
-      videoDrivers = lib.optionals (hostName != "knicks-os") [ "nvidia" ];
+      videoDrivers =
+        if
+          lib.elem hostName [
+            "knicks-os"
+            "thirtyoneiron"
+          ]
+        then
+          [ "modesetting" ]
+        else
+          [ "nvidia" ];
     };
     displayManager = {
       sddm = {
@@ -383,6 +417,8 @@ in
   systemd = {
     services = {
       systemd-udev-settle.enable = false;
+      virt-secret-init-encryption.enable = false;
+
       sddm.environment = {
         XCURSOR_THEME = "Bibata-Modern-Classic";
         XCURSOR_SIZE = "24";
@@ -391,12 +427,24 @@ in
 
       hyprland-suspend = {
         description = "Suspend Hyprland Session";
-        before = [
-          "systemd-suspend.service"
-          "systemd-hibernate.service"
-          "nvidia-suspend.service"
-          "nvidia-hibernate.service"
-        ];
+        before =
+          if
+            lib.elem hostName [
+              "knicks-os"
+              "thirtyoneiron"
+            ]
+          then
+            [
+              "systemd-suspend.service"
+              "systemd-hibernate.service"
+            ]
+          else
+            [
+              "systemd-suspend.service"
+              "systemd-hibernate.service"
+              "nvidia-suspend.service"
+              "nvidia-hibernate.service"
+            ];
         wantedBy = [
           "systemd-suspend.service"
           "systemd-hibernate.service"

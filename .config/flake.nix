@@ -36,6 +36,7 @@
         "beast-jr"
         "super-beast-lx"
         "launchpad-9"
+	"thirtyoneiron"
       ];
 
       mkSys =
