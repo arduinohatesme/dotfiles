@@ -18,6 +18,8 @@ Text {
     return "󰤮"
   }
 
+  visible: Conns.primary !== null
+
   renderType: Text.NativeRendering
 
   color: Conns.ethernet || Conns.wifi ? Theme.foreBright : Theme.foreMid

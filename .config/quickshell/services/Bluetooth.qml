@@ -8,5 +8,5 @@ Singleton {
   id: bluetoothService
 
   readonly property var adapter: Bluetooth.defaultAdapter
-  readonly property int numConnected: adapter.devices.values.length
+  readonly property int numConnected: Bluetooth.devices.values.length
 }

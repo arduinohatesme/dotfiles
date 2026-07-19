@@ -105,7 +105,7 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Configure keymap in X11
+  virtualisation.libvirtd.enable = true;
 
   programs = {
     fish.enable = true;

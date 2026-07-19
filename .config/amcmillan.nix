@@ -100,9 +100,9 @@
       rebuild = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
       rbs = "sudo nixos-rebuild switch --flake ~/.config#(hostname)";
       rbb = "sudo nixos-rebuild boot --flake ~/.config#(hostname)";
-      rbsrb = "sudo nixos-rebuild switch --flake ~/.config#(hostname) && reboot";
-      rbbrb = "sudo nixos-rebuild boot --flake ~/.config#(hostname) && reboot";
+      rbrb = "sudo nixos-rebuild boot --flake ~/.config#(hostname) && reboot";
     };
+
     shellAbbrs = {
       g = "git";
       ga = "git add";

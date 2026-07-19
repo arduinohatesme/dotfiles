@@ -4,7 +4,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Networking
-import "../services/"
 
 Singleton {
   id: connService
@@ -20,7 +19,6 @@ Singleton {
   }
 
   property bool ethernet: primary && primary.type === DeviceType.Wired
-
   property bool wifi: primary && primary.type === DeviceType.Wifi
 
   property int strength: {
