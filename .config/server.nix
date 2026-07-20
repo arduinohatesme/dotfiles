@@ -6,6 +6,20 @@ let
 in
 {
   users.users.nginx.extraGroups = [ "acme" ];
+  networking.networkmanager.wifi.powersave = true;
+
+  sleep.settings.Sleep = {
+    AllowHibernation = "no";
+    AllowHybridSleep = "no";
+    AllowSuspend = "no";
+    AllowSuspendThenHibernate = "no";
+  };
+
+  logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchDocked = "ignore";
+  };
 
   services = {
     nginx = {

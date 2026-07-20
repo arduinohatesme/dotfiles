@@ -110,10 +110,7 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager = {
-    wifi.powersave = (hostName != "thirtyoneiron");
-    enable = true;
-  };
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Matamoros";
@@ -357,6 +354,7 @@ in
         else
           [ "nvidia" ];
     };
+
     displayManager = {
       sddm = {
         enable = true;
@@ -383,12 +381,6 @@ in
       };
       defaultSession = "hyprland-uwsm";
     };
-
-    logind.settings.Login.HandleLidSwitch = lib.mkIf (hostName == "thirtyoneiron") "ignore";
-    logind.settings.Login.HandleLidSwitchExternalPower = lib.mkIf (
-      hostName == "thirtyoneiron"
-    ) "ignore";
-    logind.settings.Login.HandleLidSwitchDocked = lib.mkIf (hostName == "thirtyoneiron") "ignore";
 
     upower.enable = true;
     dbus.enable = true;
@@ -471,13 +463,6 @@ in
       "d /var/lib/sddm/.config 0755 sddm sddm - -"
       "f /var/lib/sddm/.config/kwinoutputconfig.json 0644 sddm sddm - {\"data\":[{\"lidClosed\":false,\"outputs\"[{\"enabled\":true,\"outputIndex\":0,\"position\":{\"x\":0,\"y\":0},\"priority\":0}.{\"enabled\":true,\"outputIndex\":1,\"position\":{\"x\":0,\"y\":0},\"priority\":0}]}],\"name\":\"setups\"}"
     ];
-
-    sleep.settings.Sleep = lib.mkIf (hostName == "thirtyoneiron") {
-      AllowHibernation = "no";
-      AllowHybridSleep = "no";
-      AllowSuspend = "no";
-      AllowSuspendThenHibernate = "no";
-    };
 
     settings.Manager = {
       DefaultTimeoutStopSec = "5s";
