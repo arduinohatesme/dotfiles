@@ -70,6 +70,38 @@ in
         service.DISABLE_REGISTRATION = true;
       };
     };
+
+    gitea-actions-runner = {
+      package = pkgs.forgejo-runner;
+      instances."${runnerName}" = {
+        enable = true;
+        name = runnerName;
+        url = "http://localhost:3000";
+        tokenFile = "/var/lib/forgejo-runner/runner-token";
+
+        labels = [
+          "native:host"
+          "self-hosted:host"
+        ];
+
+        hostPackages = with pkgs; [
+          nodejs_26
+          pnpm
+          uv
+          python3
+          gcc
+          git
+          coreutils
+          bash
+        ];
+      };
+    };
+  };
+
+  systemd.services."gitea-runner-${runnerName}" = {
+    serviceConfig = {
+      ReadWritePaths = [ "/var/www/${forgeDomain}" ];
+    };
   };
 
   security.acme = {
