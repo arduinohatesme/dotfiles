@@ -3,6 +3,7 @@
 let
   portfolioDomain = "arduinohates.me";
   forgeDomain = "git.arduinohates.me";
+  runnerName = "thirtyoneiron";
 in
 {
   users.users.nginx.extraGroups = [ "acme" ];
