@@ -31,6 +31,8 @@ let
 
 in
 {
+  imports = lib.optionals (hostName == "thirtyoneiron") [ ./server.nix ];
+
   boot = {
     loader = {
       efi = {
@@ -485,7 +487,12 @@ in
 
   # Open ports in the firewall.
   networking.firewall = {
-    allowedTCPPorts = [ 53317 ];
+    allowedTCPPorts = [
+      80
+      443
+      22
+      53317
+    ];
     allowedUDPPorts = [
       41641
       53317
