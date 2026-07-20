@@ -9,7 +9,7 @@ in
   users.users.nginx.extraGroups = [ "acme" ];
   networking.networkmanager.wifi.powersave = true;
 
-  sleep.settings.Sleep = {
+  systemd.sleep.settings.Sleep = {
     AllowHibernation = "no";
     AllowHybridSleep = "no";
     AllowSuspend = "no";
