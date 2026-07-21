@@ -121,20 +121,64 @@ in
     };
   };
 
-  systemd.services."gitea-runner-${runnerName}" = {
-    serviceConfig = {
-      PrivateNetwork = false;
-      Environment = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt" ];
-      ReadWritePaths = [
-        "-/var/www/${forgeDomain}"
-        "-/var/lib/gitea-runner"
-        "-/tmp"
+  systemd.services = {
+    "gitea-runner-${runnerName}" = {
+      serviceConfig = {
+        PrivateNetwork = false;
+        Environment = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt" ];
+        ReadWritePaths = [
+          "-/var/www/${forgeDomain}"
+          "-/var/lib/gitea-runner"
+          "-/tmp"
+        ];
+      };
+    };
+
+    rebuild-system = {
+      description = "Rebuild-switch the system";
+      path = with pkgs; [
+        nix
+        nixos-rebuild
+        git
+        systemd
       ];
+
+      environment = {
+        SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+      };
+
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+        ExecStart = "${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake /home/amcmillan/.config#thirtyoneiron";
+        Restart = "no";
+      };
     };
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "awmcmillan128@gmail.com";
+  security = {
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id !== "org.freedesktop.systemd1.manage-units") return;
+
+        var unit = action.lookup("unit");
+        var verb = action.lookup("verb");
+        if (unit !== "rebuild-system.service") return;
+        if (verb !== "start") return;
+
+        if (subject.user === "gitea-runner") return "yes";
+        if (
+          subject.uid >= 61184 &&
+          subject.uid <= 65519
+        ) {
+          return "yes";
+        }
+      });
+    '';
+
+    acme = {
+      acceptTerms = true;
+      defaults.email = "awmcmillan128@gmail.com";
+    };
   };
 }
