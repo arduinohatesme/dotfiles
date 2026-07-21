@@ -1,0 +1,14 @@
+name: Rebuild Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  rebuild:
+    runs-on: ThirtyOneIron:host
+
+    steps:
+      - name: Start System Rebuild
+        run: systemctl start rebuild-system.service

@@ -20,6 +20,7 @@
 !/.config/scripts/
 !/.config/quickshell/
 !/.config/clangd/
+!/.forgejo/
 !.gitignore
 !README.md
 
