@@ -82,7 +82,7 @@ in
 
         labels = [
           "ThirtyOneIron:host"
-          "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-26.04"
+          "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-latest"
         ];
 
         hostPackages = with pkgs; [

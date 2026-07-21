@@ -126,7 +126,10 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+  };
 
   programs = {
     fish.enable = true;
