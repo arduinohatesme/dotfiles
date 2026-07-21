@@ -115,6 +115,7 @@ in
           wget
           xz
           bash
+          rsync
         ];
       };
     };
