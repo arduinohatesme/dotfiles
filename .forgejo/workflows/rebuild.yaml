@@ -12,3 +12,15 @@ jobs:
     steps:
       - name: Start System Rebuild
         run: systemctl start --no-block rebuild-system.service
+
+      - name: Wait to Confirm Build
+        run: |
+          echo "Waiting for build"
+          while systemctl is-active --quiet rebuild-system.service; do
+            sleep 1
+          done
+
+          if systemctl is-failed --quiet rebuild-system.service; then
+            journalctl -u rebuild-system.service -n 50 --no-pager
+            exit 1
+          fi
