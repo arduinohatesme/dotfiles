@@ -175,6 +175,7 @@ in
       "networkmanager"
       "wheel"
       "libvirtd"
+      "docker"
     ];
     packages = with pkgs; [ ];
     shell = pkgs.fish;
@@ -249,6 +250,7 @@ in
     pnpm
     gnumake
     gcc
+    act
 
     # TS Parsers
     tree-sitter-grammars.tree-sitter-python
