@@ -204,10 +204,12 @@ in
   # Driver settings
   hardware.nvidia =
     lib.mkIf
-      (lib.elem hostName [
-        "knicks-os"
-        "thirtyoneiron"
-      ])
+      (
+        !lib.elem hostName [
+          "knicks-os"
+          "thirtyoneiron"
+        ]
+      )
       {
         modesetting.enable = true;
         powerManagement.enable = true;
@@ -237,6 +239,7 @@ in
     git
     tailscale
     nodejs_26
+    pnpm
     gnumake
     gcc
 
