@@ -19,7 +19,7 @@ jobs:
           sleep 1
 
           while [ "$(systemctl show -p ActiveState --value rebuild-system.service)" != "inactive" ] && \
-                [ "$(systemctl show -p ActiveState --value rebuild-system.service)" != "failed"]; do
+                [ "$(systemctl show -p ActiveState --value rebuild-system.service)" != "failed" ]; do
             sleep 1
           done
 
