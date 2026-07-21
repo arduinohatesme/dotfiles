@@ -11,4 +11,4 @@ jobs:
 
     steps:
       - name: Start System Rebuild
-        run: systemctl start rebuild-system.service
+        run: systemctl start --no-block rebuild-system.service
