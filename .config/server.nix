@@ -30,6 +30,14 @@ in
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
 
+      commonHttpConfig = ''
+        map $http_origin $cors_origin {
+            default "";
+            "https://arduinohates.me" "$http_origin";
+            "http://localhost:5173" "$http_origin";
+          }
+      '';
+
       virtualHosts = {
         "${portfolioDomain}" = {
           enableACME = true;
@@ -48,6 +56,7 @@ in
 
           extraConfig = ''
             client_max_body_size 512M;
+            add_header Access-Control-Allow-Origin $cors_origin always;
           '';
 
           locations."/" = {
@@ -68,6 +77,13 @@ in
           ROOT_URL = "https://${forgeDomain}/";
           HTTP_PORT = 3000;
         };
+
+        cors = {
+          ENABLED = true;
+          ALLOW_DOMAIN = "arduinohates.me, localhost:5173";
+          SCHEME = "*";
+        };
+
         service.DISABLE_REGISTRATION = true;
       };
     };
