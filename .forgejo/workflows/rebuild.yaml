@@ -7,7 +7,7 @@ on:
 
 jobs:
   rebuild:
-    runs-on: ThirtyOneIron:host
+    runs-on: ThirtyOneIron
 
     steps:
       - name: Start System Rebuild
