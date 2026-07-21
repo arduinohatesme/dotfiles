@@ -77,12 +77,12 @@ in
       instances."${runnerName}" = {
         enable = true;
         name = runnerName;
-        url = "http://localhost:3000";
+        url = "https://${forgeDomain}";
         tokenFile = "/var/lib/forgejo-runner/runner-token";
 
         labels = [
-          "native:host"
-          "self-hosted:host"
+          "ThirtyOneIron:host"
+          "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-26.04"
         ];
 
         hostPackages = with pkgs; [
@@ -93,6 +93,11 @@ in
           gcc
           git
           coreutils
+          gnutar
+          gzip
+          curl
+          wget
+          xz
           bash
         ];
       };
@@ -101,7 +106,13 @@ in
 
   systemd.services."gitea-runner-${runnerName}" = {
     serviceConfig = {
-      ReadWritePaths = [ "/var/www/${forgeDomain}" ];
+      PrivateNetwork = false;
+      Environment = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt" ];
+      ReadWritePaths = [
+        "-/var/www/${forgeDomain}"
+        "-/var/lib/gitea-runner"
+        "-/tmp"
+      ];
     };
   };
 
