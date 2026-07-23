@@ -165,7 +165,7 @@ in
       instances."${runnerName}" = {
         enable = true;
         name = runnerName;
-        url = "http://127.0.0.1:3000";
+        url = "https://${forgeDomain}";
         tokenFile = "/var/lib/forgejo-runner/runner-token";
         settings.stopIfChanged = false;
 
