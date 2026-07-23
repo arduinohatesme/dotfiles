@@ -10,6 +10,27 @@ in
   users.users.nginx.extraGroups = [ "acme" ];
   networking.networkmanager.wifi.powersave = true;
 
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers.homeassistant = {
+      volumes = [
+        "/home/amcmillan/.config/hass:/config"
+        "/etc/localtime:/etc/localtime:ro"
+        "/run/dbus:/run/dbus:ro"
+      ];
+
+      environment.TZ = "America/Matamoros";
+
+      # Note: The image will not be updated on rebuilds, unless the version label changes
+      image = "ghcr.io/home-assistant/home-assistant:stable";
+      extraOptions = [
+        "--network=host"
+        "--cap-add=NET_ADMIN"
+        "--cap-add=NET_RAW"
+      ];
+    };
+  };
+
   services = {
     logind.settings.Login = {
       HandleLidSwitch = "ignore";
@@ -17,46 +38,11 @@ in
       HandleLidSwitchDocked = "ignore";
     };
 
-    home-assistant = {
-      enable = true;
-      extraComponents = [
-        "assist_pipeline"
-        "conversation"
-        "intent"
-        "whisper"
-        "wyoming"
-        "esphome"
-      ];
-      config = {
-        default_config = { };
-        homeassistant = {
-          name = "Home";
-          unit_system = "us_customary";
-          time_zone = "America/Chicago";
-        };
-
-        http = {
-          server_host = "127.0.0.1";
-          trusted_proxies = [
-            "127.0.0.1"
-            "::1"
-          ];
-          use_x_forwarded_for = true;
-        };
-      };
-    };
-
-    wyoming.whisper.servers.main = {
-      enable = true;
-      model = "small-int8";
-      lang = "en";
-    };
-
     nginx = {
       enable = true;
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
-      recommendedOptimisation = true;
+      recommendedOptimisation = false;
       recommendedGzipSettings = true;
 
       commonHttpConfig = ''
@@ -68,8 +54,8 @@ in
       '';
 
       appendHttpConfig = ''
-        limit_req_zone $binary_remote_addr zone=general_api_limit:5m rate=30r/m;
-        limit_req_zone $binary_remote_addr zone=login_api_limit:5m rate=10r/m;
+        limit_req_zone $binary_remote_addr zone=general_api_limit:5m rate=2r/s;
+        limit_req_zone $binary_remote_addr zone=login_api_limit:5m rate=30r/m;
         limit_req_zone $binary_remote_addr zone=api_api_limit:10m rate=1r/s;
         limit_conn_zone $binary_remote_addr zone=general_conn_limit:5m;
         limit_conn_zone $binary_remote_addr zone=login_conn_limit:1m;
@@ -110,9 +96,13 @@ in
 
           locations."/" = {
             proxyPass = "http://localhost:3000";
+            extraConfig = ''
+              limit_req zone=general_api_limit burst=15 nodelay;
+              limit_conn general_conn_limit 5;
+            '';
           };
 
-          locations."/api/" = {
+          locations."/api" = {
             proxyPass = "http://localhost:3000/api/";
             extraConfig = ''
               limit_req zone=api_api_limit burst=15 nodelay;
@@ -120,11 +110,11 @@ in
             '';
           };
 
-          locations."/user/login/" = {
+          locations."/user/login" = {
             proxyPass = "http://localhost:3000/user/login/";
             extraConfig = ''
-              limit_req zone=login_api_limit nodelay;
-              limit_conn api_conn_limit 2;
+              limit_req zone=login_api_limit burst=20 nodelay;
+              limit_conn api_conn_limit 3;
             '';
           };
         };
@@ -217,6 +207,7 @@ in
       AllowSuspend = "no";
       AllowSuspendThenHibernate = "no";
     };
+
     services = {
 
       "gitea-runner-${runnerName}" = {
