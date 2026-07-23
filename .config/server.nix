@@ -3,26 +3,49 @@
 let
   portfolioDomain = "arduinohates.me";
   forgeDomain = "git.arduinohates.me";
+  homeDomain = "home.arduinohates.me";
   runnerName = "thirtyoneiron";
 in
 {
   users.users.nginx.extraGroups = [ "acme" ];
   networking.networkmanager.wifi.powersave = true;
 
-  systemd.sleep.settings.Sleep = {
-    AllowHibernation = "no";
-    AllowHybridSleep = "no";
-    AllowSuspend = "no";
-    AllowSuspendThenHibernate = "no";
-  };
-
-  services.logind.settings.Login = {
-    HandleLidSwitch = "ignore";
-    HandleLidSwitchExternalPower = "ignore";
-    HandleLidSwitchDocked = "ignore";
-  };
-
   services = {
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitchDocked = "ignore";
+    };
+
+    home-assistant = {
+      enable = true;
+      extraComponents = [
+        "analytics"
+        "google_translate"
+        "met"
+        "radio_browser"
+        "shopping_list"
+        "isal"
+      ];
+      config = {
+        default_config = { };
+        homeassistant = {
+          name = "Home";
+          unit_system = "us_customary";
+          time_zone = "America/Chicago";
+        };
+
+        http = {
+          server_host = "127.0.0.1";
+          trusted_proxies = [
+            "127.0.0.1"
+            "::1"
+          ];
+          use_x_forwarded_for = true;
+        };
+      };
+    };
+
     nginx = {
       enable = true;
       recommendedProxySettings = true;
@@ -32,10 +55,10 @@ in
 
       commonHttpConfig = ''
         map $http_origin $cors_origin {
-            default "";
-            "https://arduinohates.me" "$http_origin";
-            "http://localhost:5173" "$http_origin";
-          }
+          default "";
+          "https://arduinohates.me" "$http_origin";
+          "http://localhost:5173" "$http_origin";
+        }
       '';
 
       virtualHosts = {
@@ -61,6 +84,18 @@ in
 
           locations."/" = {
             proxyPass = "http://localhost:3000";
+          };
+        };
+
+        "${homeDomain}" = {
+          enableACME = true;
+          forceSSL = true;
+          extraConfig = ''
+            proxy_buffering off;
+          '';
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8123";
+            proxyWebsockets = true;
           };
         };
       };
@@ -119,39 +154,59 @@ in
         ];
       };
     };
+
+    postgresql = {
+      enable = true;
+      ensureDatabases = [ "hass" ];
+      ensureUsers = [
+        {
+          name = "hass";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
   };
 
-  systemd.services = {
-    "gitea-runner-${runnerName}" = {
-      serviceConfig = {
-        PrivateNetwork = false;
-        Environment = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt" ];
-        ReadWritePaths = [
-          "-/var/www/${forgeDomain}"
-          "-/var/lib/gitea-runner"
-          "-/tmp"
-        ];
-      };
+  systemd = {
+    sleep.settings.Sleep = {
+      AllowHibernation = "no";
+      AllowHybridSleep = "no";
+      AllowSuspend = "no";
+      AllowSuspendThenHibernate = "no";
     };
+    services = {
 
-    rebuild-system = {
-      description = "Rebuild-switch the system";
-      path = with pkgs; [
-        nix
-        nixos-rebuild
-        git
-        systemd
-      ];
-
-      environment = {
-        SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+      "gitea-runner-${runnerName}" = {
+        serviceConfig = {
+          PrivateNetwork = false;
+          Environment = [ "SSL_CERT_FILE=/etc/ssl/certs/ca-bundle.crt" ];
+          ReadWritePaths = [
+            "-/var/www/${forgeDomain}"
+            "-/var/lib/gitea-runner"
+            "-/tmp"
+          ];
+        };
       };
 
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-        ExecStart = "${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake /home/amcmillan/.config#thirtyoneiron";
-        Restart = "no";
+      rebuild-system = {
+        description = "Rebuild-switch the system";
+        path = with pkgs; [
+          nix
+          nixos-rebuild
+          git
+          systemd
+        ];
+
+        environment = {
+          SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+        };
+
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          ExecStart = "${pkgs.nixos-rebuild}/bin/nixos-rebuild switch --flake /home/amcmillan/.config#thirtyoneiron";
+          Restart = "no";
+        };
       };
     };
   };
