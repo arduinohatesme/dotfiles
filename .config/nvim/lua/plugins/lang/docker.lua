@@ -1,9 +1,5 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "dockerfile" } },
-  },
-  {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)

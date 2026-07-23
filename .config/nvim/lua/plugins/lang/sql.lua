@@ -62,13 +62,6 @@ return {
     end,
   },
 
-  -- Treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = { ensure_installed = { "sql" } },
-  },
-
   -- Edgy integration
   {
     "folke/edgy.nvim",

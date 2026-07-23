@@ -20,12 +20,6 @@ return {
     },
   },
 
-  -- Add Rust & related to treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "rust", "ron" } },
-  },
-
   -- Correctly setup lspconfig for Rust 🚀
   {
     "neovim/nvim-lspconfig",

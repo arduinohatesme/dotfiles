@@ -263,6 +263,7 @@ in
     # Neovim LSPs
     basedpyright
     ruff
+    ty
     typescript-language-server
     vscode-langservers-extracted
     prettier

@@ -23,15 +23,38 @@ return {
     },
 
     servers = {
-      gitlab_duo = {
+      basedpyright = {
         enabled = false,
+        {
+          analysis = {
+            autoImportCompletions = false,
+            diagnosticMode = "openFilesOnly",
+            maxResults = 300,
+            typeCheckingMode = "strict",
+          },
+          capabilities = {
+            textDocument = {
+              completion = nil,
+            },
+          },
+        },
       },
-      basedpyright = {},
       clangd = {},
       eslint = {},
-      ruff = {},
+      ruff = {
+        {
+          cmd_env = { RUFF_TRACE = "messages" },
+          init_options = {
+            settings = {
+              logLevel = "error",
+            },
+          },
+          capabilities = { hoverProvider = false },
+        },
+      },
       rust_analyzer = {},
       ts_ls = {},
+      ty = {},
       yamlls = {},
     },
   },
