@@ -20,12 +20,12 @@ in
     home-assistant = {
       enable = true;
       extraComponents = [
-        "analytics"
-        "google_translate"
-        "met"
-        "radio_browser"
-        "shopping_list"
-        "isal"
+        "assist_pipeline"
+        "conversation"
+        "intent"
+        "whisper"
+        "wyoming"
+        "esphome"
       ];
       config = {
         default_config = { };
@@ -46,6 +46,12 @@ in
       };
     };
 
+    wyoming.whisper.servers.main = {
+      enable = true;
+      model = "small-int8";
+      lang = "en";
+    };
+
     nginx = {
       enable = true;
       recommendedProxySettings = true;
@@ -61,12 +67,30 @@ in
         }
       '';
 
+      appendHttpConfig = ''
+        limit_req_zone $binary_remote_addr zone=general_api_limit:5m rate=30r/m;
+        limit_req_zone $binary_remote_addr zone=login_api_limit:5m rate=10r/m;
+        limit_req_zone $binary_remote_addr zone=api_api_limit:10m rate=1r/s;
+        limit_conn_zone $binary_remote_addr zone=general_conn_limit:5m;
+        limit_conn_zone $binary_remote_addr zone=login_conn_limit:1m;
+        limit_conn_zone $binary_remote_addr zone=api_conn_limit:5m;
+
+        send_timeout 15s;
+        client_body_timeout 10s;
+        client_header_timeout 10s;
+        keepalive_timeout 30s;
+      '';
+
       virtualHosts = {
         "${portfolioDomain}" = {
           enableACME = true;
           forceSSL = true;
           serverAliases = [ "www.${portfolioDomain}" ];
           root = "/var/www/${portfolioDomain}";
+          extraConfig = ''
+            limit_req zone=general_api_limit burst=10 nodelay;
+            limit_conn general_conn_limit 10;
+          '';
 
           locations."/" = {
             tryFiles = "$uri $uri/ =404";
@@ -80,10 +104,28 @@ in
           extraConfig = ''
             client_max_body_size 512M;
             add_header Access-Control-Allow-Origin $cors_origin always;
+            limit_req zone=general_api_limit burst=10 nodelay;
+            limit_conn general_conn_limit 10;
           '';
 
           locations."/" = {
             proxyPass = "http://localhost:3000";
+          };
+
+          locations."/api/" = {
+            proxyPass = "http://localhost:3000/api/";
+            extraConfig = ''
+              limit_req zone=api_api_limit burst=15 nodelay;
+              limit_conn api_conn_limit 5;
+            '';
+          };
+
+          locations."/user/login/" = {
+            proxyPass = "http://localhost:3000/user/login/";
+            extraConfig = ''
+              limit_req zone=login_api_limit nodelay;
+              limit_conn api_conn_limit 2;
+            '';
           };
         };
 
@@ -93,6 +135,7 @@ in
           extraConfig = ''
             proxy_buffering off;
           '';
+
           locations."/" = {
             proxyPass = "http://127.0.0.1:8123";
             proxyWebsockets = true;
