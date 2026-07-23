@@ -152,6 +152,10 @@ in
           SCHEME = "*";
         };
 
+        actions = {
+          ENABLED = true;
+        };
+
         service.DISABLE_REGISTRATION = true;
       };
     };
@@ -161,8 +165,9 @@ in
       instances."${runnerName}" = {
         enable = true;
         name = runnerName;
-        url = "https://${forgeDomain}";
+        url = "http://127.0.0.1:3000";
         tokenFile = "/var/lib/forgejo-runner/runner-token";
+        settings.stopIfChanged = false;
 
         labels = [
           "ThirtyOneIron:host"
@@ -209,7 +214,6 @@ in
     };
 
     services = {
-
       "gitea-runner-${runnerName}" = {
         serviceConfig = {
           PrivateNetwork = false;
