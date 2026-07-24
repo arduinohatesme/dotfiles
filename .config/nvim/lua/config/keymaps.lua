@@ -76,9 +76,6 @@ map("n", "cc", function()
   end
 end, { expr = true })
 
--- TODO: ? for mini.surround
-map({ "n", "x" }, "?", "<nop>")
-
 -- x doesn't copy, use dl intentionally to copy
 -- Just avoids single char copying accidentally
 map("n", "x", '"_x')
