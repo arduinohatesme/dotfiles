@@ -24,7 +24,6 @@ return {
 
     servers = {
       basedpyright = {
-        enabled = false,
         {
           analysis = {
             autoImportCompletions = false,
@@ -34,7 +33,9 @@ return {
           },
           capabilities = {
             textDocument = {
-              completion = nil,
+              completionItem = {
+                snippetSupport = false,
+              },
             },
           },
         },
